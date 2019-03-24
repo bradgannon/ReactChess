@@ -1,24 +1,44 @@
+// React Imports
 import React, { Component } from 'react';
+
+// Font-Awesome Library logos - usage here: https://fontawesome.com/how-to-use/on-the-web/using-with/react
+import { library } from '@fortawesome/fontawesome-svg-core'   
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChessRook, faChessQueen, faChessPawn, faChessBishop, faChessKnight, faChessKing } from '@fortawesome/free-solid-svg-icons'
+
+// Resources
 import logo from './logo.svg';
 import './App.css';
+import KingPiece from './models/pieces/king-piece';
+import QueenPiece from './models/pieces/queen-piece';
+import Board from './components/board';
+
+
+library.add(faChessRook, faChessQueen, faChessPawn, faChessBishop, faChessKnight, faChessKing)
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.king = new KingPiece('white');
+    this.queen = new QueenPiece('white');
+    this.blackKing = new KingPiece('black');
+  }
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Board />
+          <div>
+            Example Chess Icons <FontAwesomeIcon icon="chess-rook"/>
+            <FontAwesomeIcon icon="chess-queen" />
+            <FontAwesomeIcon icon="chess-pawn" />
+            <FontAwesomeIcon icon="chess-bishop" />
+            <FontAwesomeIcon icon="chess-knight" />
+            <FontAwesomeIcon icon={this.king.icon} color={this.king.player}/>
+            <FontAwesomeIcon icon={this.blackKing.icon} color={this.blackKing.player}/>
+          </div>
+
         </header>
       </div>
     );

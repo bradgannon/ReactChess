@@ -1,0 +1,24 @@
+.block {
+    background: transparent;
+    border: 1px solid transparent;
+    float: left;
+    font-size: 36px;
+    height: 100px;
+    width: 100px;
+}
+
+.block:focus {
+    outline: none;
+}
+
+.block-dark {
+    background-color: rgb(91, 78, 19);
+    height: 100px;
+    width: 100px;
+}
+
+.block-light {
+    background-color: rgb(237, 218, 137);
+    height: 100px;
+    width: 100px;
+}
