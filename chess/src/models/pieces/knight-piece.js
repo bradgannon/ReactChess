@@ -8,5 +8,10 @@ export default class KnightPiece extends ChessPiece {
     constructor(player) {
         super(player, "chess-knight");
     }
+
+    getLegalMoves() {
+        // determine all possible options.
+        
+    }
 }
 
