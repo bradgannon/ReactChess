@@ -5,8 +5,9 @@ export default class ChessPiece {
      * @param {string} whichPlayer "white" or "black" to identify which player.
      * @param {string} icon A string that identifies the font-awesome icon to be used. 
      */
-    constructor(whichPlayer, icon) {
+    constructor(whichPlayer, icon, typeOfPiece) {
         this.player = whichPlayer;
         this.icon = icon;
+        this.typeOfPiece = typeOfPiece;
     }
 }
