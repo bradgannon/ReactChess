@@ -15,6 +15,7 @@ export default class KingPiece extends ChessPiece {
      * @param {*} destination
      */
     identifyIfValidMove(source, dest) {
+        // refer to PawnPiece.identifyIfValidMove for similar logic in how to implement
         console.log('TO BE IMPLEMENTED');
     }
 

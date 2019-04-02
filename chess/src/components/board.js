@@ -26,21 +26,6 @@ export default class Board extends Component {
     return ( <div className="rowOfBlocks" key={i}>{arrayOfBlocks}</div> );
   }
 
-  populateBoard() {
-
-  }
-
-  populatePawns() {
-    for(let i = 8; i <= 15; i++) {
-      // console.log("board id: " + this.board[i].props.id + " board props: " + this.board[i].props);
-      // this.board[i].id
-      console.log(this.board[i].props);
-    }
-    for(let i = 48; i <= 55; i++) {
-
-    }
-  }
-
   render() {
     // initalize board logic.
 
