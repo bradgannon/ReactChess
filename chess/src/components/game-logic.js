@@ -26,7 +26,6 @@ export default class GameLogic extends Component {
       turn: 'white',
       selectedPosition: -1
     }
-    
   }
 
   /**
@@ -38,16 +37,22 @@ export default class GameLogic extends Component {
       console.log("ID: " + event + ": Nothing was selected.");
     } else if (this.state.board[event] instanceof PawnPiece ) {
       console.log("ID: " + event + ": Pawn Was Selected");
+      this.state.board[event].showAvailableSpots(this.state.board);
     } else if( this.state.board[event] instanceof RookPiece) {
       console.log("ID: " + event + ": Rook Was Selected");
+      this.state.board[event].showAvailableSpots(this.state.board);
     } else if (this.state.board[event] instanceof KnightPiece) {
       console.log("ID: " + event + ": Knight Was Selected");
+      this.state.board[event].showAvailableSpots(this.state.board);
     } else if (this.state.board[event] instanceof BishopPiece) {
       console.log("ID: " + event + ": Bishop Was Selected");
+      this.state.board[event].showAvailableSpots(this.state.board);
     } else if (this.state.board[event] instanceof QueenPiece) {
       console.log("ID: " + event + ": Queen Was Selected");
+      this.state.board[event].showAvailableSpots(this.state.board);
     } else if (this.state.board[event] instanceof KingPiece) {
       console.log("ID: " + event + ": King Was Selected");
+      this.state.board[event].showAvailableSpots(this.state.board);
     } else {
       console.error("Unknown object was selected: " + event);
     }

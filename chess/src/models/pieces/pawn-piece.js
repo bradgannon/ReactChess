@@ -82,5 +82,13 @@ export default class PawnPiece extends ChessPiece {
         this.setState({ isFirstMove: false})
     }
 
+    showAvailableSpots(Board b)
+    {
+        if(b.destination >= 8 && b.destination < 16)
+        {
+            b[event + 8].se
+        }
+    }
+
 }
 
