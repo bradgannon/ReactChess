@@ -28,6 +28,7 @@ export default class Block extends Component {
 
   }
 
+  // Example
   renderPawn() {
     if (this.props.piece.player == "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -41,28 +42,63 @@ export default class Block extends Component {
   }
 
   renderRook() {
-    // TODO: Look at renderPawn() for similar logic.
-    console.error("TO BE IMPLEMENTED");
+    if (this.props.piece.player == "black") {
+      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "gray", "stroke-width": 15 }} />)
+    } else if (this.props.piece.player == "white") {
+       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "black", "stroke-width": 15 }} />)
+    }
   }
 
   renderBishop() {
-    // TODO: Look at renderPawn() for similar logic.
-    console.error("TO BE IMPLEMENTED")
+    if (this.props.piece.player == "black") {
+      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "gray", "stroke-width": 15 }} />)
+    } else if (this.props.piece.player == "white") {
+       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "black", "stroke-width": 15 }} />)
+    }
   }
 
   renderKnight() {
-    // TODO: Look at renderPawn() for similar logic.
-    console.error("TO BE IMPLEMENTED")
+    if (this.props.piece.player == "black") {
+      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "gray", "stroke-width": 15 }} />)
+    } else if (this.props.piece.player == "white") {
+       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "black", "stroke-width": 15 }} />)
+    }
   }
 
   renderQueen() {
-    // TODO: Look at renderPawn() for similar logic.
-    console.error("TO BE IMPLEMENTED")
+    if (this.props.piece.player == "black") {
+      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "gray", "stroke-width": 15 }} />)
+    } else if (this.props.piece.player == "white") {
+       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "black", "stroke-width": 15 }} />)
+    }
   }
 
   renderKing() {
-    // TODO: Look at renderPawn() for similar logic.
-    console.error("TO BE IMPLEMENTED")
+    if (this.props.piece.player == "black") {
+      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "gray", "stroke-width": 15 }} />)
+    } else if (this.props.piece.player == "white") {
+       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
+      return (<FontAwesomeIcon icon={this.props.piece.icon} color={this.props.piece.player} size="6x"
+        style={{ "stroke": "black", "stroke-width": 15 }} />)
+    }
   }
 
   /**
