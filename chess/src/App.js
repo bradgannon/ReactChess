@@ -12,6 +12,7 @@ import './App.css';
 import KingPiece from './models/pieces/king-piece';
 import QueenPiece from './models/pieces/queen-piece';
 import Board from './components/board';
+import GameLogic from './components/game-logic';
 
 
 library.add(faChessRook, faChessQueen, faChessPawn, faChessBishop, faChessKnight, faChessKing)
@@ -28,7 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Board />
+          <GameLogic />
           <div>
             Example Chess Icons <FontAwesomeIcon icon="chess-rook"/>
             <FontAwesomeIcon icon="chess-queen" />
