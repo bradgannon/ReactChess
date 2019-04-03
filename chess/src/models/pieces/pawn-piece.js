@@ -74,13 +74,31 @@ export default class PawnPiece extends ChessPiece {
     getPathFromSrcToDest(source, destination) {
 
     }
-    
+
     /**
      * Method is called after the first move has occured.
      */
     firstMoveOver() {
-        this.setState({ isFirstMove: false})
+        this.setState({ isFirstMove: false })
     }
 
-}
+    /**
+     * Method to highlight possible moves for the player
+     * @param {Board} b 
+     * @param {} location
+     */
+    showAvailableSpots(b, location) {
+        if (b.destination >= 8 && b.destination < 16) {
+            // Highlight two rows ahead
+            b[location].hightlight();
+        }
 
+        //if () {
+            // Show that you can take a piece
+        //}
+
+        //if () {
+            // Show one space ahead if no piece there
+        //}
+    }
+}
