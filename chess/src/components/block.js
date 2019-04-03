@@ -40,7 +40,7 @@ export default class Block extends Component {
           icon={this.props.piece.icon}
           color={this.props.piece.player}
           size="6x"
-          style={{ stroke: "gray", "stroke-width": 15 }}
+          style={{ stroke: "white", "stroke-width": 15 }}
         />
       );
     } else if (this.props.piece.player === "white") {
@@ -64,7 +64,7 @@ export default class Block extends Component {
           icon={this.props.piece.icon}
           color={this.props.piece.player}
           size="6x"
-          style={{ stroke: "gray", "stroke-width": 15 }}
+          style={{ stroke: "white", "stroke-width": 15 }}
         />
       );
     } else if (this.props.piece.player === "white") {
@@ -88,7 +88,7 @@ export default class Block extends Component {
           icon={this.props.piece.icon}
           color={this.props.piece.player}
           size="6x"
-          style={{ stroke: "gray", "stroke-width": 15 }}
+          style={{ stroke: "white", "stroke-width": 15 }}
         />
       );
     } else if (this.props.piece.player === "white") {
@@ -112,7 +112,7 @@ export default class Block extends Component {
           icon={this.props.piece.icon}
           color={this.props.piece.player}
           size="6x"
-          style={{ stroke: "gray", "stroke-width": 15 }}
+          style={{ stroke: "white", "stroke-width": 15 }}
         />
       );
     } else if (this.props.piece.player === "white") {
@@ -136,7 +136,7 @@ export default class Block extends Component {
           icon={this.props.piece.icon}
           color={this.props.piece.player}
           size="6x"
-          style={{ stroke: "gray", "stroke-width": 15 }}
+          style={{ stroke: "white", "stroke-width": 15 }}
         />
       );
     } else if (this.props.piece.player === "white") {
@@ -160,7 +160,7 @@ export default class Block extends Component {
           icon={this.props.piece.icon}
           color={this.props.piece.player}
           size="6x"
-          style={{ stroke: "gray", "stroke-width": 15 }}
+          style={{ stroke: "white", "stroke-width": 15 }}
         />
       );
     } else if (this.props.piece.player === "white") {
