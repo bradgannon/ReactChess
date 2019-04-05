@@ -27,7 +27,7 @@ export default class Board extends Component {
   }
 
   populateBoard() {
-
+      
   }
 
   populatePawns() {
