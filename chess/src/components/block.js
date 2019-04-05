@@ -222,12 +222,24 @@ export default class Block extends Component {
         {this.state.name}
         <button
           onClick={this.highlight}
-          className={this.isDark ? "block-dark" : "block-light"}
+          className={returnCSS}
         >
           {this.renderPieces()}
         </button>
       </div>
     );
+  }
+
+  returnCSS() {
+    if (this.state.highlighted) {
+      return "block-highlight";
+    }
+    else if (this.isDark) {
+      return "block-dark";
+    }
+    else {
+      return "block-white";
+    }
   }
 
   /**
