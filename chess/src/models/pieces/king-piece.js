@@ -14,9 +14,13 @@ export default class KingPiece extends ChessPiece {
      * @param {*} source 
      * @param {*} destination
      */
-    identifyIfValidMove(source, dest) {
-        // refer to PawnPiece.identifyIfValidMove for similar logic in how to implement
-        console.log('TO BE IMPLEMENTED');
+    identifyIfValidMove(source, destination) {
+        if (destination + 1 == source || destination + 8 == source || destination - 1 == source || destination - 8 == source) {
+            // King can move one space in any direction
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -27,6 +31,15 @@ export default class KingPiece extends ChessPiece {
      */
     getPathFromSrcToDest(source, destination) {
         // TODO: should exclude the source and destination in the path.
+    }
+
+        /**
+     * Method to highlight possible moves for the player
+     * @param {Board} b 
+     * @param {} location
+     */
+    showAvailableSpots(b, location) {
+        // TODO
     }
 }
 
