@@ -27,6 +27,28 @@ export default class RookPiece extends ChessPiece {
      */
     getPathFromSrcToDest(source, destination) {
         // TODO: should exclude the source and destination in the path.
+        let path = [], pathStart, pathEnd, incrementBy;
+    if(source > destination){
+      pathStart = destination;
+      pathEnd = source;
     }
+    else{
+      pathStart = source;
+      pathEnd = destination;
+    }
+    if(Math.abs(source - destination) % 8 === 0){
+      incrementBy = 8;
+      pathStart += 8;
+    }
+    else{
+      incrementBy = 1;
+      pathStart += 1;
+    }
+
+    for(let i = pathStart; i < pathEnd; i+=incrementBy){
+      path.push(i);
+    }
+    return path;
+  }
 }
 
