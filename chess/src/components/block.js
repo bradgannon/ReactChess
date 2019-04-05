@@ -23,7 +23,10 @@ export default class Block extends Component {
   constructor(props) {
     super(props);
     console.log(this.props);
-    this.state = { isPlayerOnBlock: "no" };
+    this.state = {
+      isPlayerOnBlock: "no",
+      highlighted: false
+    };
     // this.handleClick = this.handleClick.bind(this);
     console.log(props);
     this.isDark = props.isDark;
@@ -31,7 +34,9 @@ export default class Block extends Component {
 
   componentDidMount() {}
 
-  // Example
+ /**
+  * Method to Render a Pawn on the block
+  */
   renderPawn() {
     if (this.props.piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -56,6 +61,9 @@ export default class Block extends Component {
     }
   }
 
+   /**
+  * Method to Render a Rook on the block
+  */
   renderRook() {
     if (this.props.piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -80,6 +88,9 @@ export default class Block extends Component {
     }
   }
 
+  /**
+  * Method to Render a Bishop on the block
+  */
   renderBishop() {
     if (this.props.piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -104,6 +115,9 @@ export default class Block extends Component {
     }
   }
 
+  /**
+  * Method to Render a Knight on the block
+  */
   renderKnight() {
     if (this.props.piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -128,6 +142,9 @@ export default class Block extends Component {
     }
   }
 
+  /**
+  * Method to Render a Queen on the block
+  */
   renderQueen() {
     if (this.props.piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -152,6 +169,9 @@ export default class Block extends Component {
     }
   }
 
+  /**
+  * Method to Render a King on the block
+  */
   renderKing() {
     if (this.props.piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -199,13 +219,22 @@ export default class Block extends Component {
   render() {
     return (
       <div className="block">
+        {this.state.name}
         <button
-          onClick={this.props.onClick}
+          onClick={this.highlight}
           className={this.isDark ? "block-dark" : "block-light"}
         >
           {this.renderPieces()}
         </button>
       </div>
     );
+  }
+
+  /**
+   * Highlights the block by changing its color
+   */
+  highlight() {
+    // TODO
+    //this.setState({highlighted: !this.state.highlighted});
   }
 }

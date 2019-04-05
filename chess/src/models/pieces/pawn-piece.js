@@ -88,17 +88,6 @@ export default class PawnPiece extends ChessPiece {
      * @param {} location
      */
     showAvailableSpots(b, location) {
-        if (b.destination >= 8 && b.destination < 16) {
-            // Highlight two rows ahead
-            b[location].hightlight();
-        }
-
-        //if () {
-            // Show that you can take a piece
-        //}
-
-        //if () {
-            // Show one space ahead if no piece there
-        //}
+        // TODO
     }
 }
