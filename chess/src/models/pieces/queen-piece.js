@@ -27,6 +27,36 @@ export default class QueenPiece extends ChessPiece {
      */
     getPathFromSrcToDest(source, destination) {
         // TODO: should exclude the source and destination in the path.
+        let path = [], pathStart, pathEnd, incrementBy;
+        if(source > destination){
+          pathStart = destination;
+          pathEnd = source;
+        }
+        else{
+          pathStart = source;
+          pathEnd = destination;
+        }
+        if(Math.abs(source - destination) % 8 === 0){
+          incrementBy = 8;
+          pathStart += 8;
+        }
+        else if(Math.abs(source - destination) % 9 === 0){
+          incrementBy = 9;
+          pathStart += 9;
+        }
+        else if(Math.abs(source - destination) % 7 === 0){
+          incrementBy = 7;
+          pathStart += 7;
+        }
+        else{
+          incrementBy = 1;
+          pathStart += 1;
+        }
+    
+        for(let i = pathStart; i < pathEnd; i+=incrementBy){
+          path.push(i);
+        }
+        return path;
+      }
     }
-}
 

@@ -27,6 +27,14 @@ export default class KnightPiece extends ChessPiece {
      */
     getPathFromSrcToDest(source, destination) {
         // TODO: should exclude the source and destination in the path.
-    }
+        return (source - 17 === destination || 
+            source - 10 === destination || 
+            source + 6 === destination || 
+            source + 15 === destination || 
+            source - 15 === destination || 
+            source - 6 === destination || 
+            source + 10 === destination || 
+            source + 17 === destination);
+        }
 }
 
