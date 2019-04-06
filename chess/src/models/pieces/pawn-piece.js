@@ -25,15 +25,15 @@ export default class PawnPiece extends ChessPiece {
         // on first move, pawn can move optional 2 spaces instead of 1.
         if (this.isFirstMove) {
             if (this.player == 'white') {
-                if (destination + 16 == source || destination + 8 == source) {
+                if (destination + 16 === source || destination + 8 === source) {
                     return true;
                     // opponent is next to pawn.
-                } else if (isOpponentAdjacent && (destination + 7 == source || destination + 9 == source)) {
+                } else if (isOpponentAdjacent && (destination + 7 === source || destination + 9 === source)) {
                     return true;
                 }
-                else if (this.player == 'black') {
+                else if (this.player === 'black') {
                     // first pawn move
-                    if (destination - 16 == source || destination - 8 == source) {
+                    if (destination - 16 === source || destination - 8 === source) {
                         return true;
                         // opponent is next to pawn.
                     } else if (isOpponentAdjacent && (destination - 7 == source || destination - 9 == source)) {
@@ -63,6 +63,10 @@ export default class PawnPiece extends ChessPiece {
         }
         // not a valid move.
         return false
+    }
+
+    showAvailableSpots() {
+
     }
 
     /**
