@@ -66,7 +66,7 @@ export default class GameLogic extends Component {
 
 	render() {
 		let playerTurn = "";
-		if (this.state.turn == "white") {
+		if (this.state.turn === "white") {
 			let playerTurn = "White's Turn";
 		} else {
 			let playerTurn = "Black's Turn";

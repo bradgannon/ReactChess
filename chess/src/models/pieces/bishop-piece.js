@@ -56,13 +56,4 @@ export default class BishopPiece extends ChessPiece {
 	showAvailableSpots(b, location) {
 		// TODO
 	}
-
-	/**
-	 * Method to highlight possible moves for the player
-	 * @param {Board} b
-	 * @param {} location
-	 */
-	showAvailableSpots(b, location) {
-		// TODO
-	}
 }

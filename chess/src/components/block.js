@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import "./block.css";
 import PawnPiece from "../models/pieces/pawn-piece";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faChessRook,
-	faChessQueen,
-	faChessPawn,
-	faChessBishop,
-	faChessKnight,
-	faChessKing
-} from "@fortawesome/free-solid-svg-icons";
 import RookPiece from "../models/pieces/rook-piece";
 import BishopPiece from "../models/pieces/bishop-piece";
 import KnightPiece from "../models/pieces/knight-piece";
