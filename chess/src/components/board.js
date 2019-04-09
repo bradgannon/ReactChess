@@ -11,6 +11,11 @@ export default class Board extends Component {
     // this.board = [];
   }
 
+  /**
+   * Renders a block with the correct coloring.
+   * @param {int} i The index of the block to be rendered on the board.
+   * @param {boolean} isDark A boolean to determine what color the block should be
+   */
   createBlock(i, isDark) {
     // console.log("create block triggered with: " + isDark);
     console.log(this.props);
@@ -22,6 +27,11 @@ export default class Board extends Component {
   
   }
 
+  /**
+   * Renders a row of blocks
+   * @param {*} arrayOfBlocks Array of block objects
+   * @param {*} i The index value
+   */
   createRow(arrayOfBlocks, i) {
     return ( <div className="rowOfBlocks" key={i}>{arrayOfBlocks}</div> );
   }

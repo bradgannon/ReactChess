@@ -30,12 +30,18 @@ export default class GameLogic extends Component {
 
 	/**
 	 * do on click stuff
-	 * @param {} event
+	 * @param {} event an integer value of the selected board, from 0 to 63.
 	 */
 	handleClick(event) {
+		this.setState({
+			selectedPosition: event
+		});
 		if (this.state.board[event] == null) {
 			console.log("ID: " + event + ": Nothing was selected.");
 		} else if (this.state.board[event] instanceof PawnPiece) {
+			// highlight available spots.
+			this.state.board[event].showAvailableSpots(this.state.board, event);
+			// this.state.board[event + 8]
 			console.log("ID: " + event + ": Pawn Was Selected");
 			this.state.board[event].showAvailableSpots(this.state.board, event);
 		} else if (this.state.board[event] instanceof RookPiece) {
