@@ -23,13 +23,14 @@ export default class Block extends React.Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props);
-		this.highlight = this.highlight.bind(this);
+		//this.highlight = this.highlight.bind(this);
+		this.selectBlock = this.selectBlock.bind(this);
 		// this.handleClick = this.handleClick.bind(this);
 		console.log(props);
 		this.isDark = props.isDark;
 		this.state = {
 			name: "bob",
-			isPlayerOnBlock: "no",
+			isPlayerOnBlock: false,
 			highlighted: false
 		};
 	}
@@ -61,6 +62,9 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
+		this.setState({ isPlayerOnBlock: true }, () => {
+			console.log(this.state.isPlayerOnBlock);
+		});
 	}
 
 	/**
@@ -88,6 +92,7 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
+		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -115,6 +120,7 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
+		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -142,6 +148,7 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
+		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -169,6 +176,7 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
+		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -196,6 +204,7 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
+		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -224,7 +233,7 @@ export default class Block extends React.Component {
 			<div className="block">
 				{/* {this.state.name} */}
 				<button
-					onClick={this.highlight}
+					onClick={this.selectBlock}
 					// className={this.isDark ? "block-dark" : "block-light"}
 					className={css}
 				>
@@ -234,6 +243,16 @@ export default class Block extends React.Component {
 		);
 	}
 
+	selectBlock() {
+		console.log("Block Selected, " + this.state.isPlayerOnBlock);
+		if (this.state.isPlayerOnBlock) {
+			this.highlight();
+		}
+	}
+
+	/**
+	 * Returns the css needed for the piece whether it is highlighted or not;
+	 */
 	returnCSS() {
 		if (this.state.highlighted) {
 			return "block-highlight";
