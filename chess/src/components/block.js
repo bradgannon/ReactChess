@@ -15,14 +15,11 @@ export default class Block extends React.Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props);
-		//this.highlight = this.highlight.bind(this);
 		this.selectBlock = this.selectBlock.bind(this);
-		// this.handleClick = this.handleClick.bind(this);
 		console.log(props);
 		this.isDark = props.isDark;
 		this.state = {
 			name: "bob",
-			isPlayerOnBlock: false,
 			highlighted: false
 		};
 	}
@@ -54,9 +51,6 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
-		this.setState({ isPlayerOnBlock: true }, () => {
-			console.log(this.state.isPlayerOnBlock);
-		});
 	}
 
 	/**
@@ -84,7 +78,6 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
-		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -112,7 +105,6 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
-		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -140,7 +132,6 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
-		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -168,7 +159,6 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
-		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -196,7 +186,6 @@ export default class Block extends React.Component {
 				/>
 			);
 		}
-		this.setState({ isPlayerOnBlock: true });
 	}
 
 	/**
@@ -236,9 +225,25 @@ export default class Block extends React.Component {
 	}
 
 	selectBlock() {
-		console.log("Block Selected, " + this.state.isPlayerOnBlock);
-		if (this.state.isPlayerOnBlock) {
-			this.highlight();
+		if (this.props.piece != null) {
+			if (this.props.piece.player === "white") {
+				console.log(
+					"Block Selected; Piece: " +
+						this.props.piece +
+						" Player: " +
+						this.props.piece.player
+				);
+				this.highlight();
+			} else {
+				console.log(
+					"Block Selected; Piece: " +
+						this.props.piece +
+						" Player: " +
+						this.props.piece.player
+				);
+			}
+		} else {
+			console.log("Empty block selected.");
 		}
 	}
 
