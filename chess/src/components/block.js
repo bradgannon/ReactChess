@@ -218,13 +218,14 @@ export default class Block extends Component {
 	}
 
 	render() {
+		let css = this.returnCSS();
 		return (
 			<div className="block">
 				{this.state.name}
 				<button
 					onClick={this.highlight}
 					// className={this.isDark ? "block-dark" : "block-light"}
-					className={this.returnCSS()}
+					className={css}
 				>
 					{this.renderPieces()}
 				</button>
