@@ -26,18 +26,15 @@ export default class Block extends React.Component {
 		this.highlight = this.highlight.bind(this);
 		// this.handleClick = this.handleClick.bind(this);
 		console.log(props);
-    this.isDark = props.isDark;
-    this.state = {
-      name: "bob",
+		this.isDark = props.isDark;
+		this.state = {
+			name: "bob",
 			isPlayerOnBlock: "no",
 			highlighted: false
 		};
-   
 	}
 
-	componentDidMount() {
-    
-  }
+	componentDidMount() {}
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -251,27 +248,33 @@ export default class Block extends React.Component {
 	 * Highlights the block by changing its color
 	 */
 	highlight() {
-    // TODO
-    console.log(this.state);
-    this.setState({
-      name: "kevin"
-    }, () => {
-      console.log(this.state.name);
-    })
+		console.log(this.state);
+		this.setState(
+			{
+				name: "kevin"
+			},
+			() => {
+				console.log(this.state.name);
+			}
+		);
 		if (this.state.highlighted) {
-      this.setState({
-        highlighted: false
-      }, () => {
-        console.log("highlighted: " + this.state.highlighted);
-      });
-		
+			this.setState(
+				{
+					highlighted: false
+				},
+				() => {
+					console.log("highlighted: " + this.state.highlighted);
+				}
+			);
 		} else {
-      this.setState({
-        highlighted: true
-      }, () => {
-        console.log("highlighted: " + this.state.highlighted);
-      });
-
+			this.setState(
+				{
+					highlighted: true
+				},
+				() => {
+					console.log("highlighted: " + this.state.highlighted);
+				}
+			);
 		}
 	}
 }
