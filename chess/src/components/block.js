@@ -19,21 +19,25 @@ import KingPiece from "../models/pieces/king-piece";
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
  */
-export default class Block extends Component {
+export default class Block extends React.Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props);
-		this.state = {
-			isPlayerOnBlock: "no",
-			highlighted: false
-		};
 		this.highlight = this.highlight.bind(this);
 		// this.handleClick = this.handleClick.bind(this);
 		console.log(props);
-		this.isDark = props.isDark;
+    this.isDark = props.isDark;
+    this.state = {
+      name: "bob",
+			isPlayerOnBlock: "no",
+			highlighted: false
+		};
+   
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+    
+  }
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -221,7 +225,7 @@ export default class Block extends Component {
 		let css = this.returnCSS();
 		return (
 			<div className="block">
-				{this.state.name}
+				{/* {this.state.name} */}
 				<button
 					onClick={this.highlight}
 					// className={this.isDark ? "block-dark" : "block-light"}
@@ -247,13 +251,27 @@ export default class Block extends Component {
 	 * Highlights the block by changing its color
 	 */
 	highlight() {
-		// TODO
+    // TODO
+    console.log(this.state);
+    this.setState({
+      name: "kevin"
+    }, () => {
+      console.log(this.state.name);
+    })
 		if (this.state.highlighted) {
-			this.setState({ highlighted: false });
-			console.log("highlighted: " + this.state.highlighted);
+      this.setState({
+        highlighted: false
+      }, () => {
+        console.log("highlighted: " + this.state.highlighted);
+      });
+		
 		} else {
-			this.setState({ higlighted: true });
-			console.log("highlighted: " + this.state.highlighted);
+      this.setState({
+        highlighted: true
+      }, () => {
+        console.log("highlighted: " + this.state.highlighted);
+      });
+
 		}
 	}
 }
