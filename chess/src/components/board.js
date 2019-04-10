@@ -16,21 +16,21 @@ export default class Board extends Component {
 	 * @param {boolean} isDark A boolean to determine what color the block should be
 	 */
 	createBlock(i, isDark) {
+		// console.log("create block triggered with: " + isDark);
+		console.log(this.props);
 		if (isDark) {
 			return (
 				<Block
-					key={i}
 					piece={this.blocks[i]}
-					onClick={() => this.props.onClick(i)}
+					onClick={() => this.props.piece.showAvailableSpots()}
 					isDark={true}
 				/>
 			);
 		} else {
 			return (
 				<Block
-					key={i}
 					piece={this.blocks[i]}
-					onClick={() => this.props.onClick(i)}
+					onClick={() => this.props.piece.showAvailableSpots()}
 					isDark={false}
 				/>
 			);
@@ -73,6 +73,7 @@ export default class Board extends Component {
 				}
 			}
 			let boardRow = <div className="row">{rows}</div>;
+			console.log(boardRow);
 			board.push(boardRow);
 			// // this.board.push(;
 			// this.populatePawns();
