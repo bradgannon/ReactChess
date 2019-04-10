@@ -246,6 +246,7 @@ export default class Block extends Component {
 		} else {
 			console.log("Empty block selected.");
 		}
+		this.props.onClick();
 	}
 
 	/**

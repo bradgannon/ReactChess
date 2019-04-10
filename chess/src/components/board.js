@@ -21,8 +21,9 @@ export default class Board extends Component {
 		if (isDark) {
 			return (
 				<Block
+					key={i}
 					piece={this.blocks[i]}
-					onClick={() => this.props.piece.showAvailableSpots()}
+					onClick={() => this.props.onClick(i)}
 					isDark={true}
 				/>
 			);
@@ -30,7 +31,7 @@ export default class Board extends Component {
 			return (
 				<Block
 					piece={this.blocks[i]}
-					onClick={() => this.props.piece.showAvailableSpots()}
+					onClick={() => this.props.onClick(i)}
 					isDark={false}
 				/>
 			);
