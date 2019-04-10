@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 // Font-Awesome Library logos - usage here: https://fontawesome.com/how-to-use/on-the-web/using-with/react
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faChessRook,
 	faChessQueen,
@@ -14,9 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Resources
-import logo from "./logo.png";
 import "./App.css";
-import Board from "./components/board";
 import GameLogic from "./components/game-logic";
 
 library.add(
@@ -29,9 +26,9 @@ library.add(
 );
 
 class App extends Component {
-	constructor() {
-		super();
-	}
+	// constructor() {
+	// 	super();
+	// }
 	render() {
 		return (
 			<div className="App">

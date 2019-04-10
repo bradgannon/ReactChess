@@ -11,7 +11,7 @@ import KingPiece from "../models/pieces/king-piece";
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
  */
-export default class Block extends React.Component {
+export default class Block extends Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props);
@@ -37,7 +37,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "stroke-width": 15 }}
+					style={{ stroke: "white", "strokeWidth": 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -47,7 +47,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "stroke-width": 15 }}
+					style={{ stroke: "black", "strokeWidth": 15 }}
 				/>
 			);
 		}
@@ -64,7 +64,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "stroke-width": 15 }}
+					style={{ stroke: "white", "strokeWidth": 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -74,7 +74,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "stroke-width": 15 }}
+					style={{ stroke: "black", "strokeWidth": 15 }}
 				/>
 			);
 		}
@@ -91,7 +91,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "stroke-width": 15 }}
+					style={{ stroke: "white", "strokeWidth": 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -101,7 +101,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "stroke-width": 15 }}
+					style={{ stroke: "black", "strokeWidth": 15 }}
 				/>
 			);
 		}
@@ -118,7 +118,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "stroke-width": 15 }}
+					style={{ stroke: "white", "strokeWidth": 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -128,7 +128,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "stroke-width": 15 }}
+					style={{ stroke: "black", "strokeWidth": 15 }}
 				/>
 			);
 		}
@@ -145,7 +145,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "stroke-width": 15 }}
+					style={{ stroke: "white", "strokeWidth": 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -155,7 +155,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "stroke-width": 15 }}
+					style={{ stroke: "black", "strokeWidth": 15 }}
 				/>
 			);
 		}
@@ -172,7 +172,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "stroke-width": 15 }}
+					style={{ stroke: "white", "strokeWidth": 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -182,7 +182,7 @@ export default class Block extends React.Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "stroke-width": 15 }}
+					style={{ stroke: "black", "strokeWidth": 15 }}
 				/>
 			);
 		}
@@ -241,6 +241,7 @@ export default class Block extends React.Component {
 						" Player: " +
 						this.props.piece.player
 				);
+				this.highlight();
 			}
 		} else {
 			console.log("Empty block selected.");
