@@ -14,9 +14,7 @@ import KingPiece from "../models/pieces/king-piece";
 export default class Block extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 		this.selectBlock = this.selectBlock.bind(this);
-		console.log(props);
 		this.isDark = props.isDark;
 		this.state = {
 			name: "bob",
@@ -242,6 +240,7 @@ export default class Block extends Component {
 						this.props.piece.player
 				);
 				this.highlight();
+				this.props.onClick();
 			}
 		} else {
 			console.log("Empty block selected.");
@@ -252,9 +251,13 @@ export default class Block extends Component {
 	 * Returns the css needed for the piece whether it is highlighted or not;
 	 */
 	returnCSS() {
-		if (this.state.highlighted) {
-			return "block-highlight";
-		} else if (this.isDark) {
+		// console.log(this.props.piece);
+		// if(this.props.piece.getIsSelected()) {
+		// 	return "block-highlight";
+		// }
+		// if (this.state.highlighted) {
+		// 	return "block-highlight";
+		  if (this.isDark) {
 			return "block-dark";
 		} else {
 			return "block-light";
@@ -265,15 +268,6 @@ export default class Block extends Component {
 	 * Highlights the block by changing its color
 	 */
 	highlight() {
-		console.log(this.state);
-		this.setState(
-			{
-				name: "kevin"
-			},
-			() => {
-				console.log(this.state.name);
-			}
-		);
 		if (this.state.highlighted) {
 			this.setState(
 				{
