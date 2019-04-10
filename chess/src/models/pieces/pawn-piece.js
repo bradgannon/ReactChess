@@ -8,8 +8,6 @@ export default class PawnPiece extends ChessPiece {
 
 	constructor(player) {
 		super(player, "chess-pawn", "pawn");
-		// testing selection
-		this.isSelected = false;
 		// pawns can move 1 or 2 forward on there first "move".
 
 		this.state = { isFirstMove: true };
@@ -91,12 +89,10 @@ export default class PawnPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		// console.log(b);
-		// console.log(location);
-		// console.log("Showing " + b + " Available Spots");
+		console.log("Showing " + this.props.piece + " Available Spots");
 		if (location >= 8 && location < 16) {
-			// b.blocks[location + 16].highlight();
+			b.blocks[location + 16].highlight();
 		}
-		// b.blocks[location + 8].highlight();
+		b.blocks[location + 8].highlight();
 	}
 }
