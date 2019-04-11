@@ -7,6 +7,7 @@ import BishopPiece from "../models/pieces/bishop-piece";
 import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
+import Board from "./board";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -224,6 +225,9 @@ export default class Block extends React.Component {
 		);
 	}
 
+	/**
+	 * Highlights a block and the possible moves the piece on the block can take when the user selects that block
+	 */
 	selectBlock() {
 		if (this.props.piece != null) {
 			if (this.props.piece.player === "white") {
@@ -234,6 +238,8 @@ export default class Block extends React.Component {
 						this.props.piece.player
 				);
 				this.highlight();
+				console.log(this.props.location);
+				this.props.piece.showAvailableSpots(this.Board, this.props.location);
 			} else {
 				console.log(
 					"Block Selected; Piece: " +
@@ -264,33 +270,13 @@ export default class Block extends React.Component {
 	 * Highlights the block by changing its color
 	 */
 	highlight() {
-		console.log(this.state);
 		this.setState(
 			{
-				name: "kevin"
+				highlighted: !this.state.highlighted
 			},
 			() => {
-				console.log(this.state.name);
+				console.log("highlighted: " + this.state.highlighted);
 			}
 		);
-		if (this.state.highlighted) {
-			this.setState(
-				{
-					highlighted: false
-				},
-				() => {
-					console.log("highlighted: " + this.state.highlighted);
-				}
-			);
-		} else {
-			this.setState(
-				{
-					highlighted: true
-				},
-				() => {
-					console.log("highlighted: " + this.state.highlighted);
-				}
-			);
-		}
 	}
 }
