@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 import "./block.css";
 import PawnPiece from "../models/pieces/pawn-piece";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,10 +9,12 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
+import { updateBoard } from '../redux/action/index';
+
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
  */
-export default class Block extends Component {
+class Block extends Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props);
@@ -225,6 +228,7 @@ export default class Block extends Component {
 	}
 
 	selectBlock() {
+		console.log(this.props.board);
 		if (this.props.piece != null) {
 			if (this.props.piece.player === "white") {
 				console.log(
@@ -296,3 +300,36 @@ export default class Block extends Component {
 		}
 	}
 }
+
+function mapStateToProps(state) {
+  const { board } = state
+  return { board: board }
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		updateBoard: updateBoard()
+	}
+}
+
+// const mapStateToProps = (state, ownProps) => ({
+//   // ... computed data from state and optionally ownProps
+// })
+
+// const mapDispatchToProps = {
+//   // ... normally is an object full of action creators
+// }
+
+// and that function returns the connected, wrapper component:
+// const ConnectedComponent = connectToStore(Component);
+
+// `connect` returns a new function that accepts the component to wrap:
+const connectToStore = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Block)
+
+export default connectToStore;
+
+
+
