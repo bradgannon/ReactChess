@@ -1,8 +1,10 @@
 // React Imports
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 
 // Font-Awesome Library logos - usage here: https://fontawesome.com/how-to-use/on-the-web/using-with/react
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChessRook,
   faChessQueen,
@@ -33,31 +35,41 @@ class App extends Component {
   }
 
   handleClick() {
-    console.log("Clicked");
     this.setState({ clicked: true });
-    this.renderBoard();
   }
 
-  renderBoard() {
-    if (this.state.clicked) {
+  render() {
+    const isClicked = this.state.clicked;
+
+    if (isClicked) {
       return (
-        <div className="Start">
-          <header className="Start-header">
+        <div className="App">
+          <header className="App-header">
             <GameLogic />
           </header>
         </div>
       );
+    } else {
+      return (
+        <div className="App">
+          <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+          />
+          <header className="App-header">
+            <p>
+              <button
+                href="#"
+                class="btn btn-success buttonCSS"
+                onClick={this.handleClick}
+              >
+                Start Game!
+              </button>
+            </p>
+          </header>
+        </div>
+      );
     }
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <button onClick={this.handleClick}>Button</button>
-        </header>
-      </div>
-    );
   }
 }
 
