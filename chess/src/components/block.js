@@ -38,7 +38,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -48,7 +48,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -65,7 +65,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -75,7 +75,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -92,7 +92,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -102,7 +102,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -119,7 +119,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -129,7 +129,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -146,7 +146,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -156,7 +156,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -173,7 +173,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -183,7 +183,7 @@ export default class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -258,7 +258,9 @@ export default class Block extends Component {
 	 * Returns the css needed for the piece whether it is highlighted or not;
 	 */
 	returnCSS() {
-		if (this.state.highlighted) {
+		if (this.state.highlighted && this.props.piece.player === "black") {
+			return "block-enemy";
+		} else if (this.state.highlighted) {
 			return "block-highlight";
 		} else if (this.isDark) {
 			return "block-dark";

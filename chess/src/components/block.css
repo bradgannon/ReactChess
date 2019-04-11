@@ -28,3 +28,9 @@
 	height: 100px;
 	width: 100px;
 }
+
+.block-enemy {
+	background-color: rgb(255, 0, 0);
+	height: 100px;
+	width: 100px;
+}
