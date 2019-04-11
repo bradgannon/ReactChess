@@ -1,10 +1,8 @@
 // React Imports
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
 
 // Font-Awesome Library logos - usage here: https://fontawesome.com/how-to-use/on-the-web/using-with/react
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChessRook,
   faChessQueen,
@@ -60,7 +58,7 @@ class App extends Component {
             <p>
               <button
                 href="#"
-                class="btn btn-success buttonCSS"
+                className="btn btn-success buttonCSS"
                 onClick={this.handleClick}
               >
                 Start Game!

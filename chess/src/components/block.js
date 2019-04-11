@@ -17,12 +17,9 @@ import { updateBoard } from '../redux/action/index';
 class Block extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 		this.selectBlock = this.selectBlock.bind(this);
-		console.log(props);
 		this.isDark = props.isDark;
 		this.state = {
-			name: "bob",
 			highlighted: false
 		};
 	}
@@ -228,7 +225,6 @@ class Block extends Component {
 	}
 
 	selectBlock() {
-		console.log(this.props.board);
 		if (this.props.piece != null) {
 			if (this.props.piece.player === "white") {
 				console.log(
@@ -241,7 +237,7 @@ class Block extends Component {
 			} else {
 				console.log(
 					"Block Selected; Piece: " +
-						this.props.piece +
+						this.props.piece.constructor.name +
 						" Player: " +
 						this.props.piece.player
 				);
@@ -270,31 +266,16 @@ class Block extends Component {
 	 * Highlights the block by changing its color
 	 */
 	highlight() {
-		console.log(this.state);
-		this.setState(
-			{
-				name: "kevin"
-			},
-			() => {
-				console.log(this.state.name);
-			}
-		);
 		if (this.state.highlighted) {
 			this.setState(
 				{
 					highlighted: false
-				},
-				() => {
-					console.log("highlighted: " + this.state.highlighted);
 				}
 			);
 		} else {
 			this.setState(
 				{
 					highlighted: true
-				},
-				() => {
-					console.log("highlighted: " + this.state.highlighted);
 				}
 			);
 		}
@@ -302,13 +283,16 @@ class Block extends Component {
 }
 
 function mapStateToProps(state) {
-  const { board } = state
-  return { board: board }
+  const { board, selectedPosition } = state
+  return { 
+		board: board,
+		selectedPosition: selectedPosition
+	 }
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		updateBoard: updateBoard()
+		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard))
 	}
 }
 

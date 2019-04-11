@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
+
 import PawnPiece from "../models/pieces/pawn-piece";
 import RookPiece from "../models/pieces/rook-piece";
 import KnightPiece from "../models/pieces/knight-piece";
@@ -8,15 +10,17 @@ import KingPiece from "../models/pieces/king-piece";
 import populateGameBoard from "../utility/populate-game";
 import Board from "./board";
 
+import { updateBoard, setSelectedPosition } from '../redux/action/index';
+
+
 /**
  * Contains the logic and hosts all of the core chess components
  */
-export default class GameLogic extends Component {
+class GameLogic extends Component {
 	constructor() {
 		super();
 		// all the blocks of the board
 		let blocks = populateGameBoard();
-		console.log(blocks);
 		// initialize stack to hold blocks - as we want to update the board's values each time a change occurs.
 		// board - contains 64-length array containing either null or the chest piece
 		// turn - either 'white' or 'black' to determine whose turn it is.
@@ -33,31 +37,31 @@ export default class GameLogic extends Component {
 	 * @param {} i an integer value of the selected board, from 0 to 63.
 	 */
 	handleClick(i) {
+		this.props.setSelectedPosition(i);
 		this.setState({
 			selectedPosition: i
 		});
 		if (this.state.board[i] == null) {
-			console.log("ID: " + i + ": Nothing was selected.");
+
 		} else if (this.state.board[i] instanceof PawnPiece) {
 			// highlight available spots.
 			this.state.board[i].showAvailableSpots(this.state.board, i);
 			// this.state.board[i + 8]
-			console.log("ID: " + i + ": Pawn Was Selected");
-			this.state.board[i].showAvailableSpots(this.state.board, i);
+
 		} else if (this.state.board[i] instanceof RookPiece) {
-			console.log("ID: " + i + ": Rook Was Selected");
+
 			this.state.board[i].showAvailableSpots(this.state.board, i);
 		} else if (this.state.board[i] instanceof KnightPiece) {
-			console.log("ID: " + i + ": Knight Was Selected");
+
 			this.state.board[i].showAvailableSpots(this.state.board, i);
 		} else if (this.state.board[i] instanceof BishopPiece) {
-			console.log("ID: " + i + ": Bishop Was Selected");
+
 			this.state.board[i].showAvailableSpots(this.state.board, i);
 		} else if (this.state.board[i] instanceof QueenPiece) {
-			console.log("ID: " + i + ": Queen Was Selected");
+
 			this.state.board[i].showAvailableSpots(this.state.board, i);
 		} else if (this.state.board[i] instanceof KingPiece) {
-			console.log("ID: " + i + ": King Was Selected");
+
 			this.state.board[i].showAvailableSpots(this.state.board, i);
 		} else {
 			console.error("Unknown object was selected: " + i);
@@ -76,7 +80,7 @@ export default class GameLogic extends Component {
 				<div className="board-container">
 					<Board
 						blocks={this.state.board}
-						onClick={i => {
+						onClick={(i) => {
 							this.handleClick(i);
 						}}
 					/>
@@ -92,3 +96,24 @@ export default class GameLogic extends Component {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+  const { board, selectedPosition } = state
+  return { 
+		board: board,
+		selectedPosition: selectedPosition
+	 }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+	return {
+		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard)),
+		setSelectedPosition: (i) => dispatch(setSelectedPosition(i))
+	}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameLogic)
+

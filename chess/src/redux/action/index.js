@@ -1,5 +1,5 @@
 // redux/actions.js
-import { UPDATE_BOARD } from './actionTypes'
+import { UPDATE_BOARD, SET_SELECTED_POSITION } from './actionTypes'
 
 // let nextTodoId = 0
 // export const addTodo = content => ({
@@ -15,4 +15,8 @@ import { UPDATE_BOARD } from './actionTypes'
  */
 export function updateBoard(payload) {
   return { type: UPDATE_BOARD, payload};
+}
+
+export function setSelectedPosition(payload) {
+  return { type: SET_SELECTED_POSITION, payload };
 }

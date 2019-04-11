@@ -14,7 +14,6 @@ ReactDOM.render(
 document.getElementById('root'));
 
 store.subscribe( () => {
-  console.log("store updated")
   console.log(store.getState());
 });
 // store.dispatch( updateBoard({"test": "tacobell"}));
