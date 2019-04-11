@@ -58,7 +58,7 @@ class App extends Component {
           />
           <p>
             <button class="buttonCSS" onClick={this.handleClick}>
-              Start Game!
+              Start Game
             </button>
           </p>
         </div>

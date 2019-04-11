@@ -23,8 +23,18 @@
   align-items: center;
   font-size: 40px;
   color: black;
-  fill: darkgreen;
-  background-color: green;
+  background-color: darkslategray;
+  height: 150px;
+  width: 350px;
+  outline-color: white;
+  border-radius: 8px;
+}
+
+.buttonCSS:hover {
+  align-items: center;
+  font-size: 40px;
+  color: black;
+  background-color: forestgreen !important;
   height: 150px;
   width: 350px;
   outline-color: white;
