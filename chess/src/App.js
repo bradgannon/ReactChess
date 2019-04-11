@@ -33,13 +33,13 @@ class App extends Component {
   }
 
   handleClick() {
-    console.log("Clicked");
     this.setState({ clicked: true });
-    this.renderBoard();
   }
 
-  renderBoard() {
-    if (this.state.clicked) {
+  render() {
+    const isClicked = this.state.clicked;
+
+    if (isClicked) {
       return (
         <div className="Start">
           <header className="Start-header">
@@ -47,17 +47,15 @@ class App extends Component {
           </header>
         </div>
       );
+    } else {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <button onClick={this.handleClick}>Button</button>
+          </header>
+        </div>
+      );
     }
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <button onClick={this.handleClick}>Button</button>
-        </header>
-      </div>
-    );
   }
 }
 
