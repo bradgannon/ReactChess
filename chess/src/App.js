@@ -51,22 +51,16 @@ class App extends Component {
       );
     } else {
       return (
-        <div className="App">
+        <div className="App-header">
           <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
           />
-          <header className="App-header">
-            <p>
-              <button
-                href="#"
-                class="btn btn-success buttonCSS"
-                onClick={this.handleClick}
-              >
-                Start Game!
-              </button>
-            </p>
-          </header>
+          <p>
+            <button class="buttonCSS" onClick={this.handleClick}>
+              Start Game!
+            </button>
+          </p>
         </div>
       );
     }

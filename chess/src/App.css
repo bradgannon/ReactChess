@@ -20,8 +20,15 @@
 }
 
 .buttonCSS {
-  height: 100px;
-  width: 1000px;
+  align-items: center;
+  font-size: 40px;
+  color: black;
+  fill: darkgreen;
+  background-color: green;
+  height: 150px;
+  width: 350px;
+  outline-color: white;
+  border-radius: 8px;
 }
 
 .App-link {
