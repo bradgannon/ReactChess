@@ -1,5 +1,4 @@
 import ChessPiece from "./chess-piece";
-
 export default class PawnPiece extends ChessPiece {
 	/**
 	 * Extends the ChessPiece class.
@@ -10,7 +9,9 @@ export default class PawnPiece extends ChessPiece {
 		super(player, "chess-pawn", "pawn");
 		// pawns can move 1 or 2 forward on there first "move".
 
-		this.state = { isFirstMove: true };
+		this.state = {
+			isFirstMove: true
+		};
 		// pawns can move adjacent if opponent is next to them.
 	}
 
@@ -89,10 +90,47 @@ export default class PawnPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("Showing " + this.props.piece + " Available Spots");
-		if (location >= 8 && location < 16) {
-			b.blocks[location + 16].highlight();
+		console.log("showAvailableSpots queued");
+
+		// return an array of possible locations.
+		let validMoves = [];
+		if (this.player === "white") {
+			// subtract values.
+			if (b[location - 9] instanceof ChessPiece) {
+				if (b[location - 9].player === "black") {
+					validMoves.push(location - 9);
+				}
+			}
+			if (b[location - 7] instanceof ChessPiece) {
+				if (b[location - 7].player === "black") {
+					validMoves.push(location - 7);
+				}
+			}
+			let aboveLocation = b[location - 8];
+			if (!b[location - 8]) {
+				validMoves.push(location - 8);
+			}
+			if (this.state.isFirstMove && !b[location - 16]) {
+				validMoves.push(location - 16);
+			}
+		} else {
+			// player is black
+			if ( b[location + 9] instanceof ChessPiece) {
+				if ( b[location + 9].player ==="white") {
+					validMoves.push(location + 9);
+				}
+			}
+			if ( b[location + 7] instanceof ChessPiece) {
+				if (b[location + 7].player === "white") {
+					validMoves.push(location + 7);
+				}
+			}
+			if ( !b[location + 8]) {
+				validMoves.push(location + 8);
+			} if (this.state.isFirstMove && !b[location + 16]) {
+				validMoves.push(location + 16);
+			}
 		}
-		b.blocks[location + 8].highlight();
+		return validMoves;
 	}
 }
