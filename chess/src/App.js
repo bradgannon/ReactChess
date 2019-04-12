@@ -9,7 +9,8 @@ import {
   faChessPawn,
   faChessBishop,
   faChessKnight,
-  faChessKing
+  faChessKing,
+  faCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 // Resources
@@ -22,7 +23,8 @@ library.add(
   faChessPawn,
   faChessBishop,
   faChessKnight,
-  faChessKing
+  faChessKing,
+  faCircle
 );
 
 class App extends Component {

@@ -29,48 +29,6 @@ class GameLogic extends Component {
 		};
 	}
 
-	
-	/**
-	 * do on click stuff
-	 * @param {} i an integer value of the selected board, from 0 to 63.
-	 */
-	// handleClick(i) {
-	// 	// this.props.setSelectedPosition(i);
-	// 	this.setState({
-	// 		selectedPosition: i
-	// 	});
-	// 	if(this.props.board[i] == null) {
-	// 		console.log("props exectued right");
-	// 	}
-	// 	if (this.props.board[i] == null) {
-
-	// 	} else if (this.props.board[i] instanceof PawnPiece) {
-	// 		// highlight available spots.
-	// 		this.props.board[i].showAvailableSpots(this.state.board, i);
-	// 		// this.state.board[i + 8]
-	// 		console.log('pawn selected - in handleClick')
-
-	// 	} else if (this.props.board[i] instanceof RookPiece) {
-
-	// 		this.props.board[i].showAvailableSpots(this.state.board, i);
-	// 	} else if (this.props.board[i] instanceof KnightPiece) {
-
-	// 		this.props.board[i].showAvailableSpots(this.state.board, i);
-	// 	} else if (this.props.board[i] instanceof BishopPiece) {
-
-	// 		this.props.board[i].showAvailableSpots(this.state.board, i);
-	// 	} else if (this.props.board[i] instanceof QueenPiece) {
-
-	// 		this.props.board[i].showAvailableSpots(this.state.board, i);
-	// 	} else if (this.props.board[i] instanceof KingPiece) {
-
-	// 		this.props.board[i].showAvailableSpots(this.state.board, i);
-	// 	} else {
-	// 		console.error("Unknown object was selected: " + i);
-	// 	}
-	// }
-	
-
 	render() {
 		let playerTurn = "";
 		if (this.state.turn === "white") {
@@ -108,10 +66,9 @@ function mapStateToProps(state) {
 	 }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
 	return {
-		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard)),
-		setSelectedPosition: (i) => dispatch(setSelectedPosition(i))
+		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard))
 	}
 }
 

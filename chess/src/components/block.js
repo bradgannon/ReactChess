@@ -9,7 +9,8 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { updateBoard, setSelectedPosition } from '../redux/action/index';
+import { updateBoard, setSelectedPosition, setPotentialMoves } from '../redux/action/index';
+import PotentialMove from "../models/potential-move";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -189,6 +190,19 @@ class Block extends Component {
 	}
 
 	/**
+	 * Renders a potential move
+	 */
+	renderPotentialMove() {
+		return (
+			<FontAwesomeIcon
+				icon="circle"
+				color="rgba(28, 28, 28, 0.7)"
+				size="3x"
+			/>
+		);
+	}
+
+	/**
 	 * Determines if a piece needs to be render onthe specific block
 	 */
 	renderPieces() {
@@ -205,6 +219,8 @@ class Block extends Component {
 			return this.renderQueen();
 		} else if (this.props.piece instanceof KingPiece) {
 			return this.renderKing();
+		} else if ( this.props.piece instanceof PotentialMove) {
+			return this.renderPotentialMove();
 		}
 	}
 
@@ -224,11 +240,52 @@ class Block extends Component {
 		);
 	}
 
+	/**
+	 * Renders all of the available moves the player can make on the board.
+	 */
+	showAvailableMoves() {
+		let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
+		this.props.setPotentialMoves(availableMoves);
+		let board = this.props.board;
+		availableMoves.forEach(index => {
+			board[index] = new PotentialMove(this.props.piece.player, index);
+		});
+		this.props.updateBoard(board);
+	}
+
+	/**
+	 * Removes the previous selected piece's potential moves from the board.
+	 */
+	removePreviousAvailableMoves() {
+		let previousAvailableMoves = this.props.potentialMoves;
+		let board = this.props.board;
+		previousAvailableMoves.forEach(index => {
+			if(board[index] instanceof PotentialMove) {
+				board[index] = undefined;
+			}
+		});
+		this.props.updateBoard(board);
+	}
+
 	selectBlock() {
-		this.props.setSelectedPosition(this.props.index)
-		if(this.props.board[this.props.index] instanceof PawnPiece) {
-			this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
-		}
+    
+		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
+		console.log(this.props.selectedPosition);
+		this.removePreviousAvailableMoves();
+    if(this.state.highlighted) {
+			this.props.setSelectedPosition(-1);
+			this.props.setPotentialMoves([]);
+    } else {
+      this.props.setSelectedPosition(this.props.index);
+
+      // Show available spots per selection.
+      if(this.props.board[this.props.index] instanceof PawnPiece) {
+				this.showAvailableMoves();
+				// let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
+				// this.props.setPotentialMoves(availableMoves);
+      }
+    }
+	
 		if (this.props.piece != null) {
 			if (this.props.piece.player === "white") {
 				console.log(
@@ -250,7 +307,6 @@ class Block extends Component {
 		} else {
 			console.log("Empty block selected.");
 		}
-		// this.props.onClick();
 	}
 
 	/**
@@ -258,8 +314,14 @@ class Block extends Component {
 	 */
 	returnCSS() {
 		if (this.state.highlighted) {
-			return "block-highlight";
-		} else if (this.isDark) {
+			if(this.props.selectedPosition != this.props.index) {
+				this.setState({highlighted: false});
+			} else {
+				return "block-highlight";
+			}
+
+		} 
+		if (this.isDark) {
 			return "block-dark";
 		} else {
 			return "block-light";
@@ -271,34 +333,28 @@ class Block extends Component {
 	 */
 	highlight() {
 		if (this.state.highlighted) {
-			this.setState(
-				{
-					highlighted: false
-				}
-			);
+			this.setState({ highlighted: false });
 			
 		} else {
-			this.setState(
-				{
-					highlighted: true
-				}
-			);
+			this.setState({highlighted: true});
 		}
 	}
 }
 
 function mapStateToProps(state) {
-  const { board, selectedPosition } = state
+  const { board, selectedPosition, potentialMoves } = state
   return { 
 		board: board,
-		selectedPosition: selectedPosition
+		selectedPosition: selectedPosition,
+		potentialMoves: potentialMoves
 	 }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
 	return {
 		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard)),
-		setSelectedPosition: () => dispatch(setSelectedPosition(ownProps.index))
+		setSelectedPosition: (index) => dispatch(setSelectedPosition(index)),
+		setPotentialMoves: (arrayOfPossibleMoves) => dispatch(setPotentialMoves(arrayOfPossibleMoves))
 	}
 }
 
