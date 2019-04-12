@@ -89,6 +89,7 @@ export default class PawnPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
+		console.log("showAvailableSpots queued");
 		// console.log("Showing " + this.props.piece + " Available Spots");
 		// if (location >= 8 && location < 16) {
 		// 	b.blocks[location + 16].highlight();

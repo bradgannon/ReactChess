@@ -20,6 +20,7 @@ export default class Board extends Component {
 			return (
 				<Block
 					key={i}
+					index={i}
 					piece={this.blocks[i]}
 					onClick={() => this.props.onClick(i)}
 					isDark={true}
@@ -29,6 +30,7 @@ export default class Board extends Component {
 			return (
 				<Block
 					key={i}
+					index={i}
 					piece={this.blocks[i]}
 					onClick={() => this.props.onClick(i)}
 					isDark={false}

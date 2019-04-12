@@ -9,7 +9,7 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { updateBoard } from '../redux/action/index';
+import { updateBoard, setSelectedPosition } from '../redux/action/index';
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -225,6 +225,10 @@ class Block extends Component {
 	}
 
 	selectBlock() {
+		this.props.setSelectedPosition(this.props.index)
+		if(this.props.board[this.props.index] instanceof PawnPiece) {
+			this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
+		}
 		if (this.props.piece != null) {
 			if (this.props.piece.player === "white") {
 				console.log(
@@ -246,7 +250,7 @@ class Block extends Component {
 		} else {
 			console.log("Empty block selected.");
 		}
-		this.props.onClick();
+		// this.props.onClick();
 	}
 
 	/**
@@ -272,6 +276,7 @@ class Block extends Component {
 					highlighted: false
 				}
 			);
+			
 		} else {
 			this.setState(
 				{
@@ -290,9 +295,10 @@ function mapStateToProps(state) {
 	 }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
 	return {
-		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard))
+		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard)),
+		setSelectedPosition: () => dispatch(setSelectedPosition(ownProps.index))
 	}
 }
 
