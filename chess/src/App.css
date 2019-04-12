@@ -20,8 +20,25 @@
 }
 
 .buttonCSS {
-  height: 100px;
-  width: 1000px;
+  align-items: center;
+  font-size: 40px;
+  color: black;
+  background-color: darkslategray;
+  height: 150px;
+  width: 350px;
+  outline-color: white;
+  border-radius: 8px;
+}
+
+.buttonCSS:hover {
+  align-items: center;
+  font-size: 40px;
+  color: black;
+  background-color: forestgreen !important;
+  height: 150px;
+  width: 350px;
+  outline-color: white;
+  border-radius: 8px;
 }
 
 .App-link {
