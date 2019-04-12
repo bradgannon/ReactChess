@@ -9,5 +9,14 @@ export default class ChessPiece {
         this.player = whichPlayer;
         this.icon = icon;
         this.typeOfPiece = typeOfPiece;
+        this.isSelected = false;
+    }
+
+    setIsSelected(isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    getIsSelected() {
+        return this.isSelected;
     }
 }

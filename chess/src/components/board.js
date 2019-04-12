@@ -6,7 +6,6 @@ export default class Board extends Component {
 		super(props);
 		// this.counter = 0;
 		this.blocks = this.props.blocks;
-		console.log(this.blocks);
 		// this.board = [];
 	}
 
@@ -17,20 +16,23 @@ export default class Board extends Component {
 	 */
 	createBlock(i, isDark) {
 		// console.log("create block triggered with: " + isDark);
-		console.log(this.props);
 		if (isDark) {
 			return (
 				<Block
+					key={i}
+					index={i}
 					piece={this.blocks[i]}
-					onClick={() => this.props.piece.showAvailableSpots()}
+					onClick={() => this.props.onClick(i)}
 					isDark={true}
 				/>
 			);
 		} else {
 			return (
 				<Block
+					key={i}
+					index={i}
 					piece={this.blocks[i]}
-					onClick={() => this.props.piece.showAvailableSpots()}
+					onClick={() => this.props.onClick(i)}
 					isDark={false}
 				/>
 			);
@@ -72,8 +74,7 @@ export default class Board extends Component {
 					shouldBeDark = true;
 				}
 			}
-			let boardRow = <div className="row">{rows}</div>;
-			console.log(boardRow);
+			let boardRow = <div key={i} className="row">{rows}</div>;
 			board.push(boardRow);
 			// // this.board.push(;
 			// this.populatePawns();
