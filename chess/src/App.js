@@ -10,12 +10,14 @@ import {
   faChessBishop,
   faChessKnight,
   faChessKing,
-  faCircle
+  faCircle,
+  faChess
 } from "@fortawesome/free-solid-svg-icons";
 
 // Resources
 import "./App.css";
 import GameLogic from "./components/game-logic";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(
   faChessRook,
@@ -51,11 +53,75 @@ class App extends Component {
       );
     } else {
       return (
-        <div className="App-header">
+        <div className="Start-header">
           <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
           />
+          <h1 className="headerCSS">Welcome to Chess!</h1>
+          <section>
+            <div className="whitePiece">
+              <FontAwesomeIcon
+                icon="chess-pawn"
+                size="6x"
+                style={{ stroke: "black", strokeWidth: 10 }}
+              />
+            </div>
+            <div className="blackPiece">
+              <FontAwesomeIcon
+                icon="chess-rook"
+                size="6x"
+                style={{ stroke: "white", strokeWidth: 10 }}
+              />
+            </div>
+            <div className="whitePiece">
+              <FontAwesomeIcon
+                icon="chess-queen"
+                size="6x"
+                style={{ stroke: "black", strokeWidth: 10 }}
+              />
+            </div>
+            <div className="blackPiece">
+              <FontAwesomeIcon
+                icon="chess-king"
+                size="6x"
+                style={{ stroke: "white", strokeWidth: 10 }}
+              />
+            </div>
+            <div className="whitePiece">
+              <FontAwesomeIcon
+                icon="chess-bishop"
+                size="6x"
+                style={{ stroke: "black", strokeWidth: 10 }}
+              />
+            </div>
+            <div className="blackPiece">
+              <FontAwesomeIcon
+                icon="chess-knight"
+                size="6x"
+                style={{ stroke: "white", strokeWidth: 10 }}
+              />
+            </div>
+            <div className="whitePiece">
+              <FontAwesomeIcon
+                icon="chess-pawn"
+                size="6x"
+                style={{ stroke: "black", strokeWidth: 10 }}
+              />
+            </div>
+          </section>
+          <section className="center">
+            <div className="center">
+              <input placeholder="Username" />
+            </div>
+            <div>
+              <input placeholder="Password" />
+            </div>
+          </section>
+          <div>
+            <button class="loginButton">Log In</button>
+          </div>
+
           <p>
             <button class="buttonCSS" onClick={this.handleClick}>
               Start Game
