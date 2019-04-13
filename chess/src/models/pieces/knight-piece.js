@@ -10,42 +10,41 @@ export default class KnightPiece extends ChessPiece {
 	}
 
 	/**
-	 *
-	 * @param {*} source
-	 * @param {*} destination
-	 */
-	identifyIfValidMove(source, destination) {
-		if (destination + 15 === source || destination + 17 === source) {
-			// Knight forward two
-			return true;
-		} else if (destination + 6 === source || destination - 10 === source) {
-			// Knight left two
-			return true;
-		} else if (destination + 6 === source || destination - 10 === source) {
-			// Knight right two
-			return true;
-		} else if (destination - 17 === source || destination - 15 === source) {
-			// Knight back two
-			return true;
-		}
-	}
-
-	/**
-	 * Returns an array of a path from the source to the destination.
-	 *
-	 * @param {*} source
-	 * @param {*} destination
-	 */
-	getPathFromSrcToDest(source, destination) {
-		// TODO: should exclude the source and destination in the path.
-	}
-
-	/**
 	 * Method to highlight possible moves for the player
 	 * @param {Board} b
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		// TODO
+		console.log("showAvailableSpots queued");
+
+		// return an array of possible locations.
+		let validMoves = [];
+
+		// Mod statement ensure that the knighkt does not cross the boundary of the chessboard and reappear on the other side of the board, a limitation caused by the 1D array
+		if ((location - 17) % 8 < 7 && !b[location - 17]) {
+			validMoves.push(location - 17);
+		}
+		if ((location - 15) % 8 > 0 && !b[location - 15]) {
+			validMoves.push(location - 15);
+		}
+		if ((location + 17) % 8 > 0 && !b[location + 17]) {
+			validMoves.push(location + 17);
+		}
+		if ((location + 15) % 8 < 7 && !b[location + 15]) {
+			validMoves.push(location + 15);
+		}
+		if ((location - 10) % 8 < 6 && !b[location - 10]) {
+			validMoves.push(location - 10);
+		}
+		if ((location + 10) % 8 > 1 && !b[location + 10]) {
+			validMoves.push(location + 10);
+		}
+		if ((location - 6) % 8 < 6 && !b[location - 6]) {
+			validMoves.push(location - 6);
+		}
+		if ((location + 6) % 8 > 1 && !b[location + 6]) {
+			validMoves.push(location + 6);
+		}
+		return validMoves;
 	}
 }

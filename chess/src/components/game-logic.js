@@ -1,16 +1,8 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
-
-import PawnPiece from "../models/pieces/pawn-piece";
-import RookPiece from "../models/pieces/rook-piece";
-import KnightPiece from "../models/pieces/knight-piece";
-import BishopPiece from "../models/pieces/bishop-piece";
-import QueenPiece from "../models/pieces/queen-piece";
-import KingPiece from "../models/pieces/king-piece";
+import { connect } from "react-redux";
 import Board from "./board";
 
-import { updateBoard, setSelectedPosition } from '../redux/action/index';
-
+import { updateBoard, setSelectedPosition } from "../redux/action/index";
 
 /**
  * Contains the logic and hosts all of the core chess components
@@ -41,7 +33,7 @@ class GameLogic extends Component {
 				<div className="board-container">
 					<Board
 						blocks={this.props.board}
-						onClick={(i) => {
+						onClick={i => {
 							this.handleClick(i);
 						}}
 					/>
@@ -59,21 +51,20 @@ class GameLogic extends Component {
 }
 
 function mapStateToProps(state) {
-  const { board, selectedPosition } = state
-  return { 
+	const { board, selectedPosition } = state;
+	return {
 		board: board,
 		selectedPosition: selectedPosition
-	 }
+	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard))
-	}
+		updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
+	};
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GameLogic)
-
+	mapStateToProps,
+	mapDispatchToProps
+)(GameLogic);

@@ -8,7 +8,6 @@ import BishopPiece from "../models/pieces/bishop-piece";
 import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
-import Board from "./board";
 
 import {
 	updateBoard,
@@ -282,7 +281,7 @@ class Block extends Component {
 			this.props.setSelectedPosition(this.props.index);
 
 			// Show available spots per selection.
-			if (this.props.board[this.props.index] instanceof PawnPiece) {
+			if (this.props.board[this.props.index]) {
 				this.showAvailableMoves();
 				// let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
 				// this.props.setPotentialMoves(availableMoves);
@@ -298,8 +297,6 @@ class Block extends Component {
 						this.props.piece.player
 				);
 				this.highlight();
-				console.log(this.props.location);
-				this.props.piece.showAvailableSpots(this.Board, this.props.location);
 			} else {
 				console.log(
 					"Block Selected; Piece: " +
@@ -336,14 +333,11 @@ class Block extends Component {
 	 * Highlights the block by changing its color
 	 */
 	highlight() {
-		this.setState(
-			{
-				highlighted: !this.state.highlighted
-			},
-			() => {
-				console.log("highlighted: " + this.state.highlighted);
-			}
-		);
+		if (this.state.highlighted) {
+			this.setState({ highlighted: false });
+		} else {
+			this.setState({ highlighted: true });
+		}
 	}
 }
 
