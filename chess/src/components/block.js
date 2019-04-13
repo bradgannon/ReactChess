@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import "./block.css";
 import PawnPiece from "../models/pieces/pawn-piece";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,11 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { updateBoard, setSelectedPosition, setPotentialMoves } from '../redux/action/index';
+import {
+	updateBoard,
+	setSelectedPosition,
+	setPotentialMoves
+} from "../redux/action/index";
 import PotentialMove from "../models/potential-move";
 
 /**
@@ -38,7 +42,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -48,7 +52,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -65,7 +69,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -75,7 +79,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -92,7 +96,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -102,7 +106,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -119,7 +123,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -129,7 +133,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -146,7 +150,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -156,7 +160,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -173,7 +177,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "white", "strokeWidth": 15 }}
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
@@ -183,7 +187,7 @@ class Block extends Component {
 					icon={this.props.piece.icon}
 					color={this.props.piece.player}
 					size="6x"
-					style={{ stroke: "black", "strokeWidth": 15 }}
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -194,11 +198,7 @@ class Block extends Component {
 	 */
 	renderPotentialMove() {
 		return (
-			<FontAwesomeIcon
-				icon="circle"
-				color="rgba(28, 28, 28, 0.7)"
-				size="3x"
-			/>
+			<FontAwesomeIcon icon="circle" color="rgba(28, 28, 28, 0.7)" size="3x" />
 		);
 	}
 
@@ -219,7 +219,7 @@ class Block extends Component {
 			return this.renderQueen();
 		} else if (this.props.piece instanceof KingPiece) {
 			return this.renderKing();
-		} else if ( this.props.piece instanceof PotentialMove) {
+		} else if (this.props.piece instanceof PotentialMove) {
 			return this.renderPotentialMove();
 		}
 	}
@@ -244,7 +244,10 @@ class Block extends Component {
 	 * Renders all of the available moves the player can make on the board.
 	 */
 	showAvailableMoves() {
-		let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
+		let availableMoves = this.props.board[this.props.index].showAvailableSpots(
+			this.props.board,
+			this.props.index
+		);
 		this.props.setPotentialMoves(availableMoves);
 		let board = this.props.board;
 		availableMoves.forEach(index => {
@@ -260,7 +263,7 @@ class Block extends Component {
 		let previousAvailableMoves = this.props.potentialMoves;
 		let board = this.props.board;
 		previousAvailableMoves.forEach(index => {
-			if(board[index] instanceof PotentialMove) {
+			if (board[index] instanceof PotentialMove) {
 				board[index] = undefined;
 			}
 		});
@@ -268,24 +271,23 @@ class Block extends Component {
 	}
 
 	selectBlock() {
-    
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
 		console.log(this.props.selectedPosition);
 		this.removePreviousAvailableMoves();
-    if(this.state.highlighted) {
+		if (this.state.highlighted) {
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
-    } else {
-      this.props.setSelectedPosition(this.props.index);
+		} else {
+			this.props.setSelectedPosition(this.props.index);
 
-      // Show available spots per selection.
-      if(this.props.board[this.props.index] instanceof PawnPiece) {
+			// Show available spots per selection.
+			if (this.props.board[this.props.index]) {
 				this.showAvailableMoves();
 				// let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
 				// this.props.setPotentialMoves(availableMoves);
-      }
-    }
-	
+			}
+		}
+
 		if (this.props.piece != null) {
 			if (this.props.piece.player === "white") {
 				console.log(
@@ -314,13 +316,12 @@ class Block extends Component {
 	 */
 	returnCSS() {
 		if (this.state.highlighted) {
-			if(this.props.selectedPosition != this.props.index) {
-				this.setState({highlighted: false});
+			if (this.props.selectedPosition != this.props.index) {
+				this.setState({ highlighted: false });
 			} else {
 				return "block-highlight";
 			}
-
-		} 
+		}
 		if (this.isDark) {
 			return "block-dark";
 		} else {
@@ -334,28 +335,28 @@ class Block extends Component {
 	highlight() {
 		if (this.state.highlighted) {
 			this.setState({ highlighted: false });
-			
 		} else {
-			this.setState({highlighted: true});
+			this.setState({ highlighted: true });
 		}
 	}
 }
 
 function mapStateToProps(state) {
-  const { board, selectedPosition, potentialMoves } = state
-  return { 
+	const { board, selectedPosition, potentialMoves } = state;
+	return {
 		board: board,
 		selectedPosition: selectedPosition,
 		potentialMoves: potentialMoves
-	 }
+	};
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
 	return {
-		updateBoard: (updatedBoard) => dispatch(updateBoard(updatedBoard)),
-		setSelectedPosition: (index) => dispatch(setSelectedPosition(index)),
-		setPotentialMoves: (arrayOfPossibleMoves) => dispatch(setPotentialMoves(arrayOfPossibleMoves))
-	}
+		updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard)),
+		setSelectedPosition: index => dispatch(setSelectedPosition(index)),
+		setPotentialMoves: arrayOfPossibleMoves =>
+			dispatch(setPotentialMoves(arrayOfPossibleMoves))
+	};
 }
 
 // const mapStateToProps = (state, ownProps) => ({
@@ -371,11 +372,8 @@ function mapDispatchToProps(dispatch, ownProps) {
 
 // `connect` returns a new function that accepts the component to wrap:
 const connectToStore = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Block)
+	mapStateToProps,
+	mapDispatchToProps
+)(Block);
 
 export default connectToStore;
-
-
-

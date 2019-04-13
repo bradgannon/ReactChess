@@ -24,6 +24,7 @@ export default class Board extends Component {
 					piece={this.blocks[i]}
 					onClick={() => this.props.onClick(i)}
 					isDark={true}
+					location={i}
 				/>
 			);
 		} else {
@@ -34,6 +35,7 @@ export default class Board extends Component {
 					piece={this.blocks[i]}
 					onClick={() => this.props.onClick(i)}
 					isDark={false}
+					location={i}
 				/>
 			);
 		}

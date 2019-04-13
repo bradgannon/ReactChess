@@ -10,48 +10,72 @@ export default class QueenPiece extends ChessPiece {
 	}
 
 	/**
-	 *
-	 * @param {*} source
-	 * @param {*} destination
-	 */
-	identifyIfValidMove(source, destination) {
-		if (
-			destination + 8 === source ||
-			destination + 1 === source ||
-			destination - 1 === source ||
-			destination - 8 === source
-		) {
-			// Queen can move vertically / horizontally
-			return true;
-		} else if (
-			destination + 9 === source ||
-			destination + 7 === source ||
-			destination - 7 === source ||
-			destination - 9 === source
-		) {
-			// Queen can move diagonally
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Returns an array of a path from the source to the destination.
-	 *
-	 * @param {*} source
-	 * @param {*} destination
-	 */
-	getPathFromSrcToDest(source, destination) {
-		// TODO: should exclude the source and destination in the path.
-	}
-
-	/**
 	 * Method to highlight possible moves for the player
 	 * @param {Board} b
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		// TODO
+		console.log("showAvailableSpots queued");
+
+		// return an array of possible locations.
+		let validMoves = [];
+
+		// Check to the North East
+		let i = 0;
+		while (!b[location - 7 * i] && (location - 7 * i) % 8 != 7) {
+			validMoves.push(location - 7 * i);
+			i++;
+		}
+
+		// Check to the North West
+		i = 0;
+		while (!b[location - 9 * i] && (location - 9 * i) % 8 != 0) {
+			validMoves.push(location - 9 * i);
+			i++;
+		}
+
+		// Check to the South East
+		i = 0;
+		while (!b[location + 9 * i] && (location + 9 * i) % 8 != 7) {
+			validMoves.push(location + 9 * i);
+			i++;
+		}
+
+		// Check to the South West
+		i = 0;
+		while (!b[location + 7 * i] && (location + 7 * i) % 8 != 0) {
+			validMoves.push(location + 7 * i);
+			i++;
+		}
+
+		// Right
+		i = 0;
+		while (!b[location + i] && (location + i) % 8 != 7) {
+			validMoves.push(location + i);
+			i++;
+		}
+
+		// Left
+		i = 0;
+		while (!b[location - i] && (location - i) % 8 != 0) {
+			validMoves.push(location - i);
+			i++;
+		}
+
+		// Forward
+		i = 0;
+		while (!b[location + i * 8]) {
+			validMoves.push(location + i * 8);
+			i++;
+		}
+
+		// Back
+		i = 0;
+		while (!b[location - i * 8]) {
+			validMoves.push(location - i * 8);
+			i++;
+		}
+
+		return validMoves;
 	}
 }
