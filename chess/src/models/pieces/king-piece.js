@@ -10,40 +10,41 @@ export default class KingPiece extends ChessPiece {
 	}
 
 	/**
-	 *
-	 * @param {*} source
-	 * @param {*} destination
-	 */
-	identifyIfValidMove(source, destination) {
-		if (
-			destination + 1 === source ||
-			destination + 8 === source ||
-			destination - 1 === source ||
-			destination - 8 === source
-		) {
-			// King can move one space in any direction
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Returns an array of a path from the source to the destination.
-	 *
-	 * @param {*} source
-	 * @param {*} destination
-	 */
-	getPathFromSrcToDest(source, destination) {
-		// TODO: should exclude the source and destination in the path.
-	}
-
-	/**
 	 * Method to highlight possible moves for the player
 	 * @param {Board} b
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		// TODO
+		console.log("showAvailableSpots queued");
+
+		// return an array of possible locations.
+		let validMoves = [];
+
+		// Mod statements ensure that the king doesn't go off the edge fo the board
+		if (!b[location + 1] && (location + 1) % 8 != 7) {
+			validMoves.push(location + 1);
+		}
+		if (!b[location + 9] && (location + 9) % 8 != 7) {
+			validMoves.push(location + 9);
+		}
+		if (!b[location + 8]) {
+			validMoves.push(location + 8);
+		}
+		if (!b[location + 7] && (location + 7) % 8 != 0) {
+			validMoves.push(location + 7);
+		}
+		if (!b[location - 1] && (location - 1) % 8 != 0) {
+			validMoves.push(location - 1);
+		}
+		if (!b[location - 7] && (location - 7) % 8 != 7) {
+			validMoves.push(location - 7);
+		}
+		if (!b[location - 8]) {
+			validMoves.push(location - 8);
+		}
+		if (!b[location - 9] && (location - 9) % 8 != 0) {
+			validMoves.push(location - 9);
+		}
+		return validMoves;
 	}
 }
