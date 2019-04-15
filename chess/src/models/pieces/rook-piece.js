@@ -36,16 +36,16 @@ export default class RookPiece extends ChessPiece {
 
 		// Take it back now yall
 		i = 1;
-		while (!b[location + (i * 8)]) {
+		while (!b[location + i * 8]) {
 			validMoves.push(location + i * 8);
 			i++;
 		}
 
 		// Two hops this time
 		i = 1;
-		let futureLocation = location - (i * 8);
-		while (!b[location - (i * 8)]) {
-			futureLocation = location - (i * 8);
+		let futureLocation = location - i * 8;
+		while (!b[location - i * 8]) {
+			futureLocation = location - i * 8;
 			validMoves.push(location - i * 8);
 			i++;
 		}

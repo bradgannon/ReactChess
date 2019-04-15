@@ -43,6 +43,7 @@ export default class PawnPiece extends ChessPiece {
 			}
 			if (this.state.isFirstMove && !b[location - 16]) {
 				validMoves.push(location - 16);
+				this.state.isFirstMove = false;
 			}
 		} else {
 			// player is black
@@ -61,6 +62,7 @@ export default class PawnPiece extends ChessPiece {
 			}
 			if (this.state.isFirstMove && !b[location + 16]) {
 				validMoves.push(location + 16);
+				this.state.isFirstMove = false;
 			}
 		}
 		return validMoves;
