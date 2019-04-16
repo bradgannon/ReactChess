@@ -42,9 +42,11 @@ export default class KnightPiece extends ChessPiece {
 		if ((location - 6) % 8 < 6 && !b[location - 6]) {
 			validMoves.push(location - 6);
 		}
-		if ((location + 6) % 8 > 1 && !b[location + 6]) {
+		if ((location + 6) % 8 >= 0 && !b[location + 6]) {
 			validMoves.push(location + 6);
 		}
+
+		// todo: Handle Instance of Opposing Chess Pieces
 		return validMoves;
 	}
 }

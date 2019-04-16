@@ -21,29 +21,31 @@ export default class RookPiece extends ChessPiece {
 		let validMoves = [];
 
 		// Check to the right
-		let i = 0;
-		while (!b[location + i] && (location + i) % 8 != 7) {
+		let i = 1;
+		while (!b[location + i] && (location + i) % 8 != 0) {
 			validMoves.push(location + i);
 			i++;
 		}
 
 		// To the left
-		i = 0;
-		while (!b[location - i] && (location - i) % 8 != 0) {
+		i = 1;
+		while (!b[location - i] && (location - i) % 8 != 7) {
 			validMoves.push(location - i);
 			i++;
 		}
 
 		// Take it back now yall
-		i = 0;
-		while (!b[location + i * 8]) {
+		i = 1;
+		while (!b[location + (i * 8)]) {
 			validMoves.push(location + i * 8);
 			i++;
 		}
 
 		// Two hops this time
-		i = 0;
-		while (!b[location - i * 8]) {
+		i = 1;
+		let futureLocation = location - (i * 8);
+		while (!b[location - (i * 8)]) {
+			futureLocation = location - (i * 8);
 			validMoves.push(location - i * 8);
 			i++;
 		}
