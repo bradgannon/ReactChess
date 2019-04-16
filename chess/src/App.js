@@ -115,7 +115,7 @@ class App extends Component {
               <input placeholder="Username" />
             </div>
             <div>
-              <input placeholder="Password" />
+              <input type="password" placeholder="Password" />
             </div>
           </section>
           <div>
