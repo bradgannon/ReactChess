@@ -275,6 +275,20 @@ class Block extends Component {
 		this.props.updateBoard(board);
 	}
 
+
+	/**
+	 * Method is called when a piece is removed from the board.  Method updates the redux state
+	 * to keep track of which pieces are on the board and not on the board.
+	 * @param {ChessPiece} PieceToBeRemoved 
+	 */
+	handleRemovePiece(PieceToBeRemoved) {
+		// TODO: To be implemented
+		console.log("Handle Remove Piece was called with: Player: " +
+		 PieceToBeRemoved.player + " Piece: " + PieceToBeRemoved.typeOfPiece);
+	}
+	/**
+	 * Moves the Selected Position Piece to the clicked on Piece.
+	 */
 	movePiece() {
 		let pieceIndex = this.props.index;
 		let indexOfPieceToBeMoved = this.props.selectedPosition;
@@ -283,6 +297,7 @@ class Block extends Component {
 		if(this.props.piece instanceof ChessPiece && this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player) {
 			// trigger function to delete piece from board.
 			console.log('enemy piece is removed');
+			this.handleRemovePiece(board[this.props.selectedPosition]);
 		}
 
 		// Set the instance of the pawn to be past it's first move
