@@ -14,7 +14,7 @@ export default class PawnPiece extends ChessPiece {
 	}
 
 	setPastFirstMove() {
-		console.log('past first move should be queued');
+		console.log("past first move should be queued");
 		this.isFirstMove = false;
 	}
 	/**
@@ -44,7 +44,6 @@ export default class PawnPiece extends ChessPiece {
 			}
 			if (this.isFirstMove && !b[location - 16]) {
 				validMoves.push(location - 16);
-				this.state.isFirstMove = false;
 			}
 		} else {
 			// player is black
@@ -63,7 +62,6 @@ export default class PawnPiece extends ChessPiece {
 			}
 			if (this.isFirstMove && !b[location + 16]) {
 				validMoves.push(location + 16);
-				this.state.isFirstMove = false;
 			}
 		}
 		return validMoves;
