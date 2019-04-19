@@ -29,12 +29,12 @@ export default class PawnPiece extends ChessPiece {
 		let validMoves = [];
 		if (this.player === "white") {
 			// subtract values.
-			if (b[location - 9] instanceof ChessPiece) {
+			if (b[location - 9] instanceof ChessPiece && (location - 9) % 8 < 7) {
 				if (b[location - 9].player === "black") {
 					validMoves.push(location - 9);
 				}
 			}
-			if (b[location - 7] instanceof ChessPiece) {
+			if (b[location - 7] instanceof ChessPiece && (location - 7) % 8 > 0) {
 				if (b[location - 7].player === "black") {
 					validMoves.push(location - 7);
 				}
@@ -47,12 +47,12 @@ export default class PawnPiece extends ChessPiece {
 			}
 		} else {
 			// player is black
-			if (b[location + 9] instanceof ChessPiece) {
+			if (b[location + 9] instanceof ChessPiece && (location + 9) % 8 > 0) {
 				if (b[location + 9].player === "white") {
 					validMoves.push(location + 9);
 				}
 			}
-			if (b[location + 7] instanceof ChessPiece) {
+			if (b[location + 7] instanceof ChessPiece && (location + 7) % 8 < 7) {
 				if (b[location + 7].player === "white") {
 					validMoves.push(location + 7);
 				}
