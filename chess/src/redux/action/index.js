@@ -1,5 +1,5 @@
 // redux/actions.js
-import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, SET_MOVE_STATE, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE } from './actionTypes'
+import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE } from './actionTypes'
 
 // let nextTodoId = 0
 // export const addTodo = content => ({

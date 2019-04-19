@@ -39,7 +39,6 @@ export default class PawnPiece extends ChessPiece {
 					validMoves.push(location - 7);
 				}
 			}
-			let aboveLocation = b[location - 8];
 			if (!b[location - 8]) {
 				validMoves.push(location - 8);
 			}

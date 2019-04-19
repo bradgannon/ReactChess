@@ -18,7 +18,7 @@ import {
 } from "../redux/action/index";
 
 import PotentialMove from '../models/potential-move';
-import { SELECT_AVAILABLE_MOVE } from "../redux/string-constants";
+import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
 
 /**
@@ -277,11 +277,10 @@ class Block extends Component {
 
 	movePiece() {
 		let pieceIndex = this.props.index;
-		let piece = this.props.piece;
 		let indexOfPieceToBeMoved = this.props.selectedPosition;
 		let board = this.props.board;
 
-		if(this.props.piece instanceof ChessPiece && this.props.piece.player != this.props.board[indexOfPieceToBeMoved].player) {
+		if(this.props.piece instanceof ChessPiece && this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player) {
 			// trigger function to delete piece from board.
 			console.log('enemy piece is removed');
 		}
@@ -305,57 +304,27 @@ class Block extends Component {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
 		console.log(this.props.selectedPosition);
 		this.removePreviousAvailableMoves();
-		if (this.state.highlighted) {
-			this.props.setSelectedPosition(-1);
-			this.props.setPotentialMoves([]);
-		} else {
+
+		if(this.props.moveState === SELECT_PIECE) {
 			this.props.setSelectedPosition(this.props.index);
 
-			let selectedPiece= this.props.board[this.props.index];
-			let selectedPiecesPlayer = '';
-			if(selectedPiece) {
-				selectedPiecesPlayer = selectedPiece.player;
-			}
-			if( this.props.playerTurn === selectedPiecesPlayer) {
-				// Show available spots per selection.
-				let isPotentialMove = this.props.piece instanceof PotentialMove;
-				if (this.props.board[this.props.index] && (!isPotentialMove)) {
-					this.showAvailableMoves();
-					// let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
-					// this.props.setPotentialMoves(availableMoves);
-				}
-			}
-			
 		}
-
 		// check if exists in available moves, and it is turn selection.
 		if(this.props.moveState === SELECT_AVAILABLE_MOVE && this.props.potentialMoves.indexOf(this.props.index) >= 0) {
 			console.log('this piece should be highlighted');
 			// move piece
 			this.movePiece();
-
-		} else if (this.props.piece) {
+		} else if ( this.props.moveState === SELECT_AVAILABLE_MOVE && this.props.potentialMoves.indexOf(this.props.index) < 0) {
+				this.props.setSelectedPosition(-1);
+				this.props.setPotentialMoves([]);
+				this.props.revertToSelectPiece();
+		} else if (this.props.piece && this.props.moveState === SELECT_PIECE) {
 			if(this.props.piece.player === this.props.playerTurn) {
-				if (this.props.piece.player === "white") {
-					console.log(
-						"Block Selected; Piece: " +
-							this.props.piece +
-							" Player: " +
-							this.props.piece.player
-					);
 					this.highlight();
-	
-				} else {
-					console.log(
-						"Block Selected; Piece: " +
-							this.props.piece.constructor.name +
-							" Player: " +
-							this.props.piece.player
-					);
-					this.highlight();
-				}
+					
+			} else {
+				console.log("wrong player's turn...");
 			}
-			
 		} else {
 			console.log("Empty block selected.");
 		}
@@ -366,7 +335,7 @@ class Block extends Component {
 	 */
 	returnCSS() {
 		if (this.state.highlighted) {
-			if (this.props.selectedPosition != this.props.index) {
+			if (this.props.selectedPosition !== this.props.index) {
 				this.setState({ highlighted: false });
 			} else {
 				return "block-highlight";
@@ -392,6 +361,7 @@ class Block extends Component {
 			this.props.revertToSelectPiece();
 		} else {
 			this.setState({ highlighted: true });
+			this.showAvailableMoves();
 			this.props.nextMoveState();
 		}
 	}

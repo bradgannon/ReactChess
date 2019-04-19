@@ -20,33 +20,33 @@ export default class BishopPiece extends ChessPiece {
 		// return an array of possible locations.
 		let validMoves = [];
 
-		// Check to the North East
-		let i = 1;
-		while (!b[location - 7 * i] && (location - 7 * i) % 8 !== 0) {
-			validMoves.push(location - 7 * i);
-			i++;
-		}
-
-		// Check to the North West
-		i = 1;
-		while (!b[location - 9 * i] && (location - 9 * i) % 8 !== 7) {
-			validMoves.push(location - 9 * i);
-			i++;
-		}
-
-		// Check to the South East
-		i = 1;
-		while (!b[location + 9 * i] && (location + 9 * i) % 8 !== 0) {
-			validMoves.push(location + 9 * i);
-			i++;
-		}
-
-		// Check to the South West
-		i = 1;
-		while (!b[location + 7 * i] && (location + 7 * i) % 8 !== 7) {
-			validMoves.push(location + 7 * i);
-			i++;
-		}
+			// Check to the North East
+			let i = 1;
+			while (!b[location - 7 * i] && (location - 7 * i) % 8 !== 0 && location - 7 * i >= 0) {
+				validMoves.push(location - 7 * i);
+				i++;
+			}
+	
+			// Check to the North West
+			i = 1;
+			while (!b[location - 9 * i] && (location - 9 * i) % 8 !== 7 && location - 9 * i >= 0) {
+				validMoves.push(location - 9 * i);
+				i++;
+			}
+	
+			// Check to the South East
+			i = 1;
+			while (!b[location + 9 * i] && (location + 9 * i) % 8 !== 0 && location + 9 * i < 64) {
+				validMoves.push(location + 9 * i);
+				i++;
+			}
+	
+			// Check to the South West
+			i = 1;
+			while (!b[location + 7 * i] && (location + 7 * i) % 8 !== 7 && location + 7 * i < 64) {
+				validMoves.push(location + 7 * i);
+				i++;
+			}
 
 		return validMoves;
 	}

@@ -54,7 +54,7 @@ function rootReducer(state = initialState, action) {
     }
    
   } else if (action.type === REVERT_TO_SELECT_PIECE) {
-    if(!state.moveState === SELECT_PIECE) {
+    if(state.moveState !== SELECT_PIECE) {
       return Object.assign({}, state, {
         moveState: SELECT_PIECE
       });
