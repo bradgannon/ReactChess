@@ -358,25 +358,31 @@ class Block extends Component {
 	 * Returns the css needed for the piece whether it is highlighted or not;
 	 */
 	returnCSS() {
+		//String to return related to
+		let returnStr = "block-";
+
+		// See if the block is highligted
 		if (this.state.highlighted) {
 			if (this.props.selectedPosition !== this.props.index) {
 				this.setState({ highlighted: false });
 			} else {
-				return "block-highlight";
+				returnStr = "block-highlight-";
 			}
 		} else {
 			if (this.props.potentialMoves.indexOf(this.props.index) >= 0) {
 				if (!this.props.board[this.props.index]) {
-					return "block-potential-move";
+					returnStr = "block-potential-move-";
 				} else {
-					return "block-enemy";
+					returnStr = "block-enemy-";
 				}
 			}
 		}
+
+		// Determine dark or light to return
 		if (this.isDark) {
-			return "block-dark";
+			return returnStr + "dark";
 		} else {
-			return "block-light";
+			return returnStr + "light";
 		}
 	}
 
