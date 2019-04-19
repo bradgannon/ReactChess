@@ -9,12 +9,14 @@ export default class PawnPiece extends ChessPiece {
 		super(player, "chess-pawn", "pawn");
 		// pawns can move 1 or 2 forward on there first "move".
 
-		this.state = {
-			isFirstMove: true
-		};
+		this.isFirstMove = true;
 		// pawns can move adjacent if opponent is next to them.
 	}
 
+	setPastFirstMove() {
+		console.log('past first move should be queued');
+		this.isFirstMove = false;
+	}
 	/**
 	 * Method to highlight possible moves for the player
 	 * @param {Board} b
@@ -37,11 +39,10 @@ export default class PawnPiece extends ChessPiece {
 					validMoves.push(location - 7);
 				}
 			}
-			let aboveLocation = b[location - 8];
 			if (!b[location - 8]) {
 				validMoves.push(location - 8);
 			}
-			if (this.state.isFirstMove && !b[location - 16]) {
+			if (this.isFirstMove && !b[location - 16]) {
 				validMoves.push(location - 16);
 				this.state.isFirstMove = false;
 			}
@@ -60,7 +61,7 @@ export default class PawnPiece extends ChessPiece {
 			if (!b[location + 8]) {
 				validMoves.push(location + 8);
 			}
-			if (this.state.isFirstMove && !b[location + 16]) {
+			if (this.isFirstMove && !b[location + 16]) {
 				validMoves.push(location + 16);
 				this.state.isFirstMove = false;
 			}
