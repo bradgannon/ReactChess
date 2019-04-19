@@ -24,13 +24,13 @@
 }
 
 .block-potential-move {
-	background-color: rgb(244, 200, 66);
+	background-color: rgb(135, 206, 235);
 	height: 100px;
 	width: 100px;
 }
 
 .block-highlight {
-	background-color: rgb(135, 206, 235);
+	background-color: rgb(106, 90, 205);
 	height: 100px;
 	width: 100px;
 }
