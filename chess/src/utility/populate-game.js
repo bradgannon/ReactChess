@@ -29,10 +29,6 @@ export default function populateGameBoard() {
 	boardOfBlocks[3] = new QueenPiece("black");
 	boardOfBlocks[4] = new KingPiece("black");
 
-	// Test Piece in the middle of the board for moves testing
-	boardOfBlocks[26] = new PawnPiece("black");
-	boardOfBlocks[35] = new QueenPiece("white");
-
 	// white peices
 	for (let j = 48; j <= 55; j++) {
 		boardOfBlocks[j] = new PawnPiece("white");
