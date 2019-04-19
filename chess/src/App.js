@@ -10,8 +10,7 @@ import {
   faChessBishop,
   faChessKnight,
   faChessKing,
-  faCircle,
-  faChess
+  faCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 // Resources
