@@ -33,7 +33,7 @@ export default function populateGameBoard() {
 
   // white peices
   for (let j = 48; j <= 55; j++) {
-    boardOfBlocks[j] = new RookPiece("white");
+    boardOfBlocks[j] = new PawnPiece("white");
   }
 
   boardOfBlocks[63] = new RookPiece("white");

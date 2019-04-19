@@ -1,4 +1,4 @@
-import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, NEXT_MOVE_STATE } from '../action/actionTypes';
+import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE } from '../action/actionTypes';
 import populateGameBoard from '../../utility/populate-game';
 import { SELECT_PIECE, SELECT_AVAILABLE_MOVE, WHITE, BLACK } from '../string-constants';
 
@@ -34,6 +34,7 @@ function rootReducer(state = initialState, action) {
       })
     }
   } else if (action.type === NEXT_MOVE_STATE) {
+    console.log('next move state queued');
     if(state.moveState === SELECT_PIECE) {
       return Object.assign({}, state, {
         moveState: SELECT_AVAILABLE_MOVE
@@ -52,6 +53,12 @@ function rootReducer(state = initialState, action) {
       }
     }
    
+  } else if (action.type === REVERT_TO_SELECT_PIECE) {
+    if(state.moveState !== SELECT_PIECE) {
+      return Object.assign({}, state, {
+        moveState: SELECT_PIECE
+      });
+    }
   }
   return state;
 }

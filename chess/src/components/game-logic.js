@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Board from "./board";
 
-import { updateBoard, setSelectedPosition } from "../redux/action/index";
+import { updateBoard } from "../redux/action/index";
 
 /**
  * Contains the logic and hosts all of the core chess components
@@ -23,7 +23,7 @@ class GameLogic extends Component {
 
 	render() {
 		let playerTurn = "";
-		if (this.state.turn === "white") {
+		if (this.props.playerTurn === "white") {
 			playerTurn = "White's Turn";
 		} else {
 			playerTurn = "Black's Turn";
@@ -51,10 +51,11 @@ class GameLogic extends Component {
 }
 
 function mapStateToProps(state) {
-	const { board, selectedPosition } = state;
+	const { board, selectedPosition, playerTurn } = state;
 	return {
 		board: board,
-		selectedPosition: selectedPosition
+		selectedPosition: selectedPosition,
+		playerTurn: playerTurn
 	};
 }
 
