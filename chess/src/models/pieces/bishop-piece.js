@@ -40,7 +40,7 @@ export default class BishopPiece extends ChessPiece {
 		}
 		if (
 			b[location - 7 * i] instanceof ChessPiece &&
-			(location - 7 * i) % 8 < 7
+			(location - 7 * i) % 8 > 0
 		) {
 			if (b[location - 7 * i].player === enemy) {
 				validMoves.push(location - 7 * i);
@@ -78,7 +78,7 @@ export default class BishopPiece extends ChessPiece {
 		}
 		if (
 			b[location + 9 * i] instanceof ChessPiece &&
-			(location + 9 * i) % 8 < 7
+			(location + 9 * i) % 8 !== 0
 		) {
 			if (b[location + 9 * i].player === enemy) {
 				validMoves.push(location + 9 * i);
