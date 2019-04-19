@@ -12,9 +12,14 @@ import KingPiece from "../models/pieces/king-piece";
 import {
 	updateBoard,
 	setSelectedPosition,
-	setPotentialMoves
+	setPotentialMoves,
+	nextMoveState,
+	revertToSelectPiece
 } from "../redux/action/index";
-import PotentialMove from "../models/potential-move";
+
+import PotentialMove from '../models/potential-move';
+import { SELECT_AVAILABLE_MOVE } from "../redux/string-constants";
+import ChessPiece from "../models/pieces/chess-piece";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -220,7 +225,7 @@ class Block extends Component {
 		} else if (this.props.piece instanceof KingPiece) {
 			return this.renderKing();
 		} else if (this.props.piece instanceof PotentialMove) {
-			return this.renderPotentialMove();
+			// return (<PotentialMovePiece index={this.props.index} />)
 		}
 	}
 
@@ -250,9 +255,9 @@ class Block extends Component {
 		);
 		this.props.setPotentialMoves(availableMoves);
 		let board = this.props.board;
-		availableMoves.forEach(index => {
-			board[index] = new PotentialMove(this.props.piece.player, index);
-		});
+		// availableMoves.forEach(index => {
+		// 	board[index] = new PotentialMove(this.props.piece.player, index);
+		// });
 		this.props.updateBoard(board);
 	}
 
@@ -270,6 +275,32 @@ class Block extends Component {
 		this.props.updateBoard(board);
 	}
 
+	movePiece() {
+		let pieceIndex = this.props.index;
+		let piece = this.props.piece;
+		let indexOfPieceToBeMoved = this.props.selectedPosition;
+		let board = this.props.board;
+
+		if(this.props.piece instanceof ChessPiece && this.props.piece.player != this.props.board[indexOfPieceToBeMoved].player) {
+			// trigger function to delete piece from board.
+			console.log('enemy piece is removed');
+		}
+
+		// Set the instance of the pawn to be past it's first move
+		if( this.props.board[this.props.selectedPosition] instanceof PawnPiece ) {
+			this.props.board[this.props.selectedPosition].setPastFirstMove();
+		}
+		board[pieceIndex] = board[this.props.selectedPosition];
+		board[this.props.selectedPosition] = undefined;
+
+		
+		console.log('board is being updated with' + board[pieceIndex]);
+		this.props.updateBoard(board);
+		this.props.setSelectedPosition(-1);
+		this.props.setPotentialMoves([]);
+		this.props.nextMoveState();
+	}
+
 	selectBlock() {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
 		console.log(this.props.selectedPosition);
@@ -280,32 +311,51 @@ class Block extends Component {
 		} else {
 			this.props.setSelectedPosition(this.props.index);
 
-			// Show available spots per selection.
-			if (this.props.board[this.props.index]) {
-				this.showAvailableMoves();
-				// let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
-				// this.props.setPotentialMoves(availableMoves);
+			let selectedPiece= this.props.board[this.props.index];
+			let selectedPiecesPlayer = '';
+			if(selectedPiece) {
+				selectedPiecesPlayer = selectedPiece.player;
 			}
+			if( this.props.playerTurn === selectedPiecesPlayer) {
+				// Show available spots per selection.
+				let isPotentialMove = this.props.piece instanceof PotentialMove;
+				if (this.props.board[this.props.index] && (!isPotentialMove)) {
+					this.showAvailableMoves();
+					// let availableMoves = this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index);
+					// this.props.setPotentialMoves(availableMoves);
+				}
+			}
+			
 		}
 
-		if (this.props.piece != null) {
-			if (this.props.piece.player === "white") {
-				console.log(
-					"Block Selected; Piece: " +
-						this.props.piece +
-						" Player: " +
-						this.props.piece.player
-				);
-				this.highlight();
-			} else {
-				console.log(
-					"Block Selected; Piece: " +
-						this.props.piece.constructor.name +
-						" Player: " +
-						this.props.piece.player
-				);
-				this.highlight();
+		// check if exists in available moves, and it is turn selection.
+		if(this.props.moveState === SELECT_AVAILABLE_MOVE && this.props.potentialMoves.indexOf(this.props.index) >= 0) {
+			console.log('this piece should be highlighted');
+			// move piece
+			this.movePiece();
+
+		} else if (this.props.piece) {
+			if(this.props.piece.player === this.props.playerTurn) {
+				if (this.props.piece.player === "white") {
+					console.log(
+						"Block Selected; Piece: " +
+							this.props.piece +
+							" Player: " +
+							this.props.piece.player
+					);
+					this.highlight();
+	
+				} else {
+					console.log(
+						"Block Selected; Piece: " +
+							this.props.piece.constructor.name +
+							" Player: " +
+							this.props.piece.player
+					);
+					this.highlight();
+				}
 			}
+			
 		} else {
 			console.log("Empty block selected.");
 		}
@@ -321,6 +371,10 @@ class Block extends Component {
 			} else {
 				return "block-highlight";
 			}
+		} else {
+			if(this.props.potentialMoves.indexOf(this.props.index) >= 0) {
+				return "block-potential-move";
+			}
 		}
 		if (this.isDark) {
 			return "block-dark";
@@ -335,18 +389,22 @@ class Block extends Component {
 	highlight() {
 		if (this.state.highlighted) {
 			this.setState({ highlighted: false });
+			this.props.revertToSelectPiece();
 		} else {
 			this.setState({ highlighted: true });
+			this.props.nextMoveState();
 		}
 	}
 }
 
 function mapStateToProps(state) {
-	const { board, selectedPosition, potentialMoves } = state;
+	const { board, selectedPosition, potentialMoves, playerTurn, moveState } = state;
 	return {
 		board: board,
 		selectedPosition: selectedPosition,
-		potentialMoves: potentialMoves
+		potentialMoves: potentialMoves,
+		playerTurn: playerTurn,
+		moveState: moveState
 	};
 }
 
@@ -355,7 +413,9 @@ function mapDispatchToProps(dispatch, ownProps) {
 		updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard)),
 		setSelectedPosition: index => dispatch(setSelectedPosition(index)),
 		setPotentialMoves: arrayOfPossibleMoves =>
-			dispatch(setPotentialMoves(arrayOfPossibleMoves))
+			dispatch(setPotentialMoves(arrayOfPossibleMoves)),
+		nextMoveState: () => dispatch(nextMoveState()), 
+		revertToSelectPiece: () => dispatch(revertToSelectPiece())
 	};
 }
 

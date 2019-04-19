@@ -22,14 +22,14 @@ export default class RookPiece extends ChessPiece {
 
 		// Check to the right
 		let i = 1;
-		while (!b[location + i] && (location + i) % 8 != 0) {
+		while (!b[location + i] && (location + i) % 8 !== 0) {
 			validMoves.push(location + i);
 			i++;
 		}
 
 		// To the left
 		i = 1;
-		while (!b[location - i] && (location - i) % 8 != 7) {
+		while (!b[location - i] && (location - i) % 8 !== 7) {
 			validMoves.push(location - i);
 			i++;
 		}

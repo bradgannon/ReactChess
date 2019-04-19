@@ -22,42 +22,42 @@ export default class QueenPiece extends ChessPiece {
 
 		// Check to the North East
 		let i = 1;
-		while (!b[location - 7 * i] && (location - 7 * i) % 8 != 0) {
+		while (!b[location - 7 * i] && (location - 7 * i) % 8 !== 0) {
 			validMoves.push(location - 7 * i);
 			i++;
 		}
 
 		// Check to the North West
 		i = 1;
-		while (!b[location - 9 * i] && (location - 9 * i) % 8 != 7) {
+		while (!b[location - 9 * i] && (location - 9 * i) % 8 !== 7) {
 			validMoves.push(location - 9 * i);
 			i++;
 		}
 
 		// Check to the South East
 		i = 1;
-		while (!b[location + 9 * i] && (location + 9 * i) % 8 != 0) {
+		while (!b[location + 9 * i] && (location + 9 * i) % 8 !== 0) {
 			validMoves.push(location + 9 * i);
 			i++;
 		}
 
 		// Check to the South West
 		i = 1;
-		while (!b[location + 7 * i] && (location + 7 * i) % 8 != 7) {
+		while (!b[location + 7 * i] && (location + 7 * i) % 8 !== 7) {
 			validMoves.push(location + 7 * i);
 			i++;
 		}
 
 		// Left
 		i = 1;
-		while (!b[location - i] && (location - i) % 8 != 7) {
+		while (!b[location - i] && (location - i) % 8 !== 7) {
 			validMoves.push(location - i);
 			i++;
 		}
 
 		// Right
 		i = 1;
-		while (!b[location + i] && (location + i) % 8 != 0) {
+		while (!b[location + i] && (location + i) % 8 !== 0) {
 			validMoves.push(location + i);
 			i++;
 		}

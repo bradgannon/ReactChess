@@ -1,5 +1,5 @@
 // redux/actions.js
-import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, SET_MOVE_STATE, NEXT_MOVE_STATE } from './actionTypes'
+import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, SET_MOVE_STATE, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE } from './actionTypes'
 
 // let nextTodoId = 0
 // export const addTodo = content => ({
@@ -29,6 +29,10 @@ export function nextPlayerTurn() {
   return { type: NEXT_PLAYER_TURN }
 }
 
-export function nextMoveState(payload) {
-  return { type: NEXT_MOVE_STATE, payload };
+export function nextMoveState() {
+  return { type: NEXT_MOVE_STATE };
+}
+
+export function revertToSelectPiece() {
+  return { type: REVERT_TO_SELECT_PIECE}
 }
