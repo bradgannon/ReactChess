@@ -32,7 +32,7 @@ export default class KingPiece extends ChessPiece {
 		// Mod statements ensure that the king doesn't go off the edge of the board
 		if (
 			(!b[nextLocation] || b[nextLocation].player === enemy) &&
-			nextLocation % 8 !== 7 &&
+			nextLocation % 8 !== 0 &&
 			nextLocation < 64
 		) {
 			validMoves.push(location + 1);
@@ -40,7 +40,7 @@ export default class KingPiece extends ChessPiece {
 		nextLocation = location + 9;
 		if (
 			(!b[nextLocation] || b[nextLocation].player === enemy) &&
-			nextLocation % 8 !== 7 &&
+			nextLocation % 8 !== 0 &&
 			nextLocation < 64
 		) {
 			validMoves.push(location + 9);
@@ -57,7 +57,7 @@ export default class KingPiece extends ChessPiece {
 		nextLocation = location + 7;
 		if (
 			(!b[nextLocation] || b[nextLocation].player === enemy) &&
-			nextLocation % 8 !== 0 &&
+			nextLocation % 8 !== 7 &&
 			nextLocation < 64
 		) {
 			validMoves.push(location + 7);
@@ -66,7 +66,7 @@ export default class KingPiece extends ChessPiece {
 		nextLocation = location - 1;
 		if (
 			(!b[nextLocation] || b[nextLocation].player === enemy) &&
-			nextLocation % 8 !== 0 &&
+			nextLocation % 8 !== 7 &&
 			nextLocation >= 0
 		) {
 			validMoves.push(location - 1);
@@ -75,7 +75,7 @@ export default class KingPiece extends ChessPiece {
 		nextLocation = location - 7;
 		if (
 			(!b[nextLocation] || b[nextLocation].player === enemy) &&
-			nextLocation % 8 !== 7 &&
+			nextLocation % 8 !== 0 &&
 			nextLocation >= 0
 		) {
 			validMoves.push(location - 7);
@@ -92,7 +92,7 @@ export default class KingPiece extends ChessPiece {
 		nextLocation = location - 9;
 		if (
 			(!b[nextLocation] || b[nextLocation].player === enemy) &&
-			nextLocation % 8 !== 0 &&
+			nextLocation % 8 !== 7 &&
 			nextLocation >= 0
 		) {
 			validMoves.push(location - 9);
