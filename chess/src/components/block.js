@@ -17,7 +17,7 @@ import {
 	revertToSelectPiece
 } from "../redux/action/index";
 
-import PotentialMove from '../models/potential-move';
+import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
 
@@ -275,16 +275,19 @@ class Block extends Component {
 		this.props.updateBoard(board);
 	}
 
-
 	/**
 	 * Method is called when a piece is removed from the board.  Method updates the redux state
 	 * to keep track of which pieces are on the board and not on the board.
-	 * @param {ChessPiece} PieceToBeRemoved 
+	 * @param {ChessPiece} PieceToBeRemoved
 	 */
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
-		console.log("Handle Remove Piece was called with: Player: " +
-		 PieceToBeRemoved.player + " Piece: " + PieceToBeRemoved.typeOfPiece);
+		console.log(
+			"Handle Remove Piece was called with: Player: " +
+				PieceToBeRemoved.player +
+				" Piece: " +
+				PieceToBeRemoved.typeOfPiece
+		);
 	}
 	/**
 	 * Moves the Selected Position Piece to the clicked on Piece.
@@ -294,21 +297,23 @@ class Block extends Component {
 		let indexOfPieceToBeMoved = this.props.selectedPosition;
 		let board = this.props.board;
 
-		if(this.props.piece instanceof ChessPiece && this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player) {
+		if (
+			this.props.piece instanceof ChessPiece &&
+			this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player
+		) {
 			// trigger function to delete piece from board.
-			console.log('enemy piece is removed');
+			console.log("enemy piece is removed");
 			this.handleRemovePiece(board[this.props.selectedPosition]);
 		}
 
 		// Set the instance of the pawn to be past it's first move
-		if( this.props.board[this.props.selectedPosition] instanceof PawnPiece ) {
+		if (this.props.board[this.props.selectedPosition] instanceof PawnPiece) {
 			this.props.board[this.props.selectedPosition].setPastFirstMove();
 		}
 		board[pieceIndex] = board[this.props.selectedPosition];
 		board[this.props.selectedPosition] = undefined;
 
-		
-		console.log('board is being updated with' + board[pieceIndex]);
+		console.log("board is being updated with" + board[pieceIndex]);
 		this.props.updateBoard(board);
 		this.props.setSelectedPosition(-1);
 		this.props.setPotentialMoves([]);
@@ -320,23 +325,27 @@ class Block extends Component {
 		console.log(this.props.selectedPosition);
 		this.removePreviousAvailableMoves();
 
-		if(this.props.moveState === SELECT_PIECE) {
+		if (this.props.moveState === SELECT_PIECE) {
 			this.props.setSelectedPosition(this.props.index);
-
 		}
 		// check if exists in available moves, and it is turn selection.
-		if(this.props.moveState === SELECT_AVAILABLE_MOVE && this.props.potentialMoves.indexOf(this.props.index) >= 0) {
-			console.log('this piece should be highlighted');
+		if (
+			this.props.moveState === SELECT_AVAILABLE_MOVE &&
+			this.props.potentialMoves.indexOf(this.props.index) >= 0
+		) {
+			console.log("this piece should be highlighted");
 			// move piece
 			this.movePiece();
-		} else if ( this.props.moveState === SELECT_AVAILABLE_MOVE && this.props.potentialMoves.indexOf(this.props.index) < 0) {
-				this.props.setSelectedPosition(-1);
-				this.props.setPotentialMoves([]);
-				this.props.revertToSelectPiece();
+		} else if (
+			this.props.moveState === SELECT_AVAILABLE_MOVE &&
+			this.props.potentialMoves.indexOf(this.props.index) < 0
+		) {
+			this.props.setSelectedPosition(-1);
+			this.props.setPotentialMoves([]);
+			this.props.revertToSelectPiece();
 		} else if (this.props.piece && this.props.moveState === SELECT_PIECE) {
-			if(this.props.piece.player === this.props.playerTurn) {
-					this.highlight();
-					
+			if (this.props.piece.player === this.props.playerTurn) {
+				this.highlight();
 			} else {
 				console.log("wrong player's turn...");
 			}
@@ -349,21 +358,31 @@ class Block extends Component {
 	 * Returns the css needed for the piece whether it is highlighted or not;
 	 */
 	returnCSS() {
+		//String to return related to
+		let returnStr = "block-";
+
+		// See if the block is highligted
 		if (this.state.highlighted) {
 			if (this.props.selectedPosition !== this.props.index) {
 				this.setState({ highlighted: false });
 			} else {
-				return "block-highlight";
+				returnStr = "block-highlight-";
 			}
 		} else {
-			if(this.props.potentialMoves.indexOf(this.props.index) >= 0) {
-				return "block-potential-move";
+			if (this.props.potentialMoves.indexOf(this.props.index) >= 0) {
+				if (!this.props.board[this.props.index]) {
+					returnStr = "block-potential-move-";
+				} else {
+					returnStr = "block-enemy-";
+				}
 			}
 		}
+
+		// Determine dark or light to return
 		if (this.isDark) {
-			return "block-dark";
+			return returnStr + "dark";
 		} else {
-			return "block-light";
+			return returnStr + "light";
 		}
 	}
 
@@ -383,7 +402,13 @@ class Block extends Component {
 }
 
 function mapStateToProps(state) {
-	const { board, selectedPosition, potentialMoves, playerTurn, moveState } = state;
+	const {
+		board,
+		selectedPosition,
+		potentialMoves,
+		playerTurn,
+		moveState
+	} = state;
 	return {
 		board: board,
 		selectedPosition: selectedPosition,
@@ -399,7 +424,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 		setSelectedPosition: index => dispatch(setSelectedPosition(index)),
 		setPotentialMoves: arrayOfPossibleMoves =>
 			dispatch(setPotentialMoves(arrayOfPossibleMoves)),
-		nextMoveState: () => dispatch(nextMoveState()), 
+		nextMoveState: () => dispatch(nextMoveState()),
 		revertToSelectPiece: () => dispatch(revertToSelectPiece())
 	};
 }
