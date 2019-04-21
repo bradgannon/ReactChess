@@ -48,3 +48,35 @@ export default function populateGameBoard() {
 
 	return boardOfBlocks;
 }
+
+export function initialWhitePiecesInPlay() {
+	let whitePieces = new Array(16);
+	whitePieces[0] = new RookPiece("white");
+	whitePieces[1] = new KnightPiece("white");
+	whitePieces[2] = new BishopPiece("white");
+	whitePieces[3] = new QueenPiece("white");
+	whitePieces[4] = new KingPiece("white");
+	whitePieces[5] = new BishopPiece("white");
+	whitePieces[6] = new KnightPiece("white");
+	whitePieces[7] = new RookPiece("white");
+	for( let i = 8; i <= 15; i++) {
+		whitePieces[i] = new PawnPiece("white");
+	}
+	return whitePieces;
+}
+
+export function initialBlackPiecesInPlay() {
+	let blackPieces = new Array(16);
+	blackPieces[0] = new RookPiece("black");
+	blackPieces[1] = new KnightPiece("black");
+	blackPieces[2] = new BishopPiece("black");
+	blackPieces[3] = new QueenPiece("black");
+	blackPieces[4] = new KingPiece("black");
+	blackPieces[5] = new BishopPiece("black");
+	blackPieces[6] = new KnightPiece("black");
+	blackPieces[7] = new RookPiece("black");
+	for( let i = 8; i <= 15; i++) {
+		blackPieces[i] = new PawnPiece("black");
+	}
+	return blackPieces;
+}

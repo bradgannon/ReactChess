@@ -18,7 +18,9 @@ import {
 	setSelectedPosition,
 	setPotentialMoves,
 	nextMoveState,
-	revertToSelectPiece
+	revertToSelectPiece,
+	handleWhiteRemovePiece,
+	handleBlackRemovePiece
 } from "../redux/action/index";
 
 import PotentialMove from "../models/potential-move";
@@ -286,6 +288,11 @@ class Block extends Component {
 	 */
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
+		if(PieceToBeRemoved.player === "black") {
+			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
+		} else if (PieceToBeRemoved.player === "white" ){
+			this.props.handleBlackRemovePiece(PieceToBeRemoved);
+		}
 		console.log(
 			"Handle Remove Piece was called with: Player: " +
 				PieceToBeRemoved.player +
@@ -428,7 +435,9 @@ function mapDispatchToProps(dispatch, ownProps) {
 		setPotentialMoves: arrayOfPossibleMoves =>
 			dispatch(setPotentialMoves(arrayOfPossibleMoves)),
 		nextMoveState: () => dispatch(nextMoveState()),
-		revertToSelectPiece: () => dispatch(revertToSelectPiece())
+		revertToSelectPiece: () => dispatch(revertToSelectPiece()),
+		handleWhiteRemovePiece: (piece) => dispatch(handleWhiteRemovePiece(piece)),
+		handleBlackRemovePiece: (piece) => dispatch(handleBlackRemovePiece(piece))
 	};
 }
 

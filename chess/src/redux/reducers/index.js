@@ -1,5 +1,8 @@
-import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES, NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE } from '../action/actionTypes';
-import populateGameBoard from '../../utility/populate-game';
+import { 
+  UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES,
+  NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE, HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE
+} from '../action/actionTypes';
+import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay } from '../../utility/game-initialization';
 import { SELECT_PIECE, SELECT_AVAILABLE_MOVE, WHITE, BLACK } from '../string-constants';
 
 const initialState = {
@@ -7,7 +10,9 @@ const initialState = {
   selectedPosition: -1,
   potentialMoves: [],
   playerTurn: WHITE,
-  moveState: SELECT_PIECE
+  moveState: SELECT_PIECE,
+  whitePiecesInPlay: initialWhitePiecesInPlay(),
+  blackPiecesInPlay: initialBlackPiecesInPlay()
 }
 
 function rootReducer(state = initialState, action) { 
@@ -59,6 +64,22 @@ function rootReducer(state = initialState, action) {
         moveState: SELECT_PIECE
       });
     }
+  } else if (action.type === HANDLE_WHITE_REMOVE_PIECE ) {
+      let foundItem = state.whitePiecesInPlay.find(x => x.typeOfPiece === action.payload.typeOfPiece);
+      let piecesInPlay = state.whitePiecesInPlay;
+      piecesInPlay.pop(foundItem);
+      console.log('pieces in play')
+      console.log(piecesInPlay);
+      return Object.assign({}, state, {
+        whitePiecesInPlay: piecesInPlay
+      });
+  } else if (action.type === HANDLE_BLACK_REMOVE_PIECE ) {
+    let item = state.blackPiecesInPlay.find(x => x.typeOfPiece === action.payload.typeOfPiece);
+    let itemsInPlay = state.blackPiecesInPlay;
+    itemsInPlay.pop(item);
+    return Object.assign({}, state, {
+      blackPiecesInPlay: itemsInPlay
+    });
   }
   return state;
 }
