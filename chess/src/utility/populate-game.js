@@ -27,10 +27,7 @@ export default function populateGameBoard() {
 	boardOfBlocks[5] = new BishopPiece("black");
 
 	boardOfBlocks[3] = new QueenPiece("black");
-  boardOfBlocks[4] = new KingPiece("black");
-  
-  boardOfBlocks[30] = new KingPiece("black");
-  boardOfBlocks[33] = new KingPiece("white");
+	boardOfBlocks[4] = new KingPiece("black");
 
 	// white peices
 	for (let j = 48; j <= 55; j++) {

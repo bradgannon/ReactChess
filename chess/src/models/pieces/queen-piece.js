@@ -33,14 +33,14 @@ export default class QueenPiece extends ChessPiece {
 		while (
 			!b[location - 7 * i] &&
 			(location - 7 * i) % 8 !== 0 &&
-			location - 7 * i >= 0
+			location - 7 * i > 0
 		) {
 			validMoves.push(location - 7 * i);
 			i++;
 		}
 		if (
 			b[location - 7 * i] instanceof ChessPiece &&
-			(location - 7 * i) % 8 < 7
+			(location - 7 * i) % 8 > 0
 		) {
 			if (b[location - 7 * i].player === enemy) {
 				validMoves.push(location - 7 * i);
