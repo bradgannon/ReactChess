@@ -10,6 +10,7 @@ export default class PawnPiece extends ChessPiece {
 		// pawns can move 1 or 2 forward on there first "move".
 
 		this.isFirstMove = true;
+		this.isReadyForPromotion = false;
 		// pawns can move adjacent if opponent is next to them.
 	}
 

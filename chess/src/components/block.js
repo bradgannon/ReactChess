@@ -9,12 +9,18 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
+import { pawnManeuvers }  from '../models/chess-maneuvers';
+
+
+
 import {
 	updateBoard,
 	setSelectedPosition,
 	setPotentialMoves,
 	nextMoveState,
-	revertToSelectPiece
+	revertToSelectPiece,
+	handleWhiteRemovePiece,
+	handleBlackRemovePiece
 } from "../redux/action/index";
 
 import PotentialMove from "../models/potential-move";
@@ -282,6 +288,11 @@ class Block extends Component {
 	 */
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
+		if(PieceToBeRemoved.player === "black") {
+			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
+		} else if (PieceToBeRemoved.player === "white" ){
+			this.props.handleBlackRemovePiece(PieceToBeRemoved);
+		}
 		console.log(
 			"Handle Remove Piece was called with: Player: " +
 				PieceToBeRemoved.player +
@@ -305,11 +316,10 @@ class Block extends Component {
 			console.log("enemy piece is removed");
 			this.handleRemovePiece(board[this.props.selectedPosition]);
 		}
+		
+		// check if pawn has first move
+		board = pawnManeuvers(board, this.props.selectedPosition, this.props.index);
 
-		// Set the instance of the pawn to be past it's first move
-		if (this.props.board[this.props.selectedPosition] instanceof PawnPiece) {
-			this.props.board[this.props.selectedPosition].setPastFirstMove();
-		}
 		board[pieceIndex] = board[this.props.selectedPosition];
 		board[this.props.selectedPosition] = undefined;
 
@@ -425,7 +435,9 @@ function mapDispatchToProps(dispatch, ownProps) {
 		setPotentialMoves: arrayOfPossibleMoves =>
 			dispatch(setPotentialMoves(arrayOfPossibleMoves)),
 		nextMoveState: () => dispatch(nextMoveState()),
-		revertToSelectPiece: () => dispatch(revertToSelectPiece())
+		revertToSelectPiece: () => dispatch(revertToSelectPiece()),
+		handleWhiteRemovePiece: (piece) => dispatch(handleWhiteRemovePiece(piece)),
+		handleBlackRemovePiece: (piece) => dispatch(handleBlackRemovePiece(piece))
 	};
 }
 
