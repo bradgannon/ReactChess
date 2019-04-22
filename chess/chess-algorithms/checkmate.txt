@@ -1,0 +1,29 @@
+public boolean checkmated(Player player) {
+  if (!player.getKing().inCheck() || player.isStalemated()) {
+      return false; //not checkmate if we are not 
+                    //in check at all or we are stalemated.
+  }
+
+  //therefore if we get here on out, we are currently in check...
+
+  Pieces myPieces = player.getPieces();
+
+  for (Piece each : myPieces) {
+
+      each.doMove(); //modify the state of the board
+
+      if (!player.getKing().inCheck()) { //now we can check the modified board
+          each.undoMove(); //undo, we dont want to change the board
+          return false;
+          //not checkmate, we can make a move, 
+          //that results in our escape from checkmate.
+      }
+
+      each.undoMove();
+
+  }
+  return true; 
+  //all pieces have been examined and none can make a move and we have       
+  //confimred earlier that we have been previously checked by the opponent
+  //and that we are not in stalemate.
+}
