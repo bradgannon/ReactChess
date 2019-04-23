@@ -11,8 +11,6 @@ import KingPiece from "../models/pieces/king-piece";
 
 import { pawnManeuvers } from '../models/chess-maneuvers';
 
-
-
 import {
 	updateBoard,
 	setSelectedPosition,
@@ -314,11 +312,11 @@ class Block extends Component {
 		) {
 			// trigger function to delete piece from board.
 			console.log("enemy piece is removed");
-			this.handleRemovePiece(board[this.props.selectedPosition]);
+			this.handleRemovePiece(board[indexOfPieceToBeMoved]);
 		}
 
 		// check if pawn has first move
-		board = pawnManeuvers(board, this.props.selectedPosition, this.props.index);
+		board = pawnManeuvers(board, indexOfPieceToBeMoved, this.props.index);
 
 		// Check for castle move to implement special logic
 		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
@@ -330,8 +328,9 @@ class Block extends Component {
 		}
 		// Otherwise run normal move logic
 		else {
-			board[pieceIndex] = board[this.props.selectedPosition];
-			board[this.props.selectedPosition] = undefined;
+			console.log("Move");
+			board[pieceIndex] = board[indexOfPieceToBeMoved];
+			board[indexOfPieceToBeMoved] = undefined;
 		}
 
 		console.log("board is being updated with" + board[pieceIndex]);
