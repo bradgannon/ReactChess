@@ -59,7 +59,7 @@ export function initialWhitePiecesInPlay() {
 	whitePieces[5] = new BishopPiece("white");
 	whitePieces[6] = new KnightPiece("white");
 	whitePieces[7] = new RookPiece("white");
-	for( let i = 8; i <= 15; i++) {
+	for (let i = 8; i <= 15; i++) {
 		whitePieces[i] = new PawnPiece("white");
 	}
 	return whitePieces;
@@ -75,7 +75,7 @@ export function initialBlackPiecesInPlay() {
 	blackPieces[5] = new BishopPiece("black");
 	blackPieces[6] = new KnightPiece("black");
 	blackPieces[7] = new RookPiece("black");
-	for( let i = 8; i <= 15; i++) {
+	for (let i = 8; i <= 15; i++) {
 		blackPieces[i] = new PawnPiece("black");
 	}
 	return blackPieces;

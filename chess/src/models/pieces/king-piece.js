@@ -1,4 +1,5 @@
 import ChessPiece from "./chess-piece";
+import RookPiece from "./rook-piece";
 
 export default class KingPiece extends ChessPiece {
 	/**
@@ -96,6 +97,15 @@ export default class KingPiece extends ChessPiece {
 			nextLocation >= 0
 		) {
 			validMoves.push(location - 9);
+		}
+
+		// Castle Move
+		if (
+			!b[location + 1] &&
+			!b[location + 2] &&
+			b[location + 3] instanceof RookPiece
+		) {
+			validMoves.push(location + 2);
 		}
 
 		return validMoves;

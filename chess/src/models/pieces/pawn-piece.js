@@ -43,7 +43,7 @@ export default class PawnPiece extends ChessPiece {
 			if (!b[location - 8]) {
 				validMoves.push(location - 8);
 			}
-			if (this.isFirstMove && !b[location - 16]) {
+			if (this.isFirstMove && !b[location - 16] && !b[location - 8]) {
 				validMoves.push(location - 16);
 			}
 		} else {
@@ -61,7 +61,7 @@ export default class PawnPiece extends ChessPiece {
 			if (!b[location + 8]) {
 				validMoves.push(location + 8);
 			}
-			if (this.isFirstMove && !b[location + 16]) {
+			if (this.isFirstMove && !b[location + 16] && !b[location + 8]) {
 				validMoves.push(location + 16);
 			}
 		}
