@@ -65,6 +65,6 @@ export default class PawnPiece extends ChessPiece {
 				validMoves.push(location + 16);
 			}
 		}
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }

@@ -76,6 +76,6 @@ export default class RookPiece extends ChessPiece {
 			}
 		}
 
-		return validMoves;
-	}
+		return validMoves.filter(x => x >= 0 && x < 64);
+		}
 }

@@ -98,6 +98,6 @@ export default class KingPiece extends ChessPiece {
 			validMoves.push(location - 9);
 		}
 
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }

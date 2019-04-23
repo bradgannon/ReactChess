@@ -9,7 +9,7 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { pawnManeuvers }  from '../models/chess-maneuvers';
+import { pawnManeuvers }  from '../utility/chess-maneuvers';
 
 
 
@@ -26,6 +26,7 @@ import {
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
+import { getAllOpposingMoves } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -307,6 +308,11 @@ class Block extends Component {
 		let pieceIndex = this.props.index;
 		let indexOfPieceToBeMoved = this.props.selectedPosition;
 		let board = this.props.board;
+
+		let playerTurn = this.props.playerTurn;
+		let allOpposingMoves = getAllOpposingMoves(board, playerTurn);
+		console.log("all opposing moves:");
+		console.log(allOpposingMoves);
 
 		if (
 			this.props.piece instanceof ChessPiece &&

@@ -151,7 +151,6 @@ export default class QueenPiece extends ChessPiece {
 				validMoves.push(location - i * 8);
 			}
 		}
-
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }

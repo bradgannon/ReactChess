@@ -1,5 +1,5 @@
-import PawnPiece from './pieces/pawn-piece';
-import QueenPiece from './pieces/queen-piece';
+import PawnPiece from '../models/pieces/pawn-piece';
+import QueenPiece from '../models/pieces/queen-piece';
 
 
 /**

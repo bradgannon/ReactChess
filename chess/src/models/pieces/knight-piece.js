@@ -80,6 +80,6 @@ export default class KnightPiece extends ChessPiece {
 		}
 
 		// todo: Handle Instance of Opposing Chess Pieces
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }
