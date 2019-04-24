@@ -7,12 +7,11 @@ class RemainingPieces extends Component {
 
 	constructor(props) {
 		super(props);
-		// this.counter = 0;
-		let whitePiecesInPlay = this.props.whitePiecesInPlay;
 		this.blocks = this.props.blocks;
 		// this.board = [];
 	}
 	render() {
+		// Push all of the pices to arrays.
 		let whitePieces = [];
 		let blackPieces = [];
 		let i = 0;
@@ -24,6 +23,7 @@ class RemainingPieces extends Component {
 			i++;
 		});
 		let j = 0;
+		// push black pieces to array
 		this.props.blackPiecesInPlay.forEach(piece => {
 			if (piece) {
 				blackPieces.push(this.renderPiece(piece, j));
@@ -31,21 +31,25 @@ class RemainingPieces extends Component {
 			j++;
 		})
 		return (
-			<Paper style={{color: "black", backgroundColor:"rgb(142, 148, 150)"}}>
-			<Typography variant="h4" gutterBottom>
-        Remaining Pieces
-      </Typography>
+			// Grid object
+			<Paper style={{ color: "black", backgroundColor: "rgb(142, 148, 150)" }}>
+
 				<div className="RemainingPieces">
+					<Typography variant="h4" gutterBottom>
+						Remaining Pieces
+      		</Typography>
 					<Typography variant="h5" >
 						White's Pieces:
 					</Typography>
 					<div className="whitePieces">
+						{/* This displays all of the white pieces pushed in the code above */}
 						{whitePieces}
 					</div>
 					<div className="blackPieces">
-					<Typography variant="h5" >
-						Black's Pieces
+						<Typography variant="h5" >
+							Black's Pieces
 					</Typography>
+					{/* This displays all of black's pieces in the code above */}
 						{blackPieces}
 					</div>
 				</div>
@@ -80,11 +84,10 @@ class RemainingPieces extends Component {
 		}
 	}
 
-	// TODO
+	// TODO @Shub
 	renderKnight(piece, key) {
 		console.log("Shub implement this");
 	}
-
 	renderPiece(piece, key) {
 		console.log(piece);
 		if (piece.typeOfPiece === "pawn") {
