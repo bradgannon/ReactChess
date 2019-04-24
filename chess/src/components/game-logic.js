@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Board from "./board";
+import RemainingPieces from "./remaining-pieces";
 
 import { updateBoard } from "../redux/action/index";
+import { Container, Col} from 'react-bootstrap';
 
 /**
  * Contains the logic and hosts all of the core chess components
@@ -29,23 +31,26 @@ class GameLogic extends Component {
 			playerTurn = "Black's Turn";
 		}
 		return (
-			<div className="game-logic">
-				<div className="board-container">
+			<Container >
+				<Col>
+					<RemainingPieces />
+				</Col>
+					
+		
+			
+					<Col >
 					<Board
 						blocks={this.props.board}
 						onClick={i => {
 							this.handleClick(i);
 						}}
 					/>
-				</div>
-				<div>
-					{/* insert Current Player's Move status. */}
 					<div className="playerTurn">
 						<p>{playerTurn}</p>
 					</div>
-				</div>
-				{/* {Insert component of lost pieces for each player here} */}
-			</div>
+					</Col>
+				</Container>
+			
 		);
 	}
 }
