@@ -4,7 +4,7 @@ import Board from "./board";
 import RemainingPieces from "./remaining-pieces";
 
 import { updateBoard } from "../redux/action/index";
-import { Container, Col} from 'react-bootstrap';
+import { Grid } from '@material-ui/core/';
 
 /**
  * Contains the logic and hosts all of the core chess components
@@ -31,26 +31,29 @@ class GameLogic extends Component {
 			playerTurn = "Black's Turn";
 		}
 		return (
-			<Container >
-				<Col>
+			<div>
+			<Grid container direction="row" justify="center" alignItems="center" >
+				<Grid item xs={2} alignItems="center" justify="center">
 					<RemainingPieces />
-				</Col>
-					
-		
-			
-					<Col >
+				</Grid>
+				<Grid item xs={10} alignContent={"center"} style={{maxWidth: 900, minWidth: 900}} >
 					<Board
 						blocks={this.props.board}
 						onClick={i => {
 							this.handleClick(i);
-						}}
-					/>
-					<div className="playerTurn">
+						}} />
+				</Grid>
+			</Grid>
+			<Grid container>
+				<Grid item xs={12} >
+				<div className="playerTurn">
 						<p>{playerTurn}</p>
 					</div>
-					</Col>
-				</Container>
-			
+				</Grid>
+			</Grid>
+			</div>
+		
+
 		);
 	}
 }
