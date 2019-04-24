@@ -121,13 +121,13 @@ class App extends Component {
             </div>
           </section>
           <div>
-            <button class="loginButton" onClick={this.handleLogIn}>
+            <button className="loginButton" onClick={this.handleLogIn}>
               Log In
             </button>
           </div>
 
           <p>
-            <button class="buttonCSS" onClick={this.handleClick}>
+            <button className="buttonCSS" onClick={this.handleClick}>
               Start Game
             </button>
           </p>

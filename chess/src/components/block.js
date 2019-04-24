@@ -9,9 +9,7 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { pawnManeuvers }  from '../models/chess-maneuvers';
-
-
+import { pawnManeuvers } from '../models/chess-maneuvers';
 
 import {
 	updateBoard,
@@ -40,7 +38,7 @@ class Block extends Component {
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() { }
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -288,16 +286,16 @@ class Block extends Component {
 	 */
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
-		if(PieceToBeRemoved.player === "black") {
+		if (PieceToBeRemoved.player === "black") {
 			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
-		} else if (PieceToBeRemoved.player === "white" ){
+		} else if (PieceToBeRemoved.player === "white") {
 			this.props.handleBlackRemovePiece(PieceToBeRemoved);
 		}
 		console.log(
 			"Handle Remove Piece was called with: Player: " +
-				PieceToBeRemoved.player +
-				" Piece: " +
-				PieceToBeRemoved.typeOfPiece
+			PieceToBeRemoved.player +
+			" Piece: " +
+			PieceToBeRemoved.typeOfPiece
 		);
 	}
 	/**
@@ -314,14 +312,26 @@ class Block extends Component {
 		) {
 			// trigger function to delete piece from board.
 			console.log("enemy piece is removed");
-			this.handleRemovePiece(board[this.props.selectedPosition]);
+			this.handleRemovePiece(board[indexOfPieceToBeMoved]);
 		}
-		
-		// check if pawn has first move
-		board = pawnManeuvers(board, this.props.selectedPosition, this.props.index);
 
-		board[pieceIndex] = board[this.props.selectedPosition];
-		board[this.props.selectedPosition] = undefined;
+		// check if pawn has first move
+		board = pawnManeuvers(board, indexOfPieceToBeMoved, this.props.index);
+
+		// Check for castle move to implement special logic
+		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
+			console.log("Castle");
+			board[pieceIndex] = board[indexOfPieceToBeMoved];
+			board[indexOfPieceToBeMoved + 1] = board[pieceIndex + 1];
+			board[indexOfPieceToBeMoved] = undefined;
+			board[pieceIndex + 1] = undefined;
+		}
+		// Otherwise run normal move logic
+		else {
+			console.log("Move");
+			board[pieceIndex] = board[indexOfPieceToBeMoved];
+			board[indexOfPieceToBeMoved] = undefined;
+		}
 
 		console.log("board is being updated with" + board[pieceIndex]);
 		this.props.updateBoard(board);
