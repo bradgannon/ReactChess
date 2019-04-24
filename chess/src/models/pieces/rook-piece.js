@@ -15,7 +15,6 @@ export default class RookPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// Check color of the piece moving
 		let enemy = "";

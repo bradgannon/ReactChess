@@ -39,7 +39,6 @@ function rootReducer(state = initialState, action) {
       })
     }
   } else if (action.type === NEXT_MOVE_STATE) {
-    console.log('next move state queued');
     if(state.moveState === SELECT_PIECE) {
       return Object.assign({}, state, {
         moveState: SELECT_AVAILABLE_MOVE
@@ -68,8 +67,6 @@ function rootReducer(state = initialState, action) {
       let foundItem = state.whitePiecesInPlay.find(x => x.typeOfPiece === action.payload.typeOfPiece);
       let piecesInPlay = state.whitePiecesInPlay;
       piecesInPlay.pop(foundItem);
-      console.log('pieces in play')
-      console.log(piecesInPlay);
       return Object.assign({}, state, {
         whitePiecesInPlay: piecesInPlay
       });

@@ -1,43 +1,24 @@
 import KingPiece from "../models/pieces/king-piece";
 
-// boolean isChecked() {
-//   /* Check straight lines */
-//   for (directions) { // up, down, left and right
-//       for (square in direction) { // square by square from the king and out in the current direction
-//           if (square contains opponent rook or queen)
-//               return true;
-//           else if (square contains friendly piece)
-//               continue;
-
-//   /* Check diagonals */
-//   for (directions) { // left-up, left-down, right-up and right-down
-//       for (square in direction) { // square by square from the king and out in the current direction
-//           if (square contains opponent bishop or queen)
-//               return true;
-//           else if (square contains friendly piece)
-//               continue;
-
-//   /* Check pawns */
-//   if (squares where pawns would threaten the king contains pawns)
-//       return true;
-
-//   /* Check king, this is to find if a square is legal to move to only */
-//   if (squares where a king would threaten the king contains king)
-//       return true;
-
-//   /* Check knights */
-//   if (squares where knights would threaten the king contains knights)
-//       return true;
-export function isChecked(board, player, opposingPieces) {
+export function isChecked(board, player) {
   if(player === "white") {
-
+    return handleInCheckPlayer(board, "white");
+  } else {
+    return handleInCheckPlayer(board, "black");
   }
   // check up, down, left right
 }
 
-export function handleInCheckPlayer(board, player, opposingPieces) {
+export function handleInCheckPlayer(board, player) {
   // find king.
-  let kingPieceIndex = board.indexOf(x => x.typeOfPiece === "king");
+  // let kingPieceIndex = board.indexOf(x => x.typeOfPiece === "king");
+  let kingPieceIndex = -1;
+  for(let i = 0; i < board.length; i++) {
+    if (board[i] && board[i].player === player && board[i].typeOfPiece === "king") {
+      kingPieceIndex = i;
+      break;
+    }
+  }
   if(kingPieceIndex < 0 ) {
     throw new Error("King doesn't Exist - game is over");
   }
@@ -49,13 +30,11 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
 
     let square = board[i];
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i--;
-    if(i % 8 === 7) {
+    if(i % 8 === 7 || i < 0) {
       isFinishedWithColumn = true;
-      console.log("finished left column check @: " + i);
     }
   }
 
@@ -65,13 +44,11 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   while(!isFinishedWithColumn) {
     let square = board[i];
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i++;
-    if( i % 8 === 0 ) {
+    if( i % 8 === 0 || i > 63) {
       isFinishedWithColumn = true;
-      console.log("finished right column check @: " + i);
     }
   }
 
@@ -81,7 +58,6 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   while(!isFinishedWithUp) {
     let square = board[i];
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i = i + 8;
@@ -95,7 +71,6 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   while(!isFinishedWithUp) {
     let square = board[i];
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i = i - 8;
@@ -110,7 +85,6 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   while(!isFinishedWithDiagonal) {
     let square = board[i];
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i = i - 7;
@@ -124,8 +98,10 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   i = kingPieceIndex;
   while(!isFinishedWithDiagonal) {
     let square = board[i];
+    if(square && (square.typeOfPiece !== "bishop" || square.typeOfPiece !== "queen")) {
+      break;
+    }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i = i - 9;
@@ -139,8 +115,10 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   i = kingPieceIndex;
   while(!isFinishedWithDiagonal) {
     let square = board[i];
+    if(square && (square.typeOfPiece !== "bishop" || square.typeOfPiece !== "queen")) {
+      break;
+    }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i = i + 9;
@@ -155,7 +133,6 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
   while(!isFinishedWithDiagonal) {
     let square = board[i];
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
-      console.log("enemy rook or queen present - in check");
       return true;
     }
     i = i + 7;
@@ -183,13 +160,52 @@ export function handleInCheckPlayer(board, player, opposingPieces) {
       return true;
     }
   }
-}
 
-//   /* Check king, this is to find if a square is legal to move to only */
-//   if (squares where a king would threaten the king contains king)
+
+  // check king spots
+  let conflictedKingMoves = getConflictingKingMoves(board, player, kingPieceIndex);
+  if(conflictedKingMoves.length > 0) {
+    return true;
+  }
+
+      /* Check knights */
+//       if (squares where knights would threaten the king contains knights)
 //       return true;
-// if (board[i + 8] && board[i])
-
+  // check knights
+  i = kingPieceIndex;
+  if(board[i + 6] && board[i + 6].player !== player && board[i + 6].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i + 10] && board[i + 10].player !== player && board[i + 10].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i + 15] && board[i + 15].player !== player && board[i + 15].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i + 17] && board[i + 17].player !== player && board[i + 17].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i - 6] && board[i - 6].player !== player && board[i - 6].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i - 10] && board[i -10].player !== player && board[i - 10].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i - 15] && board[i - 15].player !== player && board[i - 15].typeOfPiece === "knight") {
+    return true;
+  } else if (board[i - 17] && board[i - 17].player !== player && board[i - 17].typeOfPiece === "knight") {
+    return true;
+  }
+  
+}
+export function getConflictingKingMoves(board, currentPlayerTurn, kingPieceIndex) {
+  // king spots
+  let i = kingPieceIndex;
+  let allOpposingMoves = getAllOpposingMoves(board, currentPlayerTurn);
+  let potentialKingMoves = [i + 1, i + 9, i + 8, i + 7, i - 1, i - 8, i - 9, i - 7];
+  let filteredKingMoves = potentialKingMoves.filter(x => x >= 0 && x < 64);
+  let removeTheseKingMoves = [];
+  allOpposingMoves.forEach(move => {
+    if(filteredKingMoves.indexOf(move) > 0) {
+      removeTheseKingMoves.push(move);
+    }
+  });
+  return removeTheseKingMoves;
+}
 
 export function getAllOpposingMoves(board, currentPlayerTurn) {
   // let localBoardObj = {};
@@ -203,8 +219,6 @@ export function getAllOpposingMoves(board, currentPlayerTurn) {
 
   }
   // let foundArray = localBoard.find(x => (x && x.player !== currentPlayerTurn));
-  console.log("opposing pieces:");
-  console.log(opposingPlayerPieceIndexes);
   let allMoves = [];
   opposingPlayerPieceIndexes.forEach(pieceIndex => {
     let currentMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);

@@ -1,4 +1,5 @@
 import ChessPiece from "./chess-piece";
+import RookPiece from "./rook-piece";
 
 export default class KingPiece extends ChessPiece {
 	/**
@@ -15,7 +16,6 @@ export default class KingPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// return an array of possible locations.
 		let validMoves = [];
@@ -98,6 +98,15 @@ export default class KingPiece extends ChessPiece {
 			validMoves.push(location - 9);
 		}
 
+		// Castle Move
+		if (
+			!b[location + 1] &&
+			!b[location + 2] &&
+			b[location + 3] instanceof RookPiece
+		) {
+			validMoves.push(location + 2);
+		}
+
 		return validMoves.filter(x => x >= 0 && x < 64);
-	}
+		}
 }

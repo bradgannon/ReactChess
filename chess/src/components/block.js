@@ -26,7 +26,7 @@ import {
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { getAllOpposingMoves } from "../utility/end-game";
+import { getAllOpposingMoves, isChecked } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -294,12 +294,6 @@ class Block extends Component {
 		} else if (PieceToBeRemoved.player === "white" ){
 			this.props.handleBlackRemovePiece(PieceToBeRemoved);
 		}
-		console.log(
-			"Handle Remove Piece was called with: Player: " +
-				PieceToBeRemoved.player +
-				" Piece: " +
-				PieceToBeRemoved.typeOfPiece
-		);
 	}
 	/**
 	 * Moves the Selected Position Piece to the clicked on Piece.
@@ -310,35 +304,63 @@ class Block extends Component {
 		let board = this.props.board;
 
 		let playerTurn = this.props.playerTurn;
-		let allOpposingMoves = getAllOpposingMoves(board, playerTurn);
-		console.log("all opposing moves:");
-		console.log(allOpposingMoves);
+		// let player = this.props.piece.player;
+		// let allOpposingMoves = getAllOpposingMoves(board, playerTurn);
+		
+		// if(isChecked(board, "black")) {
+		// 	alert("Check has occured with black called");
+		// }
+		
+
 
 		if (
 			this.props.piece instanceof ChessPiece &&
 			this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player
 		) {
 			// trigger function to delete piece from board.
-			console.log("enemy piece is removed");
 			this.handleRemovePiece(board[this.props.selectedPosition]);
 		}
 		
 		// check if pawn has first move
 		board = pawnManeuvers(board, this.props.selectedPosition, this.props.index);
-
+		// let oldBoard = JSON.parse(JSON.stringify(board));
+		let oldBoard = new Array(64);
+		for(let i = 0; i < board.length; i++) {
+			oldBoard[i] = board[i];
+		}
+		// board.forEach(item => {
+		// 	if(item === undefined) {
+		// 		oldBoard.push(item);
+		// 	}
+		// 	oldBoard.push(item);
+		// })
+		// oldBoard = Array.from(oldBoard);
+		let oldLocation = board[this.props.selectedPosition];
 		board[pieceIndex] = board[this.props.selectedPosition];
 		board[this.props.selectedPosition] = undefined;
 
-		console.log("board is being updated with" + board[pieceIndex]);
-		this.props.updateBoard(board);
-		this.props.setSelectedPosition(-1);
-		this.props.setPotentialMoves([]);
-		this.props.nextMoveState();
+		if(isChecked(board, playerTurn)) {
+			alert("Caution: Move will forfeit the game.");
+			console.log(board);
+			console.log(oldBoard);
+			// board = oldBoard;
+			// Object.assign(board, oldBoard);
+			// return;
+			// todo: why is this not updateing
+			board[this.props.selectedPosition] = oldLocation;
+			board[pieceIndex] = undefined;
+			this.props.updateBoard(board);
+		} else {
+			this.props.updateBoard(board);
+			this.props.setSelectedPosition(-1);
+			this.props.setPotentialMoves([]);
+			this.props.nextMoveState();
+		}
+		
 	}
 
 	selectBlock() {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
-		console.log(this.props.selectedPosition);
 		this.removePreviousAvailableMoves();
 
 		if (this.props.moveState === SELECT_PIECE) {
@@ -349,7 +371,6 @@ class Block extends Component {
 			this.props.moveState === SELECT_AVAILABLE_MOVE &&
 			this.props.potentialMoves.indexOf(this.props.index) >= 0
 		) {
-			console.log("this piece should be highlighted");
 			// move piece
 			this.movePiece();
 		} else if (

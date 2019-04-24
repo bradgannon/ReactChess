@@ -15,7 +15,6 @@ export default class PawnPiece extends ChessPiece {
 	}
 
 	setPastFirstMove() {
-		console.log("past first move should be queued");
 		this.isFirstMove = false;
 	}
 	/**
@@ -24,7 +23,6 @@ export default class PawnPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// return an array of possible locations.
 		let validMoves = [];
@@ -43,7 +41,7 @@ export default class PawnPiece extends ChessPiece {
 			if (!b[location - 8]) {
 				validMoves.push(location - 8);
 			}
-			if (this.isFirstMove && !b[location - 16]) {
+			if (this.isFirstMove && !b[location - 16] && !b[location - 8]) {
 				validMoves.push(location - 16);
 			}
 		} else {
@@ -61,7 +59,7 @@ export default class PawnPiece extends ChessPiece {
 			if (!b[location + 8]) {
 				validMoves.push(location + 8);
 			}
-			if (this.isFirstMove && !b[location + 16]) {
+			if (this.isFirstMove && !b[location + 16] && !b[location + 8]) {
 				validMoves.push(location + 16);
 			}
 		}
