@@ -107,6 +107,16 @@ export default class KingPiece extends ChessPiece {
 			validMoves.push(location + 2);
 		}
 
-		return validMoves.filter(x => x >= 0 && x < 64);
+		let kingPieceIndex = -1;
+		for (let i = 0; i < b.length; i++) {
+			if (b[i] && b[i].player === this.player && b[i].typeOfPiece === "king") {
+				kingPieceIndex = i;
+				break;
+			}
 		}
+		if (kingPieceIndex < 0) {
+			throw new Error("King doesn't Exist - game is over");
+		}
+		return validMoves.filter(x => x >= 0 && x < 64);
+	}
 }

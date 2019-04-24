@@ -26,7 +26,7 @@ import {
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { getAllOpposingMoves, isChecked } from "../utility/end-game";
+import { isChecked } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -323,18 +323,11 @@ class Block extends Component {
 		
 		// check if pawn has first move
 		board = pawnManeuvers(board, this.props.selectedPosition, this.props.index);
-		// let oldBoard = JSON.parse(JSON.stringify(board));
 		let oldBoard = new Array(64);
 		for(let i = 0; i < board.length; i++) {
 			oldBoard[i] = board[i];
 		}
-		// board.forEach(item => {
-		// 	if(item === undefined) {
-		// 		oldBoard.push(item);
-		// 	}
-		// 	oldBoard.push(item);
-		// })
-		// oldBoard = Array.from(oldBoard);
+		let oldSelectedPosition = board[pieceIndex];
 		let oldLocation = board[this.props.selectedPosition];
 		board[pieceIndex] = board[this.props.selectedPosition];
 		board[this.props.selectedPosition] = undefined;
@@ -343,13 +336,13 @@ class Block extends Component {
 			alert("Caution: Move will forfeit the game.");
 			console.log(board);
 			console.log(oldBoard);
-			// board = oldBoard;
-			// Object.assign(board, oldBoard);
-			// return;
-			// todo: why is this not updateing
+
 			board[this.props.selectedPosition] = oldLocation;
-			board[pieceIndex] = undefined;
+			board[pieceIndex] = oldSelectedPosition;
 			this.props.updateBoard(board);
+			this.props.setSelectedPosition(-1);
+			this.props.setPotentialMoves([]);
+			this.props.revertToSelectPiece();
 		} else {
 			this.props.updateBoard(board);
 			this.props.setSelectedPosition(-1);
