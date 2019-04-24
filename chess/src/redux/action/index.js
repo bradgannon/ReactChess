@@ -44,6 +44,7 @@ export function revertToSelectPiece() {
  * @param {*} payload 
  */
 export function handleWhiteRemovePiece(payload) {
+  console.log("white handle remove peice called with" + payload);
   return { type: HANDLE_WHITE_REMOVE_PIECE, payload };
 }
 
