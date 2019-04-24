@@ -20,13 +20,14 @@ import {
 	nextMoveState,
 	revertToSelectPiece,
 	handleWhiteRemovePiece,
-	handleBlackRemovePiece
+	handleBlackRemovePiece,
+	setGameOver
 } from "../redux/action/index";
 
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { isChecked } from "../utility/end-game";
+import { isChecked, isStalemate, isCheckmate } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -311,8 +312,6 @@ class Block extends Component {
 		// 	alert("Check has occured with black called");
 		// }
 		
-
-
 		if (
 			this.props.piece instanceof ChessPiece &&
 			this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player
@@ -332,7 +331,25 @@ class Block extends Component {
 		board[pieceIndex] = board[this.props.selectedPosition];
 		board[this.props.selectedPosition] = undefined;
 
-		if(isChecked(board, playerTurn)) {
+		if (isStalemate(board, playerTurn)) {
+			this.props.setGameOver()
+			alert("Stalemate achieved; Game Over");
+		} else if (isCheckmate(board, playerTurn)) {
+			this.props.setGameOver()
+			if(playerTurn === "white") {
+				let result = window.confirm("Checkmate! Game Over! Black Won!");
+				if(result) {
+					window.location.reload();
+				}
+			} else {
+				let result = window.confirm("Checkmate! Game Over! White Won!");
+				if(result) {
+					window.location.reload();
+				}
+			}
+		
+		}
+		else if(isChecked(board, playerTurn)) {
 			alert("Caution: Move will forfeit the game.");
 			console.log(board);
 			console.log(oldBoard);
@@ -343,7 +360,8 @@ class Block extends Component {
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
 			this.props.revertToSelectPiece();
-		} else {
+		}
+		 else {
 			this.props.updateBoard(board);
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
@@ -356,6 +374,9 @@ class Block extends Component {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
 		this.removePreviousAvailableMoves();
 
+		if(this.props.moveState === "GAME_OVER") {
+			return;
+		}
 		if (this.props.moveState === SELECT_PIECE) {
 			this.props.setSelectedPosition(this.props.index);
 		}
@@ -457,7 +478,8 @@ function mapDispatchToProps(dispatch, ownProps) {
 		nextMoveState: () => dispatch(nextMoveState()),
 		revertToSelectPiece: () => dispatch(revertToSelectPiece()),
 		handleWhiteRemovePiece: (piece) => dispatch(handleWhiteRemovePiece(piece)),
-		handleBlackRemovePiece: (piece) => dispatch(handleBlackRemovePiece(piece))
+		handleBlackRemovePiece: (piece) => dispatch(handleBlackRemovePiece(piece)),
+		setGameOver: () => dispatch(setGameOver())
 	};
 }
 

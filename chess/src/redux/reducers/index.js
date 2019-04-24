@@ -1,6 +1,6 @@
 import { 
   UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES,
-  NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE, HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE
+  NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE, HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE, SET_GAME_OVER
 } from '../action/actionTypes';
 import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay } from '../../utility/game-initialization';
 import { SELECT_PIECE, SELECT_AVAILABLE_MOVE, WHITE, BLACK } from '../string-constants';
@@ -76,6 +76,10 @@ function rootReducer(state = initialState, action) {
     itemsInPlay.pop(item);
     return Object.assign({}, state, {
       blackPiecesInPlay: itemsInPlay
+    });
+  } else if (action.type === SET_GAME_OVER) {
+    return Object.assign({}, state, {
+      moveState: "GAME_OVER"
     });
   }
   return state;

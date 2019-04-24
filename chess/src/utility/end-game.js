@@ -18,9 +18,9 @@ export function handleInCheckPlayer(board, player) {
       break;
     }
   }
-  if(kingPieceIndex < 0 ) {
-    throw new Error("King doesn't Exist - game is over");
-  }
+  // if(kingPieceIndex < 0 ) {
+  //   throw new Error("King doesn't Exist - game is over");
+  // }
 
   // find left
   let i = kingPieceIndex;
@@ -239,6 +239,85 @@ export function handleInCheckPlayer(board, player) {
     }
   // check kings
   
+}
+
+export function isStalemate(board, player) {
+  if(isChecked(board, player)) {
+    return false;
+  }
+
+  if(getAllMoves(board, player).length <= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function doMove(board, pieceIndex, selectedPosition) {
+  let oldBoard = new Array(64);
+  for(let i = 0; i < board.length; i++) {
+    oldBoard[i] = board[i];
+  }
+  let oldSelectedPosition = board[pieceIndex];
+  let oldLocation = board[selectedPosition];
+  board[pieceIndex] = board[selectedPosition];
+  board[selectedPosition] = undefined;
+
+  return board;
+
+  // board[this.props.selectedPosition] = oldLocation;
+			// board[pieceIndex] = oldSelectedPosition;
+}
+
+export function isCheckmate(board, player) {
+  // verify no checkmate or if there's a stalemate.
+  if(!isChecked(board, player) || isStalemate(board, player)) {
+    return false;
+  }
+  // iterate over all possible plaeyer's moves
+  let allPlayersPieces = getAllPlayersPieces(board, player);
+  allPlayersPieces.forEach(pieceIndex => {
+    let oldBoard = new Array(64);
+    for(let i = 0; i < board.length; i++) {
+      oldBoard[i] = board[i];
+    }
+    let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
+    allPieceMoves.forEach(move => {
+      let resultBoard = doMove(board, pieceIndex, move);
+      // if there is a move that ges the player out of checkmate, return false.
+      if(!isChecked(resultBoard, player)) {
+        board = oldBoard;
+        return false;
+      }
+      board = oldBoard;
+    })
+  });
+  // otherwise return true.
+  return true;
+}
+
+function getAllPlayersPieces(board, player) {
+  let localBoard = Array.from(board);
+  let playerPieceIndeces = [];
+  for(let i = 0; i < 64; i++) {
+    let block = localBoard[i];
+    if(block && block.player === player) {
+      playerPieceIndeces.push(i);
+    }
+  }
+  return playerPieceIndeces;
+}
+function getAllMoves(board, player) {
+  let playerPieceIndeces = getAllPlayersPieces(board, player);
+  let allMoves = [];
+  playerPieceIndeces.forEach(pieceIndex => {
+    let currentMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
+    currentMoves.forEach(move => {
+      allMoves.push(move);
+    });
+  });
+  let uniqueMoves = Array.from(new Set(allMoves));
+  return uniqueMoves;
 }
 export function getConflictingKingMoves(board, currentPlayerTurn, kingPieceIndex) {
   // king spots

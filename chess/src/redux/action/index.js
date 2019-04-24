@@ -1,7 +1,7 @@
 // redux/actions.js
 import { UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES,
    NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE,
-  HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE} from './actionTypes';
+  HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE, SET_GAME_OVER} from './actionTypes';
 
 // let nextTodoId = 0
 // export const addTodo = content => ({
@@ -49,4 +49,8 @@ export function handleWhiteRemovePiece(payload) {
 
 export function handleBlackRemovePiece(payload) {
   return { type: HANDLE_BLACK_REMOVE_PIECE, payload };
+}
+
+export function setGameOver() {
+  return { type: SET_GAME_OVER };
 }
