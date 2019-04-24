@@ -85,6 +85,16 @@
   color: white;
   font-weight: 200;
 }
+
+.modeText {
+  align-items: center;
+  font-size: 40px;
+  font-family: "Times New Roman", "Times New Roman", Times, serif;
+  font-style: normal;
+  color: white;
+  font-weight: 100;
+}
+
 .icons {
   margin-top: 20px;
   float: left;
