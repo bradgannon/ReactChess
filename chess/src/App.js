@@ -32,20 +32,15 @@ class App extends Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.state = { clicked: false, loggedIn: false };
+    this.state = { clicked: false };
   }
 
   handleClick() {
     this.setState({ clicked: true });
   }
 
-  handleLogIn() {
-    this.setState({ loggedIn: true, clicked: false });
-  }
-
   render() {
-    if (this.state.clicked && this.state.loggedIn) {
+    if (this.state.clicked) {
       return (
         <div className="App">
           <header className="App-header">
@@ -112,20 +107,6 @@ class App extends Component {
               />
             </div>
           </section>
-          <section className="center">
-            <div className="center">
-              <input placeholder="Username" />
-            </div>
-            <div>
-              <input type="password" placeholder="Password" />
-            </div>
-          </section>
-          <div>
-            <button class="loginButton" onClick={this.handleLogIn}>
-              Log In
-            </button>
-          </div>
-
           <p>
             <button class="buttonCSS" onClick={this.handleClick}>
               Start Game
