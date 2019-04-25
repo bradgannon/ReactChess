@@ -1,5 +1,6 @@
 // React Imports
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // Font-Awesome Library logos - usage here: https://fontawesome.com/how-to-use/on-the-web/using-with/react
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -17,6 +18,7 @@ import {
 import "./App.css";
 import GameLogic from "./components/game-logic";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { initializePawnWars, initializeChess, setGameMode } from "./redux/action";
 
 library.add(
   faChessRook,
@@ -50,6 +52,13 @@ class App extends Component {
     event.preventDefault();
 
     if (this.state.name !== "" && this.state.mode !== "default") {
+      if (this.state.mode === "pawnWars") {
+        this.props.initializePawnWars();
+        this.props.setGameMode("pawnWars");
+      } else {
+        this.props.initializeChess();
+        this.props.setGameMode("chess");
+      }
       this.setState({ canStart: true });
     }
   }
@@ -171,4 +180,23 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return {
+    initializePawnWars: () => dispatch(initializePawnWars()),
+    initializeChess: () => dispatch(initializeChess()),
+    setGameMode: (gamemode) => dispatch(setGameMode(gamemode))
+  };
+}
+
+function mapStateToProps(state) {
+  const { board, gameMode }  = state;
+  return {
+    board: board,
+    gameMode: gameMode
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
