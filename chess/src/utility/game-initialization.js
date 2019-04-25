@@ -49,7 +49,7 @@ export default function populateGameBoard() {
 	return boardOfBlocks;
 }
 
-export function initializeCheckMate() {
+export function populatePawnWars() {
 	let boardOfBlocks = new Array(64);
 
 	// black pieces
@@ -57,40 +57,34 @@ export function initializeCheckMate() {
 	for (let i = 8; i <= 15; i++) {
 		boardOfBlocks[i] = new PawnPiece("black");
 	}
-	boardOfBlocks[0] = new RookPiece("black");
-	boardOfBlocks[7] = new RookPiece("black");
+	boardOfBlocks[0] = new PawnPiece("black");
+	boardOfBlocks[7] = new PawnPiece("black");
 
-	boardOfBlocks[1] = new KnightPiece("black");
-	boardOfBlocks[6] = new KnightPiece("black");
+	boardOfBlocks[1] = new PawnPiece("black");
+	boardOfBlocks[6] = new PawnPiece("black");
 
-	boardOfBlocks[2] = new BishopPiece("black");
-	boardOfBlocks[5] = new BishopPiece("black");
+	boardOfBlocks[2] = new PawnPiece("black");
+	boardOfBlocks[5] = new PawnPiece("black");
 
-	boardOfBlocks[3] = new QueenPiece("black");
-	boardOfBlocks[4] = new KingPiece("black");
+	boardOfBlocks[3] = new PawnPiece("black");
+	boardOfBlocks[4] = new PawnPiece("black");
 
 	// white peices
 	for (let j = 48; j <= 55; j++) {
 		boardOfBlocks[j] = new PawnPiece("white");
 	}
 
-	boardOfBlocks[63] = new RookPiece("white");
-	boardOfBlocks[56] = new RookPiece("white");
+	boardOfBlocks[63] = new PawnPiece("white");
+	boardOfBlocks[56] = new PawnPiece("white");
 
-	boardOfBlocks[62] = new KnightPiece("white");
-	boardOfBlocks[57] = new KnightPiece("white");
+	boardOfBlocks[62] = new PawnPiece("white");
+	boardOfBlocks[57] = new PawnPiece("white");
 
-	boardOfBlocks[61] = new BishopPiece("white");
-	boardOfBlocks[58] = new BishopPiece("white");
+	boardOfBlocks[61] = new PawnPiece("white");
+	boardOfBlocks[58] = new PawnPiece("white");
 
-	boardOfBlocks[60] = new KingPiece("white");
-	boardOfBlocks[59] = new QueenPiece("white");
-
-	// test for checkmate
-	boardOfBlocks[36] = new KingPiece("black");
-	boardOfBlocks[42] = new KingPiece("white");
-	boardOfBlocks[43] = new QueenPiece("black");
-	boardOfBlocks[25] = new QueenPiece("black");
+	boardOfBlocks[60] = new PawnPiece("white");
+	boardOfBlocks[59] = new PawnPiece("white");
 
 	return boardOfBlocks;
 }
@@ -105,7 +99,7 @@ export function initialWhitePiecesInPlay() {
 	whitePieces[5] = new BishopPiece("white");
 	whitePieces[6] = new KnightPiece("white");
 	whitePieces[7] = new RookPiece("white");
-	for (let i = 8; i <= 15; i++) {
+	for( let i = 8; i <= 15; i++) {
 		whitePieces[i] = new PawnPiece("white");
 	}
 	return whitePieces;
@@ -121,7 +115,7 @@ export function initialBlackPiecesInPlay() {
 	blackPieces[5] = new BishopPiece("black");
 	blackPieces[6] = new KnightPiece("black");
 	blackPieces[7] = new RookPiece("black");
-	for (let i = 8; i <= 15; i++) {
+	for( let i = 8; i <= 15; i++) {
 		blackPieces[i] = new PawnPiece("black");
 	}
 	return blackPieces;

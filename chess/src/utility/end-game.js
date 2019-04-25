@@ -1,6 +1,11 @@
 
+/**
+ * Checks to see if player is in check
+ * @param {*} board 
+ * @param {*} player 
+ */
 export function isChecked(board, player) {
-  if(player === "white") {
+  if (player === "white") {
     return handleInCheckPlayer(board, "white");
   } else {
     return handleInCheckPlayer(board, "black");
@@ -8,43 +13,47 @@ export function isChecked(board, player) {
   // check up, down, left right
 }
 
+/**
+ * Checks to see if player is in check.
+ */
 export function handleInCheckPlayer(board, player) {
-  // find king.
-  // let kingPieceIndex = board.indexOf(x => x.typeOfPiece === "king");
+  // find king index
   let kingPieceIndex = -1;
-  for(let i = 0; i < board.length; i++) {
+  for (let i = 0; i < board.length; i++) {
     if (board[i] && board[i].player === player && board[i].typeOfPiece === "king") {
       kingPieceIndex = i;
       break;
     }
   }
-  // if(kingPieceIndex < 0 ) {
-  //   throw new Error("King doesn't Exist - game is over");
-  // }
 
   // find left
   let i = kingPieceIndex;
   let isFinishedWithColumn = false;
-  while(!isFinishedWithColumn) {
+  while (!isFinishedWithColumn) {
 
     let square = board[i];
+    if (square && ((square.typeOfPiece !== "rook" || square.player === player) &&
+      (square.typeOfPiece !== "queen" || square.player === player)) && i !== kingPieceIndex) {
+      break;
+    }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
       console.log("left triggered");
       return true;
     }
     i--;
-    if(i % 8 === 7 || i < 0) {
+    if (i % 8 === 7 || i < 0) {
       isFinishedWithColumn = true;
     }
   }
 
-  
+
   // find right
   i = kingPieceIndex;
   isFinishedWithColumn = false;
-  while(!isFinishedWithColumn) {
+  while (!isFinishedWithColumn) {
     let square = board[i];
-    if(square && (square.typeOfPiece !== "rook" && square.typeOfPiece !== "queen" && square.player === player) && i !== kingPieceIndex) {
+    if (square && ((square.typeOfPiece !== "rook" || square.player === player) &&
+      (square.typeOfPiece !== "queen" || square.player === player)) && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
@@ -52,18 +61,18 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i++;
-    if( i % 8 === 0 || i > 63) {
+    if (i % 8 === 0 || i > 63) {
       isFinishedWithColumn = true;
     }
   }
 
-  
   // find up
   i = kingPieceIndex;
   let isFinishedWithUp = false;
-  while(!isFinishedWithUp) {
+  while (!isFinishedWithUp) {
     let square = board[i];
-    if(square && ((square.typeOfPiece !== "rook" && square.typeOfPiece !== "queen") || square.player === player) && i !== kingPieceIndex) {
+    if (square && (((square.typeOfPiece !== "rook" || square.player === player)
+      && (square.typeOfPiece !== "queen" || square.player === player))) && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
@@ -71,18 +80,17 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i = i + 8;
-    if ( i > 63) {
+    if (i > 63) {
       isFinishedWithUp = true;
     }
   }
 
-  
   // find down
   i = kingPieceIndex;
   isFinishedWithUp = false;
-  while(!isFinishedWithUp) {
+  while (!isFinishedWithUp) {
     let square = board[i];
-    if(square && ((square.typeOfPiece !== "rook" && square.typeOfPiece !== "queen") || square.player === player) && i !== kingPieceIndex) {
+    if (square && ((square.typeOfPiece !== "rook" && square.typeOfPiece !== "queen")) && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
@@ -90,7 +98,7 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i = i - 8;
-    if ( i < 0) {
+    if (i < 0) {
       isFinishedWithUp = true;
     }
   }
@@ -98,9 +106,9 @@ export function handleInCheckPlayer(board, player) {
   // find north-east from king
   let isFinishedWithDiagonal = false;
   i = kingPieceIndex;
-  while(!isFinishedWithDiagonal) {
+  while (!isFinishedWithDiagonal) {
     let square = board[i];
-     if(square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
@@ -108,18 +116,17 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i = i - 7;
-    if ( i < 0 || i % 8 === 0) {
+    if (i < 0 || i % 8 === 0) {
       isFinishedWithDiagonal = true;
     }
   }
 
-  
   // find north-west
   isFinishedWithDiagonal = false;
   i = kingPieceIndex;
-  while(!isFinishedWithDiagonal) {
+  while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if(square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
@@ -127,18 +134,18 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i = i - 9;
-    if ( i < 0 || i % 8 === 7) {
+    if (i < 0 || i % 8 === 7) {
       isFinishedWithDiagonal = true;
     }
   }
 
-  
+
   // find south-east
   isFinishedWithDiagonal = false;
   i = kingPieceIndex;
-  while(!isFinishedWithDiagonal) {
+  while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if(square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
@@ -146,18 +153,18 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i = i + 9;
-    if ( i > 63 || i % 8 === 0 ) {
+    if (i > 63 || i % 8 === 0) {
       isFinishedWithDiagonal = true;
     }
   }
 
-  
+
   // find south-west
   isFinishedWithDiagonal = false;
   i = kingPieceIndex;
-  while(!isFinishedWithDiagonal) {
+  while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if(square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
@@ -165,16 +172,13 @@ export function handleInCheckPlayer(board, player) {
       return true;
     }
     i = i + 7;
-    if ( i > 63 || i % 8 === 7 ) {
+    if (i > 63 || i % 8 === 7) {
       isFinishedWithDiagonal = true;
     }
   }
 
-  
-
-  
   // pawns
-  if(player === "white") {
+  if (player === "white") {
     // handle black pawns
     i = kingPieceIndex;
     if (board[i - 7] && board[i - 7].player !== "white" && board[i - 7].typeOfPiece === "pawn") {
@@ -195,16 +199,9 @@ export function handleInCheckPlayer(board, player) {
     }
   }
 
-
-  
-
-
-  
-//       if (squares where knights would threaten the king contains knights)
-//       return true;
   // check knights
   i = kingPieceIndex;
-  if(board[i + 6] && board[i + 6].player !== player && board[i + 6].typeOfPiece === "knight") {
+  if (board[i + 6] && board[i + 6].player !== player && board[i + 6].typeOfPiece === "knight") {
     console.log("i + 6 triggered");
     return true;
   } else if (board[i + 10] && board[i + 10].player !== player && board[i + 10].typeOfPiece === "knight") {
@@ -219,7 +216,7 @@ export function handleInCheckPlayer(board, player) {
   } else if (board[i - 6] && board[i - 6].player !== player && board[i - 6].typeOfPiece === "knight") {
     console.log("i - 6 triggered");
     return true;
-  } else if (board[i - 10] && board[i -10].player !== player && board[i - 10].typeOfPiece === "knight") {
+  } else if (board[i - 10] && board[i - 10].player !== player && board[i - 10].typeOfPiece === "knight") {
     console.log("i - 10 triggered");
     return true;
   } else if (board[i - 15] && board[i - 15].player !== player && board[i - 15].typeOfPiece === "knight") {
@@ -230,23 +227,26 @@ export function handleInCheckPlayer(board, player) {
     return true;
   }
 
-    // check king spots
-    let conflictedKingMoves = getConflictingKingMoves(board, player, kingPieceIndex);
-    if(conflictedKingMoves.length > 0) {
-      console.log("conflicted king moves, make sure to disallow for: " + player);
-      console.log(conflictedKingMoves);
-      return true;
-    }
-  // check kings
-  
+  // check king spots
+  let conflictedKingMoves = getConflictingKingMoves(board, player, kingPieceIndex);
+  if (conflictedKingMoves.length > 0) {
+    console.log("conflicted king moves, make sure to disallow for: " + player);
+    console.log(conflictedKingMoves);
+    return true;
+  }
 }
 
+/**
+ * Checks if game is in stalemate
+ * @param {*} board 
+ * @param {*} player 
+ */
 export function isStalemate(board, player) {
-  if(isChecked(board, player)) {
+  if (isChecked(board, player)) {
     return false;
   }
 
-  if(getAllMoves(board, player).length <= 0) {
+  if (getAllMoves(board, player).length <= 0) {
     return true;
   } else {
     return false;
@@ -255,7 +255,7 @@ export function isStalemate(board, player) {
 
 function doMove(board, pieceIndex, selectedPosition) {
   let oldBoard = new Array(64);
-  for(let i = 0; i < board.length; i++) {
+  for (let i = 0; i < board.length; i++) {
     oldBoard[i] = board[i];
   }
   let oldSelectedPosition = board[pieceIndex];
@@ -266,26 +266,26 @@ function doMove(board, pieceIndex, selectedPosition) {
   return board;
 
   // board[this.props.selectedPosition] = oldLocation;
-			// board[pieceIndex] = oldSelectedPosition;
+  // board[pieceIndex] = oldSelectedPosition;
 }
 
 export function isCheckmate(board, player) {
   // verify no checkmate or if there's a stalemate.
-  if(!isChecked(board, player) || isStalemate(board, player)) {
+  if (!isChecked(board, player) || isStalemate(board, player)) {
     return false;
   }
   // iterate over all possible plaeyer's moves
   let allPlayersPieces = getAllPlayersPieces(board, player);
   allPlayersPieces.forEach(pieceIndex => {
     let oldBoard = new Array(64);
-    for(let i = 0; i < board.length; i++) {
+    for (let i = 0; i < board.length; i++) {
       oldBoard[i] = board[i];
     }
     let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
     allPieceMoves.forEach(move => {
       let resultBoard = doMove(board, pieceIndex, move);
       // if there is a move that ges the player out of checkmate, return false.
-      if(!isChecked(resultBoard, player)) {
+      if (!isChecked(resultBoard, player)) {
         board = oldBoard;
         return false;
       }
@@ -299,9 +299,9 @@ export function isCheckmate(board, player) {
 function getAllPlayersPieces(board, player) {
   let localBoard = Array.from(board);
   let playerPieceIndeces = [];
-  for(let i = 0; i < 64; i++) {
+  for (let i = 0; i < 64; i++) {
     let block = localBoard[i];
-    if(block && block.player === player) {
+    if (block && block.player === player) {
       playerPieceIndeces.push(i);
     }
   }
@@ -326,7 +326,7 @@ export function getConflictingKingMoves(board, currentPlayerTurn, kingPieceIndex
   let filteredKingMoves = potentialKingMoves.filter(x => x >= 0 && x < 64);
   let nonOccupiedKingdom = [];
   filteredKingMoves.forEach(move => {
-    if(board[move] && board[move].player !== currentPlayerTurn && board[move].typeOfPiece === "king") {
+    if (board[move] && board[move].player !== currentPlayerTurn && board[move].typeOfPiece === "king") {
       nonOccupiedKingdom.push(move);
     }
   })
@@ -337,9 +337,9 @@ export function getAllOpposingMoves(board, currentPlayerTurn) {
   // let localBoardObj = {};
   let localBoard = Array.from(board);
   let opposingPlayerPieceIndexes = [];
-  for(let i = 0; i < 64; i++) {
+  for (let i = 0; i < 64; i++) {
     let block = localBoard[i];
-    if(block && block.player !== currentPlayerTurn) {
+    if (block && block.player !== currentPlayerTurn) {
       opposingPlayerPieceIndexes.push(i);
     }
 
@@ -358,13 +358,13 @@ export function getAllOpposingMoves(board, currentPlayerTurn) {
 
 export function getKingPieceIndex(board, playerTurn) {
   let kingPieceIndex = -1;
-  for(let i = 0; i < board.length; i++) {
+  for (let i = 0; i < board.length; i++) {
     if (board[i] && board[i].player === playerTurn && board[i].typeOfPiece === "king") {
       kingPieceIndex = i;
       break;
     }
   }
-  if(kingPieceIndex < 0 ) {
+  if (kingPieceIndex < 0) {
     throw new Error("King doesn't Exist - game is over");
   }
   return kingPieceIndex;

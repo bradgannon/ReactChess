@@ -42,7 +42,7 @@ class Block extends Component {
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() { }
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -290,11 +290,18 @@ class Block extends Component {
 	 */
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
-		if(PieceToBeRemoved.player === "black") {
+		if (PieceToBeRemoved.player === "black") {
 			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
-		} else if (PieceToBeRemoved.player === "white" ){
+		} else if (PieceToBeRemoved.player === "white") {
 			this.props.handleBlackRemovePiece(PieceToBeRemoved);
 		}
+
+		console.log(
+			"Handle Remove Piece was called with: Player: " +
+			PieceToBeRemoved.player +
+			" Piece: " +
+			PieceToBeRemoved.typeOfPiece
+		);
 	}
 	/**
 	 * Moves the Selected Position Piece to the clicked on Piece.
@@ -317,20 +324,65 @@ class Block extends Component {
 			this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player
 		) {
 			// trigger function to delete piece from board.
-			this.handleRemovePiece(board[this.props.selectedPosition]);
+			console.log("enemy piece is removed");
+			this.handleRemovePiece(board[indexOfPieceToBeMoved]);
 		}
-		
+
 		// check if pawn has first move
-		board = pawnManeuvers(board, this.props.selectedPosition, this.props.index);
+		board = pawnManeuvers(board, indexOfPieceToBeMoved, this.props.index);
 		let oldBoard = new Array(64);
 		for(let i = 0; i < board.length; i++) {
 			oldBoard[i] = board[i];
 		}
 		let oldSelectedPosition = board[pieceIndex];
 		let oldLocation = board[this.props.selectedPosition];
-		board[pieceIndex] = board[this.props.selectedPosition];
-		board[this.props.selectedPosition] = undefined;
+		
+		// Check for castle move to implement special logic
+		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
+			console.log("Castle");
+			board[pieceIndex] = board[indexOfPieceToBeMoved];
+			board[indexOfPieceToBeMoved + 1] = board[pieceIndex + 1];
+			board[indexOfPieceToBeMoved] = undefined;
+			board[pieceIndex + 1] = undefined;
+		}
+		// Otherwise run normal move logic
+		else {
+			console.log("Move");
+			board[pieceIndex] = board[this.props.selectedPosition];
+			board[this.props.selectedPosition] = undefined;
+			if(board[pieceIndex].typeOfPiece === "king") {
+				if(isChecked(board, playerTurn)) {
+					alert("Caution: Move will forfeit the game.");
+					console.log(board);
+					console.log(oldBoard);
+		
+					board[this.props.selectedPosition] = oldLocation;
+					board[pieceIndex] = oldSelectedPosition;
+					this.props.updateBoard(board);
+					this.props.setSelectedPosition(-1);
+					this.props.setPotentialMoves([]);
+					this.props.revertToSelectPiece();
+					// if(isCheckmate(board, playerTurn)) {
+					// 	this.props.setGameOver()
+					// 	if(playerTurn === "white") {
+					// 		let result = window.confirm("Checkmate! Game Over! Black Won!");
+					// 		if(result) {
+					// 			window.location.reload();
+					// 		}
+					// 	} else {
+					// 		let result = window.confirm("Checkmate! Game Over! White Won!");
+					// 		if(result) {
+					// 			window.location.reload();
+					// 		}
+					// 	}
+					// 	return;
+					// }
+					// return;
+				}
+			}
+		}
 
+		
 		if (isStalemate(board, playerTurn)) {
 			this.props.setGameOver()
 			alert("Stalemate achieved; Game Over");
@@ -346,29 +398,29 @@ class Block extends Component {
 				if(result) {
 					window.location.reload();
 				}
-			}
-		
-		}
-		else if(isChecked(board, playerTurn)) {
-			alert("Caution: Move will forfeit the game.");
-			console.log(board);
-			console.log(oldBoard);
-
-			board[this.props.selectedPosition] = oldLocation;
-			board[pieceIndex] = oldSelectedPosition;
-			this.props.updateBoard(board);
-			this.props.setSelectedPosition(-1);
-			this.props.setPotentialMoves([]);
-			this.props.revertToSelectPiece();
+			}	
 		}
 		 else {
 			this.props.updateBoard(board);
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
 			this.props.nextMoveState();
-		}
-		
+			if(playerTurn === "white") {
+				if(isChecked(board, "black")) {
+					alert("Check!,");
+					console.log(board);
+					console.log(oldBoard);
+			}
+			} else {
+				if(isChecked(board, "white")) {
+					alert("Check!,");
+					console.log(board);
+					console.log(oldBoard);
+			}
+			}
+			
 	}
+}
 
 	selectBlock() {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
