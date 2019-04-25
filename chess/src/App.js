@@ -34,24 +34,33 @@ class App extends Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange1 = this.handleChange1.bind(this);
+    this.handleChange2 = this.handleChange2.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
     this.handleModeSubmit = this.handleModeSubmit.bind(this);
     this.state = {
       canStart: false,
-      name: "",
+      name1: "",
+      name2: "",
       mode: "default"
     };
   }
 
   handleModeSubmit(event) {
     console.log("Selected mode: " + this.state.mode);
-    const fullName = this.state.name;
-    this.setState({ name: fullName });
-    console.log("Name: " + this.state.name);
+    const player1 = this.state.name1;
+    const player2 = this.state.name2;
+    this.setState({ name1: player1 }); // Fully update name state
+    this.setState({ name2: player2 }); // Fully update name state
+    console.log("Player 1: " + this.state.name1);
+    console.log("Player 2: " + this.state.name2);
     event.preventDefault();
 
-    if (this.state.name !== "" && this.state.mode !== "default") {
+    if (
+      this.state.name1 !== "" &&
+      this.state.name2 !== "" &&
+      this.state.mode !== "default"
+    ) {
       if (this.state.mode === "pawnWars") {
         this.props.initializePawnWars();
         this.props.setGameMode("pawnWars");
@@ -60,6 +69,7 @@ class App extends Component {
         this.props.setGameMode("chess");
       }
       this.setState({ canStart: true });
+      
     }
   }
 
@@ -67,9 +77,12 @@ class App extends Component {
     this.setState({ mode: event.target.value });
   }
 
-  handleChange(event) {
-    this.setState({ name: event.target.value });
-    console.log("Player Name: " + this.state.name);
+  handleChange1(event) {
+    this.setState({ name1: event.target.value });
+  }
+
+  handleChange2(event) {
+    this.setState({ name2: event.target.value });
   }
 
   handleClick() {
@@ -153,13 +166,24 @@ class App extends Component {
             </div>
           </section>
 
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <label>
               <input
                 type="text"
-                placeholder="Enter Name"
+                placeholder="Enter Player 1 Name"
                 value={this.state.value}
-                onChange={this.handleChange}
+                onChange={this.handleChange1}
+              />
+            </label>
+          </form>
+
+          <form>
+            <label>
+              <input
+                type="text"
+                placeholder="Enter Player 2 Name"
+                value={this.state.value}
+                onChange={this.handleChange2}
               />
             </label>
           </form>
