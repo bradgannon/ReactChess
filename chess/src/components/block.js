@@ -318,6 +318,9 @@ class Block extends Component {
 		// check if pawn has first move
 		board = pawnManeuvers(board, indexOfPieceToBeMoved, this.props.index);
 
+		if(this.props.gameMode === "pawnWars") {
+			console.log("pawn wars logic here");
+		}
 		// Check for castle move to implement special logic
 		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
 			console.log("Castle");
@@ -427,14 +430,16 @@ function mapStateToProps(state) {
 		selectedPosition,
 		potentialMoves,
 		playerTurn,
-		moveState
+		moveState,
+		gameMode
 	} = state;
 	return {
 		board: board,
 		selectedPosition: selectedPosition,
 		potentialMoves: potentialMoves,
 		playerTurn: playerTurn,
-		moveState: moveState
+		moveState: moveState,
+		gameMode: gameMode
 	};
 }
 

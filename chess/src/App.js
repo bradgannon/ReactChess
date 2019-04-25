@@ -1,5 +1,6 @@
 // React Imports
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // Font-Awesome Library logos - usage here: https://fontawesome.com/how-to-use/on-the-web/using-with/react
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -17,6 +18,7 @@ import {
 import "./App.css";
 import GameLogic from "./components/game-logic";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { initializePawnWars, initializeChess, setGameMode } from "./redux/action";
 
 library.add(
   faChessRook,
@@ -32,20 +34,71 @@ class App extends Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.state = { clicked: false, loggedIn: false };
+    this.handleChange1 = this.handleChange1.bind(this);
+    this.handleChange2 = this.handleChange2.bind(this);
+    this.handleModeChange = this.handleModeChange.bind(this);
+    this.handleModeSubmit = this.handleModeSubmit.bind(this);
+    this.state = {
+      canStart: false,
+      name1: "",
+      name2: "",
+      mode: "default"
+    };
+  }
+
+  handleModeSubmit(event) {
+    console.log("Selected mode: " + this.state.mode);
+    const player1 = this.state.name1;
+    const player2 = this.state.name2;
+    this.setState({ name1: player1 }); // Fully update name state
+    this.setState({ name2: player2 }); // Fully update name state
+    console.log("Player 1: " + this.state.name1);
+    console.log("Player 2: " + this.state.name2);
+    event.preventDefault();
+
+    if (
+      this.state.name1 !== "" &&
+      this.state.name2 !== "" &&
+      this.state.mode !== "default"
+    ) {
+      if (this.state.mode === "pawnWars") {
+        this.props.initializePawnWars();
+        this.props.setGameMode("pawnWars");
+      } else {
+        this.props.initializeChess();
+        this.props.setGameMode("chess");
+      }
+      this.setState({ canStart: true });
+      
+    }
+  }
+
+  handleModeChange(event) {
+    this.setState({ mode: event.target.value });
+  }
+
+  handleChange1(event) {
+    this.setState({ name1: event.target.value });
+  }
+
+  handleChange2(event) {
+    this.setState({ name2: event.target.value });
   }
 
   handleClick() {
     this.setState({ clicked: true });
   }
 
-  handleLogIn() {
-    this.setState({ loggedIn: true, clicked: false });
-  }
-
   render() {
-    if (this.state.clicked && this.state.loggedIn) {
+    if (this.state.canStart && this.state.mode === "classic") {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <GameLogic />
+          </header>
+        </div>
+      );
+    } else if (this.state.canStart && this.state.mode === "pawnWars") {
       return (
         <div className="App">
           <header className="App-header">
@@ -112,29 +165,62 @@ class App extends Component {
               />
             </div>
           </section>
-          <section className="center">
-            <div className="center">
-              <input placeholder="Username" />
-            </div>
-            <div>
-              <input type="password" placeholder="Password" />
-            </div>
-          </section>
-          <div>
-            <button className="loginButton" onClick={this.handleLogIn}>
-              Log In
-            </button>
-          </div>
 
-          <p>
-            <button className="buttonCSS" onClick={this.handleClick}>
-              Start Game
-            </button>
-          </p>
+          <form>
+            <label>
+              <input
+                type="text"
+                placeholder="Enter Player 1 Name"
+                value={this.state.value}
+                onChange={this.handleChange1}
+              />
+            </label>
+          </form>
+
+          <form>
+            <label>
+              <input
+                type="text"
+                placeholder="Enter Player 2 Name"
+                value={this.state.value}
+                onChange={this.handleChange2}
+              />
+            </label>
+          </form>
+
+          <form onSubmit={this.handleModeSubmit}>
+            <select value={this.state.mode} onChange={this.handleModeChange}>
+              <option value="default">Choose Game Mode</option>
+              <option value="classic">Classic Mode</option>
+              <option value="pawnWars">Pawn Wars</option>
+            </select>
+            <p>
+              <input type="submit" value="Start Game" className="buttonCSS" />
+            </p>
+          </form>
         </div>
       );
     }
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return {
+    initializePawnWars: () => dispatch(initializePawnWars()),
+    initializeChess: () => dispatch(initializeChess()),
+    setGameMode: (gamemode) => dispatch(setGameMode(gamemode))
+  };
+}
+
+function mapStateToProps(state) {
+  const { board, gameMode }  = state;
+  return {
+    board: board,
+    gameMode: gameMode
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
