@@ -258,8 +258,7 @@ function doMove(board, pieceIndex, selectedPosition) {
   for (let i = 0; i < board.length; i++) {
     oldBoard[i] = board[i];
   }
-  let oldSelectedPosition = board[pieceIndex];
-  let oldLocation = board[selectedPosition];
+
   board[pieceIndex] = board[selectedPosition];
   board[selectedPosition] = undefined;
 
@@ -368,4 +367,18 @@ export function getKingPieceIndex(board, playerTurn) {
     throw new Error("King doesn't Exist - game is over");
   }
   return kingPieceIndex;
+}
+
+export function pawnWarsIsFinished(board, player) {
+  let allPieces = getAllPlayersPieces(board, player);
+  if(allPieces.length === 0) {
+    return true;
+  }
+  let allMoves = getAllMoves(board, player);
+  if(allMoves.length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+
 }

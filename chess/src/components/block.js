@@ -9,7 +9,7 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { pawnManeuvers }  from '../utility/chess-maneuvers';
+import { pawnManeuvers } from '../utility/chess-maneuvers';
 
 
 
@@ -27,7 +27,7 @@ import {
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { isChecked, isStalemate, isCheckmate } from "../utility/end-game";
+import { isChecked, isStalemate, isCheckmate, pawnWarsIsFinished } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -307,6 +307,7 @@ class Block extends Component {
 	 * Moves the Selected Position Piece to the clicked on Piece.
 	 */
 	movePiece() {
+		console.log(this.props);
 		let pieceIndex = this.props.index;
 		let indexOfPieceToBeMoved = this.props.selectedPosition;
 		let board = this.props.board;
@@ -314,11 +315,11 @@ class Block extends Component {
 		let playerTurn = this.props.playerTurn;
 		// let player = this.props.piece.player;
 		// let allOpposingMoves = getAllOpposingMoves(board, playerTurn);
-		
+
 		// if(isChecked(board, "black")) {
 		// 	alert("Check has occured with black called");
 		// }
-		
+
 		if (
 			this.props.piece instanceof ChessPiece &&
 			this.props.piece.player !== this.props.board[indexOfPieceToBeMoved].player
@@ -331,12 +332,61 @@ class Block extends Component {
 		// check if pawn has first move
 		board = pawnManeuvers(board, indexOfPieceToBeMoved, this.props.index);
 		let oldBoard = new Array(64);
-		for(let i = 0; i < board.length; i++) {
+		for (let i = 0; i < board.length; i++) {
 			oldBoard[i] = board[i];
 		}
 		let oldSelectedPosition = board[pieceIndex];
 		let oldLocation = board[this.props.selectedPosition];
-		
+
+
+		// handle pawn wars logic here
+		if (this.props.gameMode === "pawnWars") {
+			if (pawnWarsIsFinished(board, playerTurn)) {
+				if (playerTurn === "white") {
+					let playAgain = window.confirm("Game Is Over: Black Won\n Play Again?");
+					if(playAgain) {
+						window.location.reload();
+					}
+					this.props.setGameOver();
+					return;
+				} else {
+					alert("Game Is Over: White Won");
+					let playAgain = window.confirm("Game Is Over: White Won\n Play Again?");
+					if(playAgain) {
+						window.location.reload();
+					}
+					this.props.setGameOver();
+					return;
+				}
+			}
+			board[pieceIndex] = board[this.props.selectedPosition];
+			board[this.props.selectedPosition] = undefined;
+			this.props.updateBoard(board);
+			this.props.setSelectedPosition(-1);
+			this.props.setPotentialMoves([]);
+			this.props.nextMoveState();
+			if (playerTurn === "white") {
+				if (pawnWarsIsFinished(board, "black")) {
+					let playAgain = window.confirm("Game Is Over: White Won\n Play Again?");
+					if(playAgain) {
+						window.location.reload();
+					}
+					this.props.setGameOver();
+					return;
+				} else if (pawnWarsIsFinished(board, "white")) {
+					let playAgain = window.confirm("Game Is Over: Black Won\n Play Again?");
+					if(playAgain) {
+						window.location.reload();
+					}
+					this.props.setGameOver();
+					return;
+				}
+			}
+
+			return;
+
+
+		}
 		// Check for castle move to implement special logic
 		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
 			console.log("Castle");
@@ -350,12 +400,12 @@ class Block extends Component {
 			console.log("Move");
 			board[pieceIndex] = board[this.props.selectedPosition];
 			board[this.props.selectedPosition] = undefined;
-			if(board[pieceIndex].typeOfPiece === "king") {
-				if(isChecked(board, playerTurn)) {
+			if (board[pieceIndex].typeOfPiece === "king") {
+				if (isChecked(board, playerTurn)) {
 					alert("Caution: Move will forfeit the game.");
 					console.log(board);
 					console.log(oldBoard);
-		
+
 					board[this.props.selectedPosition] = oldLocation;
 					board[pieceIndex] = oldSelectedPosition;
 					this.props.updateBoard(board);
@@ -382,51 +432,51 @@ class Block extends Component {
 			}
 		}
 
-		
+
 		if (isStalemate(board, playerTurn)) {
 			this.props.setGameOver()
 			alert("Stalemate achieved; Game Over");
 		} else if (isCheckmate(board, playerTurn)) {
 			this.props.setGameOver()
-			if(playerTurn === "white") {
+			if (playerTurn === "white") {
 				let result = window.confirm("Checkmate! Game Over! Black Won!");
-				if(result) {
+				if (result) {
 					window.location.reload();
 				}
 			} else {
 				let result = window.confirm("Checkmate! Game Over! White Won!");
-				if(result) {
+				if (result) {
 					window.location.reload();
 				}
-			}	
+			}
 		}
-		 else {
+		else {
 			this.props.updateBoard(board);
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
 			this.props.nextMoveState();
-			if(playerTurn === "white") {
-				if(isChecked(board, "black")) {
+			if (playerTurn === "white") {
+				if (isChecked(board, "black")) {
 					alert("Check!,");
 					console.log(board);
 					console.log(oldBoard);
-			}
+				}
 			} else {
-				if(isChecked(board, "white")) {
+				if (isChecked(board, "white")) {
 					alert("Check!,");
 					console.log(board);
 					console.log(oldBoard);
+				}
 			}
-			}
-			
+
+		}
 	}
-}
 
 	selectBlock() {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
 		this.removePreviousAvailableMoves();
 
-		if(this.props.moveState === "GAME_OVER") {
+		if (this.props.moveState === "GAME_OVER") {
 			return;
 		}
 		if (this.props.moveState === SELECT_PIECE) {
@@ -510,14 +560,16 @@ function mapStateToProps(state) {
 		selectedPosition,
 		potentialMoves,
 		playerTurn,
-		moveState
+		moveState,
+		gameMode
 	} = state;
 	return {
 		board: board,
 		selectedPosition: selectedPosition,
 		potentialMoves: potentialMoves,
 		playerTurn: playerTurn,
-		moveState: moveState
+		moveState: moveState,
+		gameMode: gameMode
 	};
 }
 
