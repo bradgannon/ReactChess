@@ -34,19 +34,28 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
+    this.handleModeSubmit = this.handleModeSubmit.bind(this);
     this.state = {
-      clicked: false,
-      loggedIn: false,
+      canStart: false,
       name: "",
-      submitted: false,
-      mode: "classic"
+      mode: "default"
     };
+  }
+
+  handleModeSubmit(event) {
+    console.log("Selected mode: " + this.state.mode);
+    const fullName = this.state.name;
+    this.setState({ name: fullName });
+    console.log("Name: " + this.state.name);
+    event.preventDefault();
+
+    if (this.state.name !== "" && this.state.mode !== "default") {
+      this.setState({ canStart: true });
+    }
   }
 
   handleModeChange(event) {
     this.setState({ mode: event.target.value });
-    console.log("Game Mode: " + this.state.mode);
-    event.preventDefault();
   }
 
   handleChange(event) {
@@ -59,7 +68,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.submitted && this.state.clicked && this.state.classic) {
+    if (this.state.canStart && this.state.mode === "classic") {
       return (
         <div className="App">
           <header className="App-header">
@@ -67,11 +76,7 @@ class App extends Component {
           </header>
         </div>
       );
-    } else if (
-      this.state.submitted &&
-      this.state.clicked &&
-      !this.state.classic
-    ) {
+    } else if (this.state.canStart && this.state.mode === "pawnWars") {
       return (
         <div className="App">
           <header className="App-header">
@@ -150,20 +155,16 @@ class App extends Component {
             </label>
           </form>
 
-          <div>
-            <form onSubmit={this.handleModeSubmit}>
-              <select value={this.state.mode} onChange={this.handleModeChange}>
-                <option value="classic">Pawn Wars</option>
-                <option value="pawnWars">Classic</option>
-              </select>
-            </form>
-          </div>
-
-          <p>
-            <button className="buttonCSS" onClick={this.handleClick}>
-              Start Game
-            </button>
-          </p>
+          <form onSubmit={this.handleModeSubmit}>
+            <select value={this.state.mode} onChange={this.handleModeChange}>
+              <option value="default">Choose Game Mode</option>
+              <option value="classic">Classic Mode</option>
+              <option value="pawnWars">Pawn Wars</option>
+            </select>
+            <p>
+              <input type="submit" value="Start Game" className="buttonCSS" />
+            </p>
+          </form>
         </div>
       );
     }

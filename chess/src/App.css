@@ -39,6 +39,7 @@
   outline-color: white;
   border-radius: 8px;
   margin: 20px;
+  margin-top: 120px;
 }
 
 .buttonCSS:hover {
@@ -51,30 +52,7 @@
   outline-color: white;
   border-radius: 8px;
   margin: 20px;
-}
-
-.loginButton {
-  align-items: center;
-  font-size: 25px;
-  color: black;
-  background-color: lightskyblue;
-  height: 40px;
-  width: 100px;
-  outline-color: white;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.loginButton:hover {
-  align-items: center;
-  font-size: 25px;
-  color: black;
-  background-color: #4f5d8c;
-  height: 40px;
-  width: 100px;
-  outline-color: white;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  margin-top: 120px;
 }
 
 .headerCSS {
@@ -84,21 +62,6 @@
   font-style: italic;
   color: white;
   font-weight: 200;
-}
-
-.modeText {
-  align-items: center;
-  font-size: 40px;
-  font-family: "Times New Roman", "Times New Roman", Times, serif;
-  font-style: normal;
-  color: white;
-  font-weight: 100;
-}
-
-.icons {
-  margin-top: 20px;
-  float: left;
-  margin: 5px;
 }
 
 .center {
@@ -129,6 +92,10 @@
 
 .App-link {
   color: #61dafb;
+}
+
+form {
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
