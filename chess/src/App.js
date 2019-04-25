@@ -32,20 +32,46 @@ class App extends Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.state = { clicked: false, loggedIn: false };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleModeChange = this.handleModeChange.bind(this);
+    this.state = {
+      clicked: false,
+      loggedIn: false,
+      name: "",
+      submitted: false,
+      mode: "classic"
+    };
+  }
+
+  handleModeChange(event) {
+    this.setState({ mode: event.target.value });
+    console.log("Game Mode: " + this.state.mode);
+    event.preventDefault();
+  }
+
+  handleChange(event) {
+    this.setState({ name: event.target.value });
+    console.log("Player Name: " + this.state.name);
   }
 
   handleClick() {
     this.setState({ clicked: true });
   }
 
-  handleLogIn() {
-    this.setState({ loggedIn: true, clicked: false });
-  }
-
   render() {
-    if (this.state.clicked && this.state.loggedIn) {
+    if (this.state.submitted && this.state.clicked && this.state.classic) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <GameLogic />
+          </header>
+        </div>
+      );
+    } else if (
+      this.state.submitted &&
+      this.state.clicked &&
+      !this.state.classic
+    ) {
       return (
         <div className="App">
           <header className="App-header">
@@ -112,18 +138,25 @@ class App extends Component {
               />
             </div>
           </section>
-          <section className="center">
-            <div className="center">
-              <input placeholder="Username" />
-            </div>
-            <div>
-              <input type="password" placeholder="Password" />
-            </div>
-          </section>
+
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <input
+                type="text"
+                placeholder="Enter Name"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+            </label>
+          </form>
+
           <div>
-            <button className="loginButton" onClick={this.handleLogIn}>
-              Log In
-            </button>
+            <form onSubmit={this.handleModeSubmit}>
+              <select value={this.state.mode} onChange={this.handleModeChange}>
+                <option value="classic">Pawn Wars</option>
+                <option value="pawnWars">Classic</option>
+              </select>
+            </form>
           </div>
 
           <p>
