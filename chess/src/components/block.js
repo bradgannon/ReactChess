@@ -287,9 +287,9 @@ class Block extends Component {
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
 		if (PieceToBeRemoved.player === "black") {
-			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
-		} else if (PieceToBeRemoved.player === "white") {
 			this.props.handleBlackRemovePiece(PieceToBeRemoved);
+		} else if (PieceToBeRemoved.player === "white") {
+			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
 		}
 		console.log(
 			"Handle Remove Piece was called with: Player: " +
@@ -312,7 +312,7 @@ class Block extends Component {
 		) {
 			// trigger function to delete piece from board.
 			console.log("enemy piece is removed");
-			this.handleRemovePiece(board[indexOfPieceToBeMoved]);
+			this.handleRemovePiece(board[pieceIndex]);
 		}
 
 		// check if pawn has first move
