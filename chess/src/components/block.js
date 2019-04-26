@@ -344,7 +344,7 @@ class Block extends Component {
 			if (pawnWarsIsFinished(board, playerTurn)) {
 				if (playerTurn === "white") {
 					let playAgain = window.confirm("Game Is Over: Black Won\n Play Again?");
-					if(playAgain) {
+					if (playAgain) {
 						window.location.reload();
 					}
 					this.props.setGameOver();
@@ -352,7 +352,7 @@ class Block extends Component {
 				} else {
 					alert("Game Is Over: White Won");
 					let playAgain = window.confirm("Game Is Over: White Won\n Play Again?");
-					if(playAgain) {
+					if (playAgain) {
 						window.location.reload();
 					}
 					this.props.setGameOver();
@@ -368,14 +368,14 @@ class Block extends Component {
 			if (playerTurn === "white") {
 				if (pawnWarsIsFinished(board, "black")) {
 					let playAgain = window.confirm("Game Is Over: White Won\n Play Again?");
-					if(playAgain) {
+					if (playAgain) {
 						window.location.reload();
 					}
 					this.props.setGameOver();
 					return;
 				} else if (pawnWarsIsFinished(board, "white")) {
 					let playAgain = window.confirm("Game Is Over: Black Won\n Play Again?");
-					if(playAgain) {
+					if (playAgain) {
 						window.location.reload();
 					}
 					this.props.setGameOver();
@@ -457,13 +457,13 @@ class Block extends Component {
 			this.props.nextMoveState();
 			if (playerTurn === "white") {
 				if (isChecked(board, "black")) {
-					alert("Check!,");
+					alert("Check!");
 					console.log(board);
 					console.log(oldBoard);
 				}
 			} else {
 				if (isChecked(board, "white")) {
-					alert("Check!,");
+					alert("Check!");
 					console.log(board);
 					console.log(oldBoard);
 				}
