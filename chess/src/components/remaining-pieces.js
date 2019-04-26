@@ -267,9 +267,6 @@ class RemainingPieces extends Component {
 		else {
 			return (<div key={key}>{piece.typeOfPiece}</div>)
 		}
-	}
-}
-
 
 function mapStateToProps(state) {
 	const {
