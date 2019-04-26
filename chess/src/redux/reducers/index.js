@@ -1,8 +1,8 @@
 import { 
   UPDATE_BOARD, SET_SELECTED_POSITION, SET_POTENTIAL_MOVES,
-  NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE, HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE
+  NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE, HANDLE_WHITE_REMOVE_PIECE, HANDLE_BLACK_REMOVE_PIECE, INITIALIZE_PAWN_WARS, INITIALIZE_CHESS, SET_GAME_MODE
 } from '../action/actionTypes';
-import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay } from '../../utility/game-initialization';
+import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay, populatePawnWars  } from '../../utility/game-initialization';
 import { SELECT_PIECE, SELECT_AVAILABLE_MOVE, WHITE, BLACK } from '../string-constants';
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
   playerTurn: WHITE,
   moveState: SELECT_PIECE,
   whitePiecesInPlay: initialWhitePiecesInPlay(),
-  blackPiecesInPlay: initialBlackPiecesInPlay()
+  blackPiecesInPlay: initialBlackPiecesInPlay(),
+  gameMode: "chess"
 }
 
 function rootReducer(state = initialState, action) { 
@@ -88,6 +89,18 @@ function rootReducer(state = initialState, action) {
     }
     return Object.assign({}, state, {
       blackPiecesInPlay: itemsInPlay
+    });
+  } else if ( action.type === INITIALIZE_PAWN_WARS) {
+    return Object.assign({}, state, {
+      board: populatePawnWars()
+    });
+  } else if (action.type === INITIALIZE_CHESS) {
+    return Object.assign({}, state, {
+      board: populateGameBoard()
+    });
+  } else if (action.type === SET_GAME_MODE) {
+    return Object.assign({}, state, {
+      gameMode: action.payload
     });
   }
   return state;
