@@ -18,7 +18,11 @@ import {
 import "./App.css";
 import GameLogic from "./components/game-logic";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { initializePawnWars, initializeChess, setGameMode } from "./redux/action";
+import {
+  initializePawnWars,
+  initializeChess,
+  setGameMode
+} from "./redux/action";
 
 library.add(
   faChessRook,
@@ -69,7 +73,6 @@ class App extends Component {
         this.props.setGameMode("chess");
       }
       this.setState({ canStart: true });
-      
     }
   }
 
@@ -94,7 +97,10 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-            <GameLogic />
+            <GameLogic
+              player1Name={this.state.name1}
+              player2Name={this.state.name2}
+            />
           </header>
         </div>
       );
@@ -102,7 +108,10 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-            <GameLogic />
+            <GameLogic
+              player1Name={this.state.name1}
+              player2Name={this.state.name2}
+            />
           </header>
         </div>
       );
@@ -208,12 +217,12 @@ function mapDispatchToProps(dispatch) {
   return {
     initializePawnWars: () => dispatch(initializePawnWars()),
     initializeChess: () => dispatch(initializeChess()),
-    setGameMode: (gamemode) => dispatch(setGameMode(gamemode))
+    setGameMode: gamemode => dispatch(setGameMode(gamemode))
   };
 }
 
 function mapStateToProps(state) {
-  const { board, gameMode }  = state;
+  const { board, gameMode } = state;
   return {
     board: board,
     gameMode: gameMode
