@@ -1,24 +1,60 @@
 .block {
-    background: transparent;
-    border: 1px solid transparent;
-    float: left;
-    font-size: 36px;
-    height: 100px;
-    width: 100px;
+	background: transparent;
+	border: 1px solid transparent;
+	float: left;
+	font-size: 36px;
+	height: 100px;
+	width: 100px;
 }
 
 .block:focus {
-    outline: none;
+	outline: none;
 }
 
 .block-dark {
-    background-color: rgb(91, 78, 19);
-    height: 100px;
-    width: 100px;
+	background-color: rgb(91, 78, 19);
+	height: 100px;
+	width: 100px;
 }
 
 .block-light {
-    background-color: rgb(237, 218, 137);
-    height: 100px;
-    width: 100px;
+	background-color: rgb(237, 218, 137);
+	height: 100px;
+	width: 100px;
+}
+
+.block-potential-move-light {
+	background-color: rgb(135, 206, 235); /* skyblue */
+	height: 100px;
+	width: 100px;
+}
+
+.block-potential-move-dark {
+	background-color: rgb(0, 191, 255); /* deepskyblue */
+	height: 100px;
+	width: 100px;
+}
+
+.block-highlight-light {
+	background-color: rgb(123, 104, 238); /* mediumslateblue */
+	height: 100px;
+	width: 100px;
+}
+
+.block-highlight-dark {
+	background-color: rgb(106, 90, 205); /* slateblue */
+	height: 100px;
+	width: 100px;
+}
+
+.block-enemy-light {
+	background-color: rgb(255, 69, 0); /* orangered */
+	height: 100px;
+	width: 100px;
+}
+
+.block-enemy-dark {
+	background-color: rgb(255, 0, 0); /* red */
+	height: 100px;
+	width: 100px;
 }

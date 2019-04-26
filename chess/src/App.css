@@ -19,8 +19,83 @@
   color: white;
 }
 
+.Start-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.buttonCSS {
+  align-items: center;
+  font-size: 35px;
+  color: black;
+  background-color: lightskyblue;
+  height: 100px;
+  width: 500px;
+  outline-color: white;
+  border-radius: 8px;
+  margin: 20px;
+  margin-top: 120px;
+}
+
+.buttonCSS:hover {
+  align-items: center;
+  font-size: 35px;
+  color: black;
+  background-color: forestgreen !important;
+  height: 100px;
+  width: 500px;
+  outline-color: white;
+  border-radius: 8px;
+  margin: 20px;
+  margin-top: 120px;
+}
+
+.headerCSS {
+  align-items: center;
+  font-size: 100px;
+  font-family: "Times New Roman", "Times New Roman", Times, serif;
+  font-style: italic;
+  color: white;
+  font-weight: 200;
+}
+
+.center {
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.whitePiece {
+  float: left;
+  size: "6x";
+  margin-left: 25px;
+  margin-right: 25px;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.blackPiece {
+  float: left;
+  size: "6x";
+  margin-left: 25px;
+  margin-right: 25px;
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+form {
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
