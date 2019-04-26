@@ -154,8 +154,41 @@ class RemainingPieces extends Component {
 		} else if (piece.typeOfPiece === "Rook") {
 			return (this.renderRook(piece, key));
 		}
+		//Render Bishop
 
-		// Render Bishop
+		renderBishop(piece, key) {
+		console.log("Shub implement this");
+		if (piece.player === "black") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Bishop"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "white", strokeWidth: 15 }}
+				/>
+			);
+		} else if (piece.player === "white") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Bishop"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "black", strokeWidth: 15 }}
+				/>
+			)
+		}
+	}
+	renderPiece(piece, key) {
+		// console.log(piece);
+		if (piece.typeOfPiece === "pawn") {
+			return (this.renderPawn(piece, key));
+		} else if (piece.typeOfPiece === "Bishop") {
+			return (this.renderBishop(piece, key));
+		} 
 
 		// Render Queen
 
