@@ -25,11 +25,11 @@ class GameLogic extends Component {
 
 	render() {
 		let playerTurn = "";
-		if (this.props.playerTurn === "white") {
-			playerTurn = "White's Turn";
-		} else {
-			playerTurn = "Black's Turn";
-		}
+    if (this.props.playerTurn === "white") {
+      playerTurn = this.props.player1Name + "'s Turn";
+    } else {
+      playerTurn = this.props.player2Name + "'s Turn";
+    }
 		return (
 			<div>
 			<Grid container direction="row" justify="center" alignItems="center" >
