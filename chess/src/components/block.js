@@ -291,9 +291,9 @@ class Block extends Component {
 	handleRemovePiece(PieceToBeRemoved) {
 		// TODO: To be implemented
 		if (PieceToBeRemoved.player === "black") {
-			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
-		} else if (PieceToBeRemoved.player === "white") {
 			this.props.handleBlackRemovePiece(PieceToBeRemoved);
+		} else if (PieceToBeRemoved.player === "white") {
+			this.props.handleWhiteRemovePiece(PieceToBeRemoved);
 		}
 
 		console.log(
@@ -326,7 +326,7 @@ class Block extends Component {
 		) {
 			// trigger function to delete piece from board.
 			console.log("enemy piece is removed");
-			this.handleRemovePiece(board[indexOfPieceToBeMoved]);
+			this.handleRemovePiece(board[pieceIndex]);
 		}
 
 		// check if pawn has first move
@@ -400,36 +400,33 @@ class Block extends Component {
 			console.log("Move");
 			board[pieceIndex] = board[this.props.selectedPosition];
 			board[this.props.selectedPosition] = undefined;
-			if (board[pieceIndex].typeOfPiece === "king") {
-				if (isChecked(board, playerTurn)) {
-					alert("Caution: Move will forfeit the game.");
-					console.log(board);
-					console.log(oldBoard);
+			// if (board[pieceIndex].typeOfPiece === "king") {
+			// 	if (isChecked(board, playerTurn)) {
+			// 		alert("Caution: Move will forfeit the game.");
+			// 		console.log(board);
+			// 		console.log(oldBoard);
 
-					board[this.props.selectedPosition] = oldLocation;
-					board[pieceIndex] = oldSelectedPosition;
-					this.props.updateBoard(board);
-					this.props.setSelectedPosition(-1);
-					this.props.setPotentialMoves([]);
-					this.props.revertToSelectPiece();
-					// if(isCheckmate(board, playerTurn)) {
-					// 	this.props.setGameOver()
-					// 	if(playerTurn === "white") {
-					// 		let result = window.confirm("Checkmate! Game Over! Black Won!");
-					// 		if(result) {
-					// 			window.location.reload();
-					// 		}
-					// 	} else {
-					// 		let result = window.confirm("Checkmate! Game Over! White Won!");
-					// 		if(result) {
-					// 			window.location.reload();
-					// 		}
-					// 	}
-					// 	return;
-					// }
-					// return;
-				}
-			}
+			// 		board[this.props.selectedPosition] = oldLocation;
+			// 		board[pieceIndex] = oldSelectedPosition;
+			// 		this.props.updateBoard(board);
+			// 		this.props.setSelectedPosition(-1);
+			// 		this.props.setPotentialMoves([]);
+			// 		this.props.revertToSelectPiece();
+			// 	}
+			// }
+
+		}
+		if (isChecked(board, playerTurn)) {
+			alert("Caution: Move will forfeit the game.");
+			console.log(board);
+			console.log(oldBoard);
+
+			board[this.props.selectedPosition] = oldLocation;
+			board[pieceIndex] = oldSelectedPosition;
+			this.props.updateBoard(board);
+			this.props.setSelectedPosition(-1);
+			this.props.setPotentialMoves([]);
+			this.props.revertToSelectPiece();
 		}
 
 

@@ -38,6 +38,7 @@ export function handleInCheckPlayer(board, player) {
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
       console.log("left triggered");
+      console.log("index triggered on: " + i);
       return true;
     }
     i--;
@@ -58,6 +59,7 @@ export function handleInCheckPlayer(board, player) {
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
       console.log("right triggered");
+      console.log("index triggered on: " + i);
       return true;
     }
     i++;
@@ -77,6 +79,7 @@ export function handleInCheckPlayer(board, player) {
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
       console.log("up triggered");
+      console.log("index triggered on: " + i);
       return true;
     }
     i = i + 8;
@@ -95,6 +98,7 @@ export function handleInCheckPlayer(board, player) {
     }
     if (square && square.player !== player && (square.typeOfPiece === "rook" || square.typeOfPiece === "queen")) {
       console.log("down triggered");
+      console.log("index triggered on: " + i);
       return true;
     }
     i = i - 8;
@@ -108,11 +112,13 @@ export function handleInCheckPlayer(board, player) {
   i = kingPieceIndex;
   while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && ((square.typeOfPiece !== "bishop" || square.player === player) &&
+      (square.typeOfPiece !== "queen" || square.player === player) && i !== kingPieceIndex)) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
       console.log("norhteast");
+      console.log("index triggered on: " + i);
       return true;
     }
     i = i - 7;
@@ -126,11 +132,13 @@ export function handleInCheckPlayer(board, player) {
   i = kingPieceIndex;
   while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
-      break;
-    }
+    if (square && ((square.typeOfPiece !== "bishop" || square.player === player) &&
+    (square.typeOfPiece !== "queen" || square.player === player) && i !== kingPieceIndex)) {
+    break;
+  }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
       console.log("northwest triggered");
+      console.log("index triggered on: " + i);
       return true;
     }
     i = i - 9;
@@ -145,11 +153,13 @@ export function handleInCheckPlayer(board, player) {
   i = kingPieceIndex;
   while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && ((square.typeOfPiece !== "bishop" || square.player === player) &&
+      (square.typeOfPiece !== "queen" || square.player === player) && i !== kingPieceIndex)) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
       console.log("southeast");
+      console.log("index triggered on: " + i);
       return true;
     }
     i = i + 9;
@@ -164,11 +174,13 @@ export function handleInCheckPlayer(board, player) {
   i = kingPieceIndex;
   while (!isFinishedWithDiagonal) {
     let square = board[i];
-    if (square && (square.typeOfPiece !== "bishop" && square.typeOfPiece !== "queen") && i !== kingPieceIndex) {
+    if (square && ((square.typeOfPiece !== "bishop" || square.player === player) &&
+      (square.typeOfPiece !== "queen" || square.player === player) && i !== kingPieceIndex)) {
       break;
     }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
       console.log("southwest triggered");
+      console.log("index triggered on: " + i);
       return true;
     }
     i = i + 7;
@@ -183,18 +195,22 @@ export function handleInCheckPlayer(board, player) {
     i = kingPieceIndex;
     if (board[i - 7] && board[i - 7].player !== "white" && board[i - 7].typeOfPiece === "pawn") {
       console.log("pawn check, i - 7");
+      console.log("index triggered on: " + i - 7);
       return true;
     } else if (board[i - 9] && board[i - 9].player !== "white" && board[i - 9].typeOfPiece === "pawn") {
       console.log("pawn check, i - 9");
+      console.log("index triggered on: " + i - 9);
       return true;
     }
   } else if (player === "black") {
     i = kingPieceIndex;
     if (board[i + 7] && board[i + 7].player !== "black" && board[i + 7].typeOfPiece === "pawn") {
       console.log("pawn check, i + 7");
+      console.log("index triggered on: " + i + 7);
       return true;
     } else if (board[i + 9] && board[i + 9].player !== "black" && board[i + 9].typeOfPiece === "pawn") {
       console.log("pawn check, i + 9");
+      console.log("index triggered on: " + i + 9);
       return true;
     }
   }
@@ -203,27 +219,35 @@ export function handleInCheckPlayer(board, player) {
   i = kingPieceIndex;
   if (board[i + 6] && board[i + 6].player !== player && board[i + 6].typeOfPiece === "knight") {
     console.log("i + 6 triggered");
+    console.log("index triggered on: " + i + 6);
     return true;
   } else if (board[i + 10] && board[i + 10].player !== player && board[i + 10].typeOfPiece === "knight") {
     console.log("i + 10 triggered");
+    console.log("index triggered on: " + i + 10);
     return true;
   } else if (board[i + 15] && board[i + 15].player !== player && board[i + 15].typeOfPiece === "knight") {
     console.log("i + 15 triggered");
+    console.log("index triggered on: " + i + 15);
     return true;
   } else if (board[i + 17] && board[i + 17].player !== player && board[i + 17].typeOfPiece === "knight") {
     console.log("i + 17 triggered");
+    console.log("index triggered on: " + i + 17);
     return true;
   } else if (board[i - 6] && board[i - 6].player !== player && board[i - 6].typeOfPiece === "knight") {
     console.log("i - 6 triggered");
+    console.log("index triggered on: " + i - 6);
     return true;
   } else if (board[i - 10] && board[i - 10].player !== player && board[i - 10].typeOfPiece === "knight") {
     console.log("i - 10 triggered");
+    console.log("index triggered on: " + i - 10);
     return true;
   } else if (board[i - 15] && board[i - 15].player !== player && board[i - 15].typeOfPiece === "knight") {
     console.log("i - 15 triggered");
+    console.log("index triggered on: " + i - 15);
     return true;
   } else if (board[i - 17] && board[i - 17].player !== player && board[i - 17].typeOfPiece === "knight") {
     console.log("i - 17 triggered");
+    console.log("index triggered on: " + i - 17);
     return true;
   }
 
@@ -371,11 +395,11 @@ export function getKingPieceIndex(board, playerTurn) {
 
 export function pawnWarsIsFinished(board, player) {
   let allPieces = getAllPlayersPieces(board, player);
-  if(allPieces.length === 0) {
+  if (allPieces.length === 0) {
     return true;
   }
   let allMoves = getAllMoves(board, player);
-  if(allMoves.length === 0) {
+  if (allMoves.length === 0) {
     return true;
   } else {
     return false;
