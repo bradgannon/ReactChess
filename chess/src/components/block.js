@@ -1,17 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, {
+	Component
+} from "react";
+import {
+	connect
+} from "react-redux";
 import "./block.css";
 import PawnPiece from "../models/pieces/pawn-piece";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	FontAwesomeIcon
+} from "@fortawesome/react-fontawesome";
 import RookPiece from "../models/pieces/rook-piece";
 import BishopPiece from "../models/pieces/bishop-piece";
 import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import { pawnManeuvers } from '../utility/chess-maneuvers';
-
-
+import {
+	pawnManeuvers
+} from '../utility/chess-maneuvers';
 
 import {
 	updateBoard,
@@ -25,9 +31,18 @@ import {
 } from "../redux/action/index";
 
 import PotentialMove from "../models/potential-move";
-import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
+import {
+	SELECT_AVAILABLE_MOVE,
+	SELECT_PIECE
+} from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { isChecked, isStalemate, isCheckmate, pawnWarsIsFinished, getAllPossibleUncheckMoves } from "../utility/end-game";
+import {
+	isChecked,
+	isStalemate,
+	isCheckmate,
+	pawnWarsIsFinished,
+	getAllPossibleUncheckMoves
+} from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -42,7 +57,7 @@ class Block extends Component {
 		};
 	}
 
-	componentDidMount() { }
+	componentDidMount() {}
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -50,22 +65,38 @@ class Block extends Component {
 	renderPawn() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "white", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "white",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "black", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "black",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		}
@@ -77,22 +108,38 @@ class Block extends Component {
 	renderRook() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "white", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "white",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "black", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "black",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		}
@@ -104,22 +151,38 @@ class Block extends Component {
 	renderBishop() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "white", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "white",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "black", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "black",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		}
@@ -131,22 +194,38 @@ class Block extends Component {
 	renderKnight() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "white", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "white",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "black", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "black",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		}
@@ -158,22 +237,38 @@ class Block extends Component {
 	renderQueen() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "white", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "white",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "black", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "black",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		}
@@ -185,22 +280,38 @@ class Block extends Component {
 	renderKing() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "white", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "white",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return (
-				<FontAwesomeIcon
-					icon={this.props.piece.icon}
-					color={this.props.piece.player}
-					size="6x"
-					style={{ stroke: "black", strokeWidth: 15 }}
+			return ( <
+				FontAwesomeIcon icon = {
+					this.props.piece.icon
+				}
+				color = {
+					this.props.piece.player
+				}
+				size = "6x"
+				style = {
+					{
+						stroke: "black",
+						strokeWidth: 15
+					}
+				}
 				/>
 			);
 		}
@@ -210,8 +321,10 @@ class Block extends Component {
 	 * Renders a potential move
 	 */
 	renderPotentialMove() {
-		return (
-			<FontAwesomeIcon icon="circle" color="rgba(28, 28, 28, 0.7)" size="3x" />
+		return ( <
+			FontAwesomeIcon icon = "circle"
+			color = "rgba(28, 28, 28, 0.7)"
+			size = "3x" / >
 		);
 	}
 
@@ -239,17 +352,21 @@ class Block extends Component {
 
 	render() {
 		let css = this.returnCSS();
-		return (
-			<div className="block">
-				{/* {this.state.name} */}
-				<button
-					onClick={this.selectBlock}
-					// className={this.isDark ? "block-dark" : "block-light"}
-					className={css}
-				>
-					{this.renderPieces()}
-				</button>
-			</div>
+		return ( <
+			div className = "block" > {
+				/* {this.state.name} */
+			} <
+			button onClick = {
+				this.selectBlock
+			}
+			// className={this.isDark ? "block-dark" : "block-light"}
+			className = {
+				css
+			} > {
+				this.renderPieces()
+			} <
+			/button> < /
+			div >
 		);
 	}
 
@@ -385,7 +502,7 @@ class Block extends Component {
 		}
 
 		// Check for castle move to implement special logic
-		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
+		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece && board[indexOfPieceToBeMoved].isFirstMove === true && board[pieceIndex + 1].isFirstMove === true) {
 			console.log("Castle Short");
 
 			// Moves Pieces
@@ -397,8 +514,7 @@ class Block extends Component {
 			// Sets pieces as no longer on first move
 			board[indexOfPieceToBeMoved + 1].setPastFirstMove();
 			board[pieceIndex].setPastFirstMove();
-		}
-		else if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex - 2] instanceof RookPiece) {
+		} else if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex - 2] instanceof RookPiece && board[indexOfPieceToBeMoved].isFirstMove === true && board[pieceIndex - 2].isFirstMove === true) {
 			console.log("Castle Long");
 
 			// Moves Pieces
@@ -460,8 +576,7 @@ class Block extends Component {
 					window.location.reload();
 				}
 			}
-		}
-		else {
+		} else {
 			this.props.updateBoard(board);
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
@@ -527,7 +642,9 @@ class Block extends Component {
 		// See if the block is highligted
 		if (this.state.highlighted) {
 			if (this.props.selectedPosition !== this.props.index) {
-				this.setState({ highlighted: false });
+				this.setState({
+					highlighted: false
+				});
 			} else {
 				returnStr = "block-highlight-";
 			}
@@ -554,10 +671,14 @@ class Block extends Component {
 	 */
 	highlight() {
 		if (this.state.highlighted) {
-			this.setState({ highlighted: false });
+			this.setState({
+				highlighted: false
+			});
 			this.props.revertToSelectPiece();
 		} else {
-			this.setState({ highlighted: true });
+			this.setState({
+				highlighted: true
+			});
 			this.showAvailableMoves();
 			this.props.nextMoveState();
 		}
@@ -596,17 +717,6 @@ function mapDispatchToProps(dispatch, ownProps) {
 		setGameOver: () => dispatch(setGameOver())
 	};
 }
-
-// const mapStateToProps = (state, ownProps) => ({
-//   // ... computed data from state and optionally ownProps
-// })
-
-// const mapDispatchToProps = {
-//   // ... normally is an object full of action creators
-// }
-
-// and that function returns the connected, wrapper component:
-// const ConnectedComponent = connectToStore(Component);
 
 // `connect` returns a new function that accepts the component to wrap:
 const connectToStore = connect(
