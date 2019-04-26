@@ -23,7 +23,6 @@ class GameLogic extends Component {
     };
   }
 
-<<<<<<< HEAD
   render() {
     let playerTurn = "";
     if (this.props.playerTurn === "white") {
@@ -51,14 +50,14 @@ class GameLogic extends Component {
       </div>
     );
   }
-=======
+
 	render() {
 		let playerTurn = "";
-		if (this.props.playerTurn === "white") {
-			playerTurn = "White's Turn";
-		} else {
-			playerTurn = "Black's Turn";
-		}
+    if (this.props.playerTurn === "white") {
+      playerTurn = this.props.player1Name + "'s Turn";
+    } else {
+      playerTurn = this.props.player2Name + "'s Turn";
+    }
 		return (
 			<div>
 			<Grid container direction="row" justify="center" alignItems="center" >
@@ -85,7 +84,10 @@ class GameLogic extends Component {
 
 		);
 	}
+<<<<<<< HEAD
 >>>>>>> 6948e14173a331b40149b1e58d1596829ef8dfcb
+=======
+>>>>>>> d0f53d871a96f1428e91d8c9f46346eb934013a2
 }
 
 function mapStateToProps(state) {
