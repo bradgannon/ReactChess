@@ -27,7 +27,7 @@ import {
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { isChecked, isStalemate, isCheckmate, pawnWarsIsFinished } from "../utility/end-game";
+import { isChecked, isStalemate, isCheckmate, pawnWarsIsFinished, getAllPossibleUncheckMoves } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -416,6 +416,7 @@ class Block extends Component {
 			// }
 
 		}
+		let isCheckTrigger = false;
 		if (isChecked(board, playerTurn)) {
 			alert("Caution: Move will forfeit the game.");
 			console.log(board);
@@ -423,10 +424,15 @@ class Block extends Component {
 
 			board[this.props.selectedPosition] = oldLocation;
 			board[pieceIndex] = oldSelectedPosition;
-			this.props.updateBoard(board);
+			this.props.updateBoard(oldBoard);
 			this.props.setSelectedPosition(-1);
 			this.props.setPotentialMoves([]);
 			this.props.revertToSelectPiece();
+			let allPossibleUncheckMoves = getAllPossibleUncheckMoves(board, playerTurn);
+			console.log(allPossibleUncheckMoves);
+			if(allPossibleUncheckMoves.length > 0) {
+				return;
+			}
 		}
 
 
@@ -454,13 +460,13 @@ class Block extends Component {
 			this.props.nextMoveState();
 			if (playerTurn === "white") {
 				if (isChecked(board, "black")) {
-					alert("Check!,");
+					alert("Check!");
 					console.log(board);
 					console.log(oldBoard);
 				}
 			} else {
 				if (isChecked(board, "white")) {
-					alert("Check!,");
+					alert("Check!");
 					console.log(board);
 					console.log(oldBoard);
 				}

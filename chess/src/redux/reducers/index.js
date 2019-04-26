@@ -5,6 +5,7 @@ import {
 } from '../action/actionTypes';
 import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay, populatePawnWars } from '../../utility/game-initialization';
 import { SELECT_PIECE, SELECT_AVAILABLE_MOVE, WHITE, BLACK } from '../string-constants';
+import QueenPiece from '../../models/pieces/queen-piece';
 
 const initialState = {
   board: populateGameBoard(),
@@ -67,9 +68,12 @@ function rootReducer(state = initialState, action) {
     }
   } else if (action.type === HANDLE_WHITE_REMOVE_PIECE ) {
       let foundItem = state.whitePiecesInPlay.find(x => x.typeOfPiece === action.payload.typeOfPiece);
+      if(action.payload.typeOfPiece === "pawn" && !foundItem) {
+        foundItem = new QueenPiece(action.payload.player);
+      }
       let piecesInPlay = state.whitePiecesInPlay;
       for(let i = 0; i < piecesInPlay.length; i++) {
-        if(piecesInPlay[i].typeOfPiece === foundItem.typeOfPiece) {
+        if(foundItem && piecesInPlay[i].typeOfPiece === foundItem.typeOfPiece) {
           piecesInPlay.splice(i, 1);
           break;
         }
@@ -79,10 +83,12 @@ function rootReducer(state = initialState, action) {
       });
   } else if (action.type === HANDLE_BLACK_REMOVE_PIECE ) {
     let item = state.blackPiecesInPlay.find(x => x.typeOfPiece === action.payload.typeOfPiece);
+    if(action.payload.typeOfPiece === "pawn" && !item) {
+      item = new QueenPiece(action.payload.player);
+    }
     let itemsInPlay = state.blackPiecesInPlay;
-    // itemsInPlay.pop(item);
     for(let i = 0; i < itemsInPlay.length; i++) {
-      if(itemsInPlay[i].typeOfPiece === item.typeOfPiece) {
+      if(item && itemsInPlay[i].typeOfPiece === item.typeOfPiece) {
         itemsInPlay.splice(i, 1);
         break;
       }
