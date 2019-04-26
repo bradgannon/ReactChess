@@ -118,10 +118,11 @@ class RemainingPieces extends Component {
 		} else if (piece.typeOfPiece === "knight") {
 			return (this.renderKnight(piece, key));
 		}
-		// continue following pattern.
-		//render rook
+	}
+	// continue following pattern.
+	//render rook
 
-		renderRook(piece, key) {
+	renderRook(piece, key) {
 		console.log("Shub implement this");
 		if (piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -147,6 +148,7 @@ class RemainingPieces extends Component {
 			)
 		}
 	}
+
 	renderPiece(piece, key) {
 		// console.log(piece);
 		if (piece.typeOfPiece === "pawn") {
@@ -154,9 +156,10 @@ class RemainingPieces extends Component {
 		} else if (piece.typeOfPiece === "Rook") {
 			return (this.renderRook(piece, key));
 		}
-		//Render Bishop
+	}
+	//Render Bishop
 
-		renderBishop(piece, key) {
+	renderBishop(piece, key) {
 		console.log("Shub implement this");
 		if (piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -188,11 +191,12 @@ class RemainingPieces extends Component {
 			return (this.renderPawn(piece, key));
 		} else if (piece.typeOfPiece === "Bishop") {
 			return (this.renderBishop(piece, key));
-		} 
+		}
+	}
 
-		//Rendr Queen
+	//Rendr Queen
 
-		renderQueen(piece, key) {
+	renderQueen(piece, key) {
 		console.log("Shub implement this");
 		if (piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -225,8 +229,9 @@ class RemainingPieces extends Component {
 		} else if (piece.typeOfPiece === "Queen") {
 			return (this.renderQueen(piece, key));
 		}
+	}
 
-	 renderKing(piece, key) {
+	renderKing(piece, key) {
 		console.log("Shub implement this");
 		if (piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
