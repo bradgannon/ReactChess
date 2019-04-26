@@ -15,7 +15,6 @@ export default class BishopPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// return an array of possible locations.
 		let validMoves = [];
@@ -35,6 +34,7 @@ export default class BishopPiece extends ChessPiece {
 			(location - 7 * i) % 8 !== 0 &&
 			location - 7 * i >= 0
 		) {
+			if(location - 7 * i < 64 && location - 7 * i >= 0 )
 			validMoves.push(location - 7 * i);
 			i++;
 		}
@@ -104,6 +104,6 @@ export default class BishopPiece extends ChessPiece {
 			}
 		}
 
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }

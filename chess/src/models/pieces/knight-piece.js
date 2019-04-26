@@ -15,7 +15,6 @@ export default class KnightPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// return an array of possible locations.
 		let validMoves = [];
@@ -80,6 +79,6 @@ export default class KnightPiece extends ChessPiece {
 		}
 
 		// todo: Handle Instance of Opposing Chess Pieces
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }

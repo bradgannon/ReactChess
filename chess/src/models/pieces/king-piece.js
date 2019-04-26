@@ -16,7 +16,6 @@ export default class KingPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// return an array of possible locations.
 		let validMoves = [];
@@ -108,6 +107,16 @@ export default class KingPiece extends ChessPiece {
 			validMoves.push(location + 2);
 		}
 
-		return validMoves;
+		let kingPieceIndex = -1;
+		for (let i = 0; i < b.length; i++) {
+			if (b[i] && b[i].player === this.player && b[i].typeOfPiece === "king") {
+				kingPieceIndex = i;
+				break;
+			}
+		}
+		if (kingPieceIndex < 0) {
+			throw new Error("King doesn't Exist - game is over");
+		}
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }
