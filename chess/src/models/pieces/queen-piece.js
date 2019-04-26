@@ -15,7 +15,6 @@ export default class QueenPiece extends ChessPiece {
 	 * @param {} location
 	 */
 	showAvailableSpots(b, location) {
-		console.log("showAvailableSpots queued");
 
 		// return an array of possible locations.
 		let validMoves = [];
@@ -151,7 +150,6 @@ export default class QueenPiece extends ChessPiece {
 				validMoves.push(location - i * 8);
 			}
 		}
-
-		return validMoves;
+		return validMoves.filter(x => x >= 0 && x < 64);
 	}
 }

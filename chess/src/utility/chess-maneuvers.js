@@ -1,5 +1,5 @@
-import PawnPiece from './pieces/pawn-piece';
-import QueenPiece from './pieces/queen-piece';
+import PawnPiece from '../models/pieces/pawn-piece';
+import QueenPiece from '../models/pieces/queen-piece';
 
 
 /**
@@ -15,7 +15,7 @@ export function pawnManeuvers(board, selectedPosition, index) {
     board[selectedPosition].setPastFirstMove();
     // check for pawn promotion.
 
-    if (board[selectedPosition].player === "white" && index >= 0 && index <= 8) {
+    if (board[selectedPosition].player === "white" && index >= 0 && index <= 7) {
       let { player, icon, typeOfPiece } = board[selectedPosition];
       board[selectedPosition] = new QueenPiece(player, icon, typeOfPiece)
     } else if (board[selectedPosition].player === "black" && index >= 56 && index <= 63) {

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Board from "./board";
+import RemainingPieces from "./remaining-pieces";
 
 import { updateBoard } from "../redux/action/index";
+import { Grid } from '@material-ui/core/';
 
 /**
  * Contains the logic and hosts all of the core chess components
@@ -21,6 +23,7 @@ class GameLogic extends Component {
     };
   }
 
+<<<<<<< HEAD
   render() {
     let playerTurn = "";
     if (this.props.playerTurn === "white") {
@@ -48,6 +51,41 @@ class GameLogic extends Component {
       </div>
     );
   }
+=======
+	render() {
+		let playerTurn = "";
+		if (this.props.playerTurn === "white") {
+			playerTurn = "White's Turn";
+		} else {
+			playerTurn = "Black's Turn";
+		}
+		return (
+			<div>
+			<Grid container direction="row" justify="center" alignItems="center" >
+				<Grid item xs={2} alignItems="center" justify="center">
+					<RemainingPieces />
+				</Grid>
+				<Grid item xs={10} alignContent={"center"} style={{maxWidth: 900, minWidth: 900}} >
+					<Board
+						blocks={this.props.board}
+						onClick={i => {
+							this.handleClick(i);
+						}} />
+				</Grid>
+			</Grid>
+			<Grid container>
+				<Grid item xs={12} >
+				<div className="playerTurn">
+						<p>{playerTurn}</p>
+					</div>
+				</Grid>
+			</Grid>
+			</div>
+		
+
+		);
+	}
+>>>>>>> 6948e14173a331b40149b1e58d1596829ef8dfcb
 }
 
 function mapStateToProps(state) {
