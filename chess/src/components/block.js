@@ -27,7 +27,7 @@ import {
 import PotentialMove from "../models/potential-move";
 import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
-import { isChecked, isStalemate, isCheckmate, pawnWarsIsFinished } from "../utility/end-game";
+import { isChecked, isStalemate, isCheckmate, pawnWarsIsFinished, getAllPossibleUncheckMoves } from "../utility/end-game";
 
 /**
  * This class renders the each block on the board, and if needed, displaces the pieces on the board
@@ -257,16 +257,20 @@ class Block extends Component {
 	 * Renders all of the available moves the player can make on the board.
 	 */
 	showAvailableMoves() {
-		let availableMoves = this.props.board[this.props.index].showAvailableSpots(
-			this.props.board,
-			this.props.index
-		);
-		this.props.setPotentialMoves(availableMoves);
-		let board = this.props.board;
-		// availableMoves.forEach(index => {
-		// 	board[index] = new PotentialMove(this.props.piece.player, index);
-		// });
-		this.props.updateBoard(board);
+		if (this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index)) {
+			let availableMoves = this.props.board[this.props.index].showAvailableSpots(
+				this.props.board,
+				this.props.index
+			);
+			this.props.setPotentialMoves(availableMoves);
+			let board = this.props.board;
+			// availableMoves.forEach(index => {
+			// 	board[index] = new PotentialMove(this.props.piece.player, index);
+			// });
+			this.props.updateBoard(board);
+		} else {
+			throw new Error("undefined board: " + this.props.board);
+		}
 	}
 
 	/**
@@ -336,7 +340,7 @@ class Block extends Component {
 			oldBoard[i] = board[i];
 		}
 		let oldSelectedPosition = board[pieceIndex];
-		let oldLocation = board[this.props.selectedPosition];
+		let oldLocation = board[indexOfPieceToBeMoved];
 
 
 		// handle pawn wars logic here
@@ -398,22 +402,8 @@ class Block extends Component {
 		// Otherwise run normal move logic
 		else {
 			console.log("Move");
-			board[pieceIndex] = board[this.props.selectedPosition];
-			board[this.props.selectedPosition] = undefined;
-			// if (board[pieceIndex].typeOfPiece === "king") {
-			// 	if (isChecked(board, playerTurn)) {
-			// 		alert("Caution: Move will forfeit the game.");
-			// 		console.log(board);
-			// 		console.log(oldBoard);
-
-			// 		board[this.props.selectedPosition] = oldLocation;
-			// 		board[pieceIndex] = oldSelectedPosition;
-			// 		this.props.updateBoard(board);
-			// 		this.props.setSelectedPosition(-1);
-			// 		this.props.setPotentialMoves([]);
-			// 		this.props.revertToSelectPiece();
-			// 	}
-			// }
+			board[pieceIndex] = board[indexOfPieceToBeMoved];
+			board[indexOfPieceToBeMoved] = undefined;
 
 		}
 		if (isChecked(board, playerTurn)) {
@@ -421,12 +411,23 @@ class Block extends Component {
 			console.log(board);
 			console.log(oldBoard);
 
-			board[this.props.selectedPosition] = oldLocation;
+			board[indexOfPieceToBeMoved] = oldLocation;
 			board[pieceIndex] = oldSelectedPosition;
-			this.props.updateBoard(board);
-			this.props.setSelectedPosition(-1);
-			this.props.setPotentialMoves([]);
-			this.props.revertToSelectPiece();
+			let allPossibleUncheckMoves = getAllPossibleUncheckMoves(board, playerTurn);
+			console.log(allPossibleUncheckMoves);
+			if (allPossibleUncheckMoves.length > 0) {
+				this.props.updateBoard(board);
+				this.props.setSelectedPosition(-1);
+				this.props.setPotentialMoves([]);
+				this.props.revertToSelectPiece();
+				return;
+			} else {
+				// isCheckTrigger = true;
+				// this.props.updateBoard(board);
+				// this.props.setSelectedPosition(-1);
+				// this.props.setPotentialMoves([]);
+				// this.props.revertToSelectPiece();
+			}
 		}
 
 
@@ -465,13 +466,12 @@ class Block extends Component {
 					console.log(oldBoard);
 				}
 			}
-
 		}
 	}
 
 	selectBlock() {
 		// If the block is already highlighted, this is a toggle off, therefore, we want to set the position to reflect that.
-		this.removePreviousAvailableMoves();
+		// this.removePreviousAvailableMoves();
 
 		if (this.props.moveState === "GAME_OVER") {
 			return;

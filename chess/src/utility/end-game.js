@@ -133,9 +133,9 @@ export function handleInCheckPlayer(board, player) {
   while (!isFinishedWithDiagonal) {
     let square = board[i];
     if (square && ((square.typeOfPiece !== "bishop" || square.player === player) &&
-    (square.typeOfPiece !== "queen" || square.player === player) && i !== kingPieceIndex)) {
-    break;
-  }
+      (square.typeOfPiece !== "queen" || square.player === player) && i !== kingPieceIndex)) {
+      break;
+    }
     if (square && square.player !== player && (square.typeOfPiece === "bishop" || square.typeOfPiece === "queen")) {
       console.log("northwest triggered");
       console.log("index triggered on: " + i);
@@ -277,21 +277,6 @@ export function isStalemate(board, player) {
   }
 }
 
-function doMove(board, pieceIndex, selectedPosition) {
-  let oldBoard = new Array(64);
-  for (let i = 0; i < board.length; i++) {
-    oldBoard[i] = board[i];
-  }
-
-  board[pieceIndex] = board[selectedPosition];
-  board[selectedPosition] = undefined;
-
-  return board;
-
-  // board[this.props.selectedPosition] = oldLocation;
-  // board[pieceIndex] = oldSelectedPosition;
-}
-
 export function isCheckmate(board, player) {
   // verify no checkmate or if there's a stalemate.
   if (!isChecked(board, player) || isStalemate(board, player)) {
@@ -299,24 +284,60 @@ export function isCheckmate(board, player) {
   }
   // iterate over all possible plaeyer's moves
   let allPlayersPieces = getAllPlayersPieces(board, player);
-  allPlayersPieces.forEach(pieceIndex => {
-    let oldBoard = new Array(64);
-    for (let i = 0; i < board.length; i++) {
-      oldBoard[i] = board[i];
-    }
+  let oldBoard = new Array(64);
+  let oldBoard2 = new Array(64);
+  for (let i = 0; i < board.length; i++) {
+    oldBoard[i] = board[i];
+    oldBoard2[i] = board[i];
+  }
+  console.log(oldBoard);
+  for (let i = 0; i < allPlayersPieces.length; i++) {
+    let pieceIndex = allPlayersPieces[i];
     let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
-    allPieceMoves.forEach(move => {
-      let resultBoard = doMove(board, pieceIndex, move);
-      // if there is a move that ges the player out of checkmate, return false.
-      if (!isChecked(resultBoard, player)) {
-        board = oldBoard;
+    for (let j = 0; j < allPieceMoves.length; j++) {
+      let moveToSpot = allPieceMoves[j];
+      oldBoard2[moveToSpot] = board[pieceIndex];
+      oldBoard2[pieceIndex] = undefined;
+      if (!isChecked(oldBoard2, player)) {
+        oldBoard2 = oldBoard;
         return false;
       }
-      board = oldBoard;
-    })
-  });
+      Object.assign(oldBoard2, oldBoard);
+      // board = oldBoard;
+    }
+  }
   // otherwise return true.
   return true;
+}
+
+export function getAllPossibleUncheckMoves(board, player) {
+  // verify no checkmate or if there's a stalemate.
+
+  let allPossibleUneckMoves = [];
+  let allPlayersPieces = getAllPlayersPieces(board, player);
+  let oldBoard = new Array(64);
+  let oldBoard2 = new Array(64);
+  for (let i = 0; i < board.length; i++) {
+    oldBoard[i] = board[i];
+    oldBoard2[i] = board[i];
+  }
+  console.log(oldBoard);
+  for (let i = 0; i < allPlayersPieces.length; i++) {
+    let pieceIndex = allPlayersPieces[i];
+    let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
+    for (let j = 0; j < allPieceMoves.length; j++) {
+      let moveToSpot = allPieceMoves[j];
+      oldBoard2[moveToSpot] = board[pieceIndex];
+      oldBoard2[pieceIndex] = undefined;
+      if (!isChecked(oldBoard2, player)) {
+        oldBoard2 = oldBoard;
+        allPossibleUneckMoves.push({ fromLocation: pieceIndex, toLocation: moveToSpot });
+      }
+      Object.assign(oldBoard2, oldBoard);
+      // board = oldBoard;
+    }
+  }
+  return allPossibleUneckMoves;
 }
 
 function getAllPlayersPieces(board, player) {

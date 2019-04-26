@@ -119,15 +119,146 @@ class RemainingPieces extends Component {
 			return (this.renderKnight(piece, key));
 		}
 		// continue following pattern.
-		// Render Knight
+		//render rook
 
-		// Render Rook
+		renderRook(piece, key) {
+		console.log("Shub implement this");
+		if (piece.player === "black") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Rook"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "white", strokeWidth: 15 }}
+				/>
+			);
+		} else if (piece.player === "white") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Rook"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "black", strokeWidth: 15 }}
+				/>
+			)
+		}
+	}
+	renderPiece(piece, key) {
+		// console.log(piece);
+		if (piece.typeOfPiece === "pawn") {
+			return (this.renderPawn(piece, key));
+		} else if (piece.typeOfPiece === "Rook") {
+			return (this.renderRook(piece, key));
+		}
+		//Render Bishop
 
-		// Render Bishop
+		renderBishop(piece, key) {
+		console.log("Shub implement this");
+		if (piece.player === "black") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Bishop"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "white", strokeWidth: 15 }}
+				/>
+			);
+		} else if (piece.player === "white") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Bishop"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "black", strokeWidth: 15 }}
+				/>
+			)
+		}
+	}
+	renderPiece(piece, key) {
+		// console.log(piece);
+		if (piece.typeOfPiece === "pawn") {
+			return (this.renderPawn(piece, key));
+		} else if (piece.typeOfPiece === "Bishop") {
+			return (this.renderBishop(piece, key));
+		} 
 
-		// Render Queen
+		//Rendr Queen
 
-		// Render King
+		renderQueen(piece, key) {
+		console.log("Shub implement this");
+		if (piece.player === "black") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Queen"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "white", strokeWidth: 15 }}
+				/>
+			);
+		} else if (piece.player === "white") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-Queen"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "black", strokeWidth: 15 }}
+				/>
+			)
+		}
+	}
+	renderPiece(piece, key) {
+		// console.log(piece);
+		if (piece.typeOfPiece === "pawn") {
+			return (this.renderPawn(piece, key));
+		} else if (piece.typeOfPiece === "Queen") {
+			return (this.renderQueen(piece, key));
+		}
+
+	 renderKing(piece, key) {
+		console.log("Shub implement this");
+		if (piece.player === "black") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-King"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "white", strokeWidth: 15 }}
+				/>
+			);
+		} else if (piece.player === "white") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-King"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "black", strokeWidth: 15 }}
+				/>
+			)
+		}
+	}
+	renderPiece(piece, key) {
+		// console.log(piece);
+		if (piece.typeOfPiece === "pawn") {
+			return (this.renderPawn(piece, key));
+		} else if (piece.typeOfPiece === "King") {
+			return (this.renderKing(piece, key));
+		}
 		else {
 			return (<div key={key}>{piece.typeOfPiece}</div>)
 		}
