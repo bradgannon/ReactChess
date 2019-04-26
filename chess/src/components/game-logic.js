@@ -24,9 +24,9 @@ class GameLogic extends Component {
   render() {
     let playerTurn = "";
     if (this.props.playerTurn === "white") {
-      playerTurn = "White's Turn";
+      playerTurn = this.props.player1Name + "'s Turn";
     } else {
-      playerTurn = "Black's Turn";
+      playerTurn = this.props.player2Name + "'s Turn";
     }
     return (
       <div className="game-logic">
