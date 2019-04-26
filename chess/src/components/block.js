@@ -317,12 +317,6 @@ class Block extends Component {
 		let board = this.props.board;
 
 		let playerTurn = this.props.playerTurn;
-		// let player = this.props.piece.player;
-		// let allOpposingMoves = getAllOpposingMoves(board, playerTurn);
-
-		// if(isChecked(board, "black")) {
-		// 	alert("Check has occured with black called");
-		// }
 
 		if (
 			this.props.piece instanceof ChessPiece &&
@@ -393,24 +387,42 @@ class Block extends Component {
 		// Check for castle move to implement special logic
 		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
 			console.log("Castle Short");
+
+			// Moves Pieces
 			board[pieceIndex] = board[indexOfPieceToBeMoved];
 			board[indexOfPieceToBeMoved + 1] = board[pieceIndex + 1];
 			board[indexOfPieceToBeMoved] = undefined;
 			board[pieceIndex + 1] = undefined;
+
+			// Sets pieces as no longer on first move
+			board[indexOfPieceToBeMoved + 1].setPastFirstMove();
+			board[pieceIndex].setPastFirstMove();
 		}
 		else if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex - 2] instanceof RookPiece) {
 			console.log("Castle Long");
+
+			// Moves Pieces
 			board[pieceIndex] = board[indexOfPieceToBeMoved];
 			board[indexOfPieceToBeMoved - 1] = board[pieceIndex - 2];
 			board[indexOfPieceToBeMoved] = undefined;
 			board[pieceIndex - 2] = undefined;
+
+			// Sets pieces as no longer on first move
+			board[indexOfPieceToBeMoved - 1].setPastFirstMove();
+			board[pieceIndex].setPastFirstMove();
 		}
 		// Otherwise run normal move logic
 		else {
 			console.log("Move");
+
+			// Move pieces
 			board[pieceIndex] = board[indexOfPieceToBeMoved];
 			board[indexOfPieceToBeMoved] = undefined;
 
+			// Sets rooks and kings as no longer on first move
+			if (board[pieceIndex] instanceof KingPiece || board[pieceIndex] instanceof RookPiece) {
+				board[pieceIndex].setPastFirstMove();
+			}
 		}
 
 		if (isChecked(board, playerTurn)) {
@@ -428,12 +440,6 @@ class Block extends Component {
 				this.props.setPotentialMoves([]);
 				this.props.revertToSelectPiece();
 				return;
-			} else {
-				// isCheckTrigger = true;
-				// this.props.updateBoard(board);
-				// this.props.setSelectedPosition(-1);
-				// this.props.setPotentialMoves([]);
-				// this.props.revertToSelectPiece();
 			}
 		}
 

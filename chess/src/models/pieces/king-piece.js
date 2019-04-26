@@ -8,6 +8,15 @@ export default class KingPiece extends ChessPiece {
 	 */
 	constructor(player) {
 		super(player, "chess-king", "king");
+
+		this.isFirstMove = true;
+	}
+
+	/**
+	 * Update the state of the king to show that it is no longer the King's first move
+	 */
+	setPastFirstMove() {
+		this.isFirstMove = false;
 	}
 
 	/**
@@ -100,21 +109,27 @@ export default class KingPiece extends ChessPiece {
 
 		// Castle Short Move
 		if (
+			this.isFirstMove === true &&
 			!b[location + 1] &&
 			!b[location + 2] &&
 			b[location + 3] instanceof RookPiece
 		) {
-			validMoves.push(location + 2);
+			if (b[location + 3].isFirstMove === true) {
+				validMoves.push(location + 2);
+			}
 		}
 
 		// Castle Long Move
 		if (
+			this.isFirstMove === true &&
 			!b[location - 1] &&
 			!b[location - 2] &&
 			!b[location - 3] &&
 			b[location - 4] instanceof RookPiece
 		) {
-			validMoves.push(location - 2);
+			if (b[location - 4].isFirstMove === true) {
+				validMoves.push(location - 2);
+			}
 		}
 
 		let kingPieceIndex = -1;

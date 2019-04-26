@@ -7,6 +7,15 @@ export default class RookPiece extends ChessPiece {
 	 */
 	constructor(player) {
 		super(player, "chess-rook", "rook");
+
+		this.isFirstMove = true;
+	}
+
+	/**
+	 * Update the state of the king to show that it is no longer the King's first move
+	 */
+	setPastFirstMove() {
+		this.isFirstMove = false;
 	}
 
 	/**
@@ -76,5 +85,5 @@ export default class RookPiece extends ChessPiece {
 		}
 
 		return validMoves.filter(x => x >= 0 && x < 64);
-		}
+	}
 }
