@@ -98,13 +98,23 @@ export default class KingPiece extends ChessPiece {
 			validMoves.push(location - 9);
 		}
 
-		// Castle Move
+		// Castle Short Move
 		if (
 			!b[location + 1] &&
 			!b[location + 2] &&
 			b[location + 3] instanceof RookPiece
 		) {
 			validMoves.push(location + 2);
+		}
+
+		// Castle Long Move
+		if (
+			!b[location - 1] &&
+			!b[location - 2] &&
+			!b[location - 3] &&
+			b[location - 4] instanceof RookPiece
+		) {
+			validMoves.push(location - 2);
 		}
 
 		let kingPieceIndex = -1;

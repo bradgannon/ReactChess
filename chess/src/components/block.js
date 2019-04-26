@@ -388,16 +388,22 @@ class Block extends Component {
 			}
 
 			return;
-
-
 		}
+
 		// Check for castle move to implement special logic
 		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece) {
-			console.log("Castle");
+			console.log("Castle Short");
 			board[pieceIndex] = board[indexOfPieceToBeMoved];
 			board[indexOfPieceToBeMoved + 1] = board[pieceIndex + 1];
 			board[indexOfPieceToBeMoved] = undefined;
 			board[pieceIndex + 1] = undefined;
+		}
+		else if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex - 2] instanceof RookPiece) {
+			console.log("Castle Long");
+			board[pieceIndex] = board[indexOfPieceToBeMoved];
+			board[indexOfPieceToBeMoved - 1] = board[pieceIndex - 2];
+			board[indexOfPieceToBeMoved] = undefined;
+			board[pieceIndex - 2] = undefined;
 		}
 		// Otherwise run normal move logic
 		else {
@@ -406,6 +412,7 @@ class Block extends Component {
 			board[indexOfPieceToBeMoved] = undefined;
 
 		}
+
 		if (isChecked(board, playerTurn)) {
 			alert("Caution: Move will forfeit the game.");
 			console.log(board);
