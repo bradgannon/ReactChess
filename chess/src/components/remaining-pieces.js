@@ -49,7 +49,7 @@ class RemainingPieces extends Component {
 						<Typography variant="h5" >
 							Black's Pieces
 					</Typography>
-					{/* This displays all of black's pieces in the code above */}
+						{/* This displays all of black's pieces in the code above */}
 						{blackPieces}
 					</div>
 				</div>
