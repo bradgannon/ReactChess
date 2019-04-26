@@ -277,28 +277,18 @@ export function isStalemate(board, player) {
   }
 }
 
-function doMove(board, pieceIndex, selectedPosition) {
-
-  board[pieceIndex] = board[selectedPosition];
-  board[selectedPosition] = undefined;
-
-  return board;
-
-  // board[this.props.selectedPosition] = oldLocation;
-  // board[pieceIndex] = oldSelectedPosition;
-}
-
 export function isCheckmate(board, player) {
   // verify no checkmate or if there's a stalemate.
   if (!isChecked(board, player) || isStalemate(board, player)) {
     return false;
   }
   // iterate over all possible plaeyer's moves
-  let allPossibleUneckMoves = [];
   let allPlayersPieces = getAllPlayersPieces(board, player);
   let oldBoard = new Array(64);
+  let oldBoard2 = new Array(64);
   for (let i = 0; i < board.length; i++) {
     oldBoard[i] = board[i];
+    oldBoard2[i] = board[i];
   }
   console.log(oldBoard);
   for (let i = 0; i < allPlayersPieces.length; i++) {
@@ -306,13 +296,13 @@ export function isCheckmate(board, player) {
     let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
     for (let j = 0; j < allPieceMoves.length; j++) {
       let moveToSpot = allPieceMoves[j];
-      board[moveToSpot] = board[pieceIndex];
-      board[pieceIndex] = undefined;
-      if (!isChecked(board, player)) {
-        board = oldBoard;
+      oldBoard2[moveToSpot] = board[pieceIndex];
+      oldBoard2[pieceIndex] = undefined;
+      if (!isChecked(oldBoard2, player)) {
+        oldBoard2 = oldBoard;
         return false;
       }
-      Object.assign(board, oldBoard);
+      Object.assign(oldBoard2, oldBoard);
       // board = oldBoard;
     }
   }
@@ -326,8 +316,10 @@ export function getAllPossibleUncheckMoves(board, player) {
   let allPossibleUneckMoves = [];
   let allPlayersPieces = getAllPlayersPieces(board, player);
   let oldBoard = new Array(64);
+  let oldBoard2 = new Array(64);
   for (let i = 0; i < board.length; i++) {
     oldBoard[i] = board[i];
+    oldBoard2[i] = board[i];
   }
   console.log(oldBoard);
   for (let i = 0; i < allPlayersPieces.length; i++) {
@@ -335,34 +327,16 @@ export function getAllPossibleUncheckMoves(board, player) {
     let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
     for (let j = 0; j < allPieceMoves.length; j++) {
       let moveToSpot = allPieceMoves[j];
-      board[moveToSpot] = board[pieceIndex];
-      board[pieceIndex] = undefined;
-      if (!isChecked(board, player)) {
-        board = oldBoard;
+      oldBoard2[moveToSpot] = board[pieceIndex];
+      oldBoard2[pieceIndex] = undefined;
+      if (!isChecked(oldBoard2, player)) {
+        oldBoard2 = oldBoard;
         allPossibleUneckMoves.push({ fromLocation: pieceIndex, toLocation: moveToSpot });
       }
-      Object.assign(board, oldBoard);
+      Object.assign(oldBoard2, oldBoard);
       // board = oldBoard;
     }
   }
-  // allPlayersPieces.forEach(pieceIndex => {
-  //   let oldBoard = new Array(64);
-  //   for (let i = 0; i < board.length; i++) {
-  //     oldBoard[i] = board[i];
-  //   }
-  //   let allPieceMoves = board[pieceIndex].showAvailableSpots(board, pieceIndex);
-  //   allPieceMoves.forEach(move => {
-  //     board[move] = board[pieceIndex];
-  //     board[pieceIndex] = undefined;
-  //     // board = doMove(board, pieceIndex, move);
-  //     // if there is a move that ges the player out of checkmate, return false.
-  //     if (!isChecked(board, player)) {
-  //       board = oldBoard;
-  //       allPossibleUneckMoves.push({fromLocation: pieceIndex, toLocation: move});
-  //     }
-  //     board = oldBoard;
-  //   });
-  // });
   return allPossibleUneckMoves;
 }
 
