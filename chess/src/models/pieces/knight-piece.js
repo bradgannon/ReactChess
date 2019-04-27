@@ -16,26 +16,6 @@ export default class KnightPiece extends ChessPiece {
 	 */
 	showAvailableSpots(b, location) {
 
-<<<<<<< HEAD
-    /**
-     * Returns an array of a path from the source to the destination.
-     *
-     * @param {*} source 
-     * @param {*} destination 
-     */
-    getPathFromSrcToDest(source, destination) {
-        // TODO: should exclude the source and destination in the path.
-        return (source - 17 === destination || 
-            source - 10 === destination || 
-            source + 6 === destination || 
-            source + 15 === destination || 
-            source - 15 === destination || 
-            source - 6 === destination || 
-            source + 10 === destination || 
-            source + 17 === destination);
-        }
-}
-=======
 		// return an array of possible locations.
 		let validMoves = [];
 
@@ -46,7 +26,6 @@ export default class KnightPiece extends ChessPiece {
 		} else {
 			enemy = "white";
 		}
->>>>>>> 0851f94ee98c2531ec7c501744ead35160f3504c
 
 		// Mod statement ensure that the knighkt does not cross the boundary of the chessboard and reappear on the other side of the board, a limitation caused by the 1D array
 		// Checking to see if the move location is an enemy player allows for the knight to take the piece
