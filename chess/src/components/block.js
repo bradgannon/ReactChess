@@ -15,9 +15,7 @@ import KnightPiece from "../models/pieces/knight-piece";
 import QueenPiece from "../models/pieces/queen-piece";
 import KingPiece from "../models/pieces/king-piece";
 
-import {
-	pawnManeuvers
-} from '../utility/chess-maneuvers';
+import { pawnManeuvers } from "../utility/chess-maneuvers";
 
 import {
 	updateBoard,
@@ -57,7 +55,7 @@ class Block extends Component {
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() { }
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -65,38 +63,22 @@ class Block extends Component {
 	renderPawn() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "white",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "black",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -108,38 +90,22 @@ class Block extends Component {
 	renderRook() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "white",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "black",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -151,38 +117,22 @@ class Block extends Component {
 	renderBishop() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "white",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "black",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -194,38 +144,22 @@ class Block extends Component {
 	renderKnight() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "white",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "black",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -237,38 +171,22 @@ class Block extends Component {
 	renderQueen() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "white",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "black",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -280,38 +198,22 @@ class Block extends Component {
 	renderKing() {
 		if (this.props.piece.player === "black") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "white",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "white", strokeWidth: 15 }}
 				/>
 			);
 		} else if (this.props.piece.player === "white") {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
-			return ( <
-				FontAwesomeIcon icon = {
-					this.props.piece.icon
-				}
-				color = {
-					this.props.piece.player
-				}
-				size = "6x"
-				style = {
-					{
-						stroke: "black",
-						strokeWidth: 15
-					}
-				}
+			return (
+				<FontAwesomeIcon
+					icon={this.props.piece.icon}
+					color={this.props.piece.player}
+					size="6x"
+					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			);
 		}
@@ -321,10 +223,8 @@ class Block extends Component {
 	 * Renders a potential move
 	 */
 	renderPotentialMove() {
-		return ( <
-			FontAwesomeIcon icon = "circle"
-			color = "rgba(28, 28, 28, 0.7)"
-			size = "3x" / >
+		return (
+			<FontAwesomeIcon icon="circle" color="rgba(28, 28, 28, 0.7)" size="3x" />
 		);
 	}
 
@@ -352,21 +252,17 @@ class Block extends Component {
 
 	render() {
 		let css = this.returnCSS();
-		return ( <
-			div className = "block" > {
-				/* {this.state.name} */
-			} <
-			button onClick = {
-				this.selectBlock
-			}
-			// className={this.isDark ? "block-dark" : "block-light"}
-			className = {
-				css
-			} > {
-				this.renderPieces()
-			} <
-			/button> < /
-			div >
+		return (
+			<div className="block">
+				{/* {this.state.name} */}
+				<button
+					onClick={this.selectBlock}
+					// className={this.isDark ? "block-dark" : "block-light"}
+					className={css}
+				>
+					{this.renderPieces()}
+				</button>
+			</div>
 		);
 	}
 
@@ -374,11 +270,15 @@ class Block extends Component {
 	 * Renders all of the available moves the player can make on the board.
 	 */
 	showAvailableMoves() {
-		if (this.props.board[this.props.index].showAvailableSpots(this.props.board, this.props.index)) {
-			let availableMoves = this.props.board[this.props.index].showAvailableSpots(
+		if (
+			this.props.board[this.props.index].showAvailableSpots(
 				this.props.board,
 				this.props.index
-			);
+			)
+		) {
+			let availableMoves = this.props.board[
+				this.props.index
+			].showAvailableSpots(this.props.board, this.props.index);
 			this.props.setPotentialMoves(availableMoves);
 			let board = this.props.board;
 			// availableMoves.forEach(index => {
@@ -434,6 +334,12 @@ class Block extends Component {
 		let board = this.props.board;
 
 		let playerTurn = this.props.playerTurn;
+		// let player = this.props.piece.player;
+		// let allOpposingMoves = getAllOpposingMoves(board, playerTurn);
+
+		// if(isChecked(board, "black")) {
+		// 	alert("Check has occured with black called");
+		// }
 
 		if (
 			this.props.piece instanceof ChessPiece &&
@@ -453,12 +359,13 @@ class Block extends Component {
 		let oldSelectedPosition = board[pieceIndex];
 		let oldLocation = board[indexOfPieceToBeMoved];
 
-
 		// handle pawn wars logic here
 		if (this.props.gameMode === "pawnWars") {
 			if (pawnWarsIsFinished(board, playerTurn)) {
 				if (playerTurn === "white") {
-					let playAgain = window.confirm("Game Is Over: Black Won\n Play Again?");
+					let playAgain = window.confirm(
+						"Game Is Over: Black Won\n Play Again?"
+					);
 					if (playAgain) {
 						window.location.reload();
 					}
@@ -466,7 +373,9 @@ class Block extends Component {
 					return;
 				} else {
 					alert("Game Is Over: White Won");
-					let playAgain = window.confirm("Game Is Over: White Won\n Play Again?");
+					let playAgain = window.confirm(
+						"Game Is Over: White Won\n Play Again?"
+					);
 					if (playAgain) {
 						window.location.reload();
 					}
@@ -482,14 +391,18 @@ class Block extends Component {
 			this.props.nextMoveState();
 			if (playerTurn === "white") {
 				if (pawnWarsIsFinished(board, "black")) {
-					let playAgain = window.confirm("Game Is Over: White Won\n Play Again?");
+					let playAgain = window.confirm(
+						"Game Is Over: White Won\n Play Again?"
+					);
 					if (playAgain) {
 						window.location.reload();
 					}
 					this.props.setGameOver();
 					return;
 				} else if (pawnWarsIsFinished(board, "white")) {
-					let playAgain = window.confirm("Game Is Over: Black Won\n Play Again?");
+					let playAgain = window.confirm(
+						"Game Is Over: Black Won\n Play Again?"
+					);
 					if (playAgain) {
 						window.location.reload();
 					}
@@ -500,47 +413,23 @@ class Block extends Component {
 
 			return;
 		}
-
 		// Check for castle move to implement special logic
-		if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex + 1] instanceof RookPiece && board[indexOfPieceToBeMoved].isFirstMove === true && board[pieceIndex + 1].isFirstMove === true) {
-			console.log("Castle Short");
-
-			// Moves Pieces
+		if (
+			board[indexOfPieceToBeMoved] instanceof KingPiece &&
+			board[pieceIndex + 1] instanceof RookPiece
+		) {
+			console.log("Castle");
 			board[pieceIndex] = board[indexOfPieceToBeMoved];
 			board[indexOfPieceToBeMoved + 1] = board[pieceIndex + 1];
 			board[indexOfPieceToBeMoved] = undefined;
 			board[pieceIndex + 1] = undefined;
-
-			// Sets pieces as no longer on first move
-			board[indexOfPieceToBeMoved + 1].setPastFirstMove();
-			board[pieceIndex].setPastFirstMove();
-		} else if (board[indexOfPieceToBeMoved] instanceof KingPiece && board[pieceIndex - 2] instanceof RookPiece && board[indexOfPieceToBeMoved].isFirstMove === true && board[pieceIndex - 2].isFirstMove === true) {
-			console.log("Castle Long");
-
-			// Moves Pieces
-			board[pieceIndex] = board[indexOfPieceToBeMoved];
-			board[indexOfPieceToBeMoved - 1] = board[pieceIndex - 2];
-			board[indexOfPieceToBeMoved] = undefined;
-			board[pieceIndex - 2] = undefined;
-
-			// Sets pieces as no longer on first move
-			board[indexOfPieceToBeMoved - 1].setPastFirstMove();
-			board[pieceIndex].setPastFirstMove();
 		}
 		// Otherwise run normal move logic
 		else {
 			console.log("Move");
-
-			// Move pieces
 			board[pieceIndex] = board[indexOfPieceToBeMoved];
 			board[indexOfPieceToBeMoved] = undefined;
-
-			// Sets rooks and kings as no longer on first move
-			if (board[pieceIndex] instanceof KingPiece || board[pieceIndex] instanceof RookPiece) {
-				board[pieceIndex].setPastFirstMove();
-			}
 		}
-
 		if (isChecked(board, playerTurn)) {
 			alert("Caution: Move will forfeit the game.");
 			console.log(board);
@@ -548,7 +437,10 @@ class Block extends Component {
 
 			board[indexOfPieceToBeMoved] = oldLocation;
 			board[pieceIndex] = oldSelectedPosition;
-			let allPossibleUncheckMoves = getAllPossibleUncheckMoves(board, playerTurn);
+			let allPossibleUncheckMoves = getAllPossibleUncheckMoves(
+				board,
+				playerTurn
+			);
 			console.log(allPossibleUncheckMoves);
 			if (allPossibleUncheckMoves.length > 0) {
 				this.props.updateBoard(board);
@@ -556,15 +448,20 @@ class Block extends Component {
 				this.props.setPotentialMoves([]);
 				this.props.revertToSelectPiece();
 				return;
+			} else {
+				// isCheckTrigger = true;
+				// this.props.updateBoard(board);
+				// this.props.setSelectedPosition(-1);
+				// this.props.setPotentialMoves([]);
+				// this.props.revertToSelectPiece();
 			}
 		}
 
-
 		if (isStalemate(board, playerTurn)) {
-			this.props.setGameOver()
+			this.props.setGameOver();
 			alert("Stalemate achieved; Game Over");
 		} else if (isCheckmate(board, playerTurn)) {
-			this.props.setGameOver()
+			this.props.setGameOver();
 			if (playerTurn === "white") {
 				let result = window.confirm("Checkmate! Game Over! Black Won!");
 				if (result) {
@@ -642,9 +539,7 @@ class Block extends Component {
 		// See if the block is highligted
 		if (this.state.highlighted) {
 			if (this.props.selectedPosition !== this.props.index) {
-				this.setState({
-					highlighted: false
-				});
+				this.setState({ highlighted: false });
 			} else {
 				returnStr = "block-highlight-";
 			}
@@ -671,14 +566,10 @@ class Block extends Component {
 	 */
 	highlight() {
 		if (this.state.highlighted) {
-			this.setState({
-				highlighted: false
-			});
+			this.setState({ highlighted: false });
 			this.props.revertToSelectPiece();
 		} else {
-			this.setState({
-				highlighted: true
-			});
+			this.setState({ highlighted: true });
 			this.showAvailableMoves();
 			this.props.nextMoveState();
 		}
@@ -712,8 +603,8 @@ function mapDispatchToProps(dispatch, ownProps) {
 			dispatch(setPotentialMoves(arrayOfPossibleMoves)),
 		nextMoveState: () => dispatch(nextMoveState()),
 		revertToSelectPiece: () => dispatch(revertToSelectPiece()),
-		handleWhiteRemovePiece: (piece) => dispatch(handleWhiteRemovePiece(piece)),
-		handleBlackRemovePiece: (piece) => dispatch(handleBlackRemovePiece(piece)),
+		handleWhiteRemovePiece: piece => dispatch(handleWhiteRemovePiece(piece)),
+		handleBlackRemovePiece: piece => dispatch(handleBlackRemovePiece(piece)),
 		setGameOver: () => dispatch(setGameOver())
 	};
 }
