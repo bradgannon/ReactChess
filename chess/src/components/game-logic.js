@@ -32,7 +32,7 @@ class GameLogic extends Component {
     }
     return (
       <div>
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid container direction="row" justify="center" alignItems="center" spacing={16}>
           <Grid item xs={2} alignItems="center" justify="center">
             <RemainingPieces
               player1={this.props.player1Name}
@@ -41,7 +41,7 @@ class GameLogic extends Component {
           </Grid>
           <Grid
             item
-            xs={10}
+            xs={8}
             alignContent={"center"}
             style={{ maxWidth: 900, minWidth: 900 }}
           >
@@ -52,35 +52,37 @@ class GameLogic extends Component {
               }}
             />
           </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12}>
-            <div className="playerTurn">
-              <p>{playerTurn}</p>
-            </div>
+          <Grid item xs={1} >
           </Grid>
         </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <div className="playerTurn">
+                <p>{playerTurn}</p>
+              </div>
+            </Grid>
+          </Grid>
       </div>
-    );
-  }
-}
-
+        );
+      }
+    }
+    
 function mapStateToProps(state) {
-  const { board, selectedPosition, playerTurn } = state;
+  const {board, selectedPosition, playerTurn } = state;
   return {
-    board: board,
-    selectedPosition: selectedPosition,
-    playerTurn: playerTurn
-  };
-}
-
+          board: board,
+        selectedPosition: selectedPosition,
+        playerTurn: playerTurn
+      };
+    }
+    
 function mapDispatchToProps(dispatch) {
   return {
-    updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GameLogic);
+          updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
+      };
+    }
+    
+    export default connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(GameLogic);
