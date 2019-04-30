@@ -39,7 +39,7 @@ class RemainingPieces extends Component {
 						Remaining Pieces
       		</Typography>
 					<Typography variant="h5" >
-						White's Pieces:
+						{this.props.player1Name}'s Pieces:
 					</Typography>
 					<div className="whitePieces">
 						{/* This displays all of the white pieces pushed in the code above */}
@@ -47,7 +47,7 @@ class RemainingPieces extends Component {
 					</div>
 					<div className="blackPieces">
 						<Typography variant="h5" >
-							Black's Pieces
+							{this.props.player2Name}'s Pieces
 					</Typography>
 						{/* This displays all of black's pieces in the code above */}
 						{blackPieces}
@@ -128,7 +128,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-Rook"
+					icon="chess-rook"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -139,7 +139,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-Rook"
+					icon="chess-rook"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -165,7 +165,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-Bishop"
+					icon="chess-bishop"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -176,7 +176,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-Bishop"
+					icon="chess-bishop"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -202,7 +202,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-Queen"
+					icon="chess-queen"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -213,7 +213,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-Queen"
+					icon="chess-queen"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -237,7 +237,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-King"
+					icon="chess-king"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -248,7 +248,7 @@ class RemainingPieces extends Component {
 			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
 			return (
 				<FontAwesomeIcon
-					icon="chess-King"
+					icon="chess-king"
 					color={piece.player}
 					size="1x"
 					key={key}
@@ -261,9 +261,20 @@ class RemainingPieces extends Component {
 		// console.log(piece);
 		if (piece.typeOfPiece === "pawn") {
 			return (this.renderPawn(piece, key));
-		} else if (piece.typeOfPiece === "King") {
+		} else if (piece.typeOfPiece === "king") {
 			return (this.renderKing(piece, key));
+		} else if (piece.typeOfPiece === "rook") {
+			return (this.renderRook(piece,key));
 		}
+		else if (piece.typeOfPiece === "bishop") {
+			return (this.renderBishop(piece,key));}
+
+			else if (piece.typeOfPiece === "queen") {
+				return (this.renderQueen(piece,key));
+			}
+			else if (piece.typeOfPiece === "knight") {
+				return (this.renderKnight(piece,key));
+			}
 		else {
 			return (<div key={key}>{piece.typeOfPiece}</div>)
 		}
