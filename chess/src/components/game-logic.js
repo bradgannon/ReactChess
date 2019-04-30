@@ -34,7 +34,10 @@ class GameLogic extends Component {
       <div>
         <Grid container direction="row" justify="center" alignItems="center">
           <Grid item xs={2} alignItems="center" justify="center">
-            <RemainingPieces />
+            <RemainingPieces
+              player1={this.props.player1Name}
+              player2={this.props.player2Name}
+            />
           </Grid>
           <Grid
             item
