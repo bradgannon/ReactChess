@@ -1,15 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Button from '../components/Button.jsx';
+import Board from '../components/board';
+// import Button from '../components/Button.jsx';
 
-describe('Button', () => {
+describe('Board', () => {
  it('should be defined', () => {
-   expect(Button).toBeDefined();
+   expect(Board).toBeDefined();
  });
- it('should render correctly', () => {
-   const tree = shallow(
-     <Button name='button test' />
-   );
-   expect(tree).toMatchSnapshot();
- });
+//  it('should render correctly', () => {
+//    const tree = shallow(
+//      <Button name='button test' />
+//    );
+//    expect(tree).toMatchSnapshot();
+//  });
 });
