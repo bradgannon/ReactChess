@@ -111,16 +111,6 @@ class RemainingPieces extends Component {
 			)
 		}
 	}
-	renderPiece(piece, key) {
-		// console.log(piece);
-		if (piece.typeOfPiece === "pawn") {
-			return (this.renderPawn(piece, key));
-		} else if (piece.typeOfPiece === "knight") {
-			return (this.renderKnight(piece, key));
-		}
-	}
-	// continue following pattern.
-	//render rook
 
 	renderRook(piece, key) {
 		console.log("Shub implement this");
@@ -149,14 +139,6 @@ class RemainingPieces extends Component {
 		}
 	}
 
-	renderPiece(piece, key) {
-		// console.log(piece);
-		if (piece.typeOfPiece === "pawn") {
-			return (this.renderPawn(piece, key));
-		} else if (piece.typeOfPiece === "Rook") {
-			return (this.renderRook(piece, key));
-		}
-	}
 	//Render Bishop
 
 	renderBishop(piece, key) {
@@ -183,14 +165,6 @@ class RemainingPieces extends Component {
 					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			)
-		}
-	}
-	renderPiece(piece, key) {
-		// console.log(piece);
-		if (piece.typeOfPiece === "pawn") {
-			return (this.renderPawn(piece, key));
-		} else if (piece.typeOfPiece === "Bishop") {
-			return (this.renderBishop(piece, key));
 		}
 	}
 
@@ -220,14 +194,6 @@ class RemainingPieces extends Component {
 					style={{ stroke: "black", strokeWidth: 15 }}
 				/>
 			)
-		}
-	}
-	renderPiece(piece, key) {
-		// console.log(piece);
-		if (piece.typeOfPiece === "pawn") {
-			return (this.renderPawn(piece, key));
-		} else if (piece.typeOfPiece === "Queen") {
-			return (this.renderQueen(piece, key));
 		}
 	}
 
