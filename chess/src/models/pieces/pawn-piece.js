@@ -11,12 +11,15 @@ export default class PawnPiece extends ChessPiece {
 
 		this.isFirstMove = true;
 		this.isReadyForPromotion = false;
-		// pawns can move adjacent if opponent is next to them.
 	}
 
+	/**
+	 * Updates the state of the pawn after it has been moved once
+	 */
 	setPastFirstMove() {
 		this.isFirstMove = false;
 	}
+
 	/**
 	 * Method to highlight possible moves for the player
 	 * @param {Board} b

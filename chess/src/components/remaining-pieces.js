@@ -206,32 +206,32 @@ class RemainingPieces extends Component {
     }
   }
 
-  renderKing(piece, key) {
-    console.log("Shub implement this");
-    if (piece.player === "black") {
-      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
-      return (
-        <FontAwesomeIcon
-          icon={piece.icon}
-          color={piece.player}
-          size="1x"
-          key={key}
-          style={{ stroke: "white", strokeWidth: 15 }}
-        />
-      );
-    } else if (piece.player === "white") {
-      // Note: The Style property is CSS code - this allows an outline to be shown on the piece
-      return (
-        <FontAwesomeIcon
-          icon={piece.icon}
-          color={piece.player}
-          size="1x"
-          key={key}
-          style={{ stroke: "black", strokeWidth: 15 }}
-        />
-      );
-    }
-  }
+	renderKing(piece, key) {
+		console.log("Shub implement this");
+		if (piece.player === "black") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-King"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "white", strokeWidth: 15 }}
+				/>
+			);
+		} else if (piece.player === "white") {
+			// Note: The Style property is CSS code - this allows an outline to be shown on the piece
+			return (
+				<FontAwesomeIcon
+					icon="chess-King"
+					color={piece.player}
+					size="1x"
+					key={key}
+					style={{ stroke: "black", strokeWidth: 15 }}
+				/>
+			)
+		}
+	}
 }
 
 function mapStateToProps(state) {
