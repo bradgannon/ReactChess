@@ -47,9 +47,6 @@ class GameLogic extends Component {
           >
             <Board
               blocks={this.props.board}
-              onClick={i => {
-                this.handleClick(i);
-              }}
             />
           </Grid>
           <Grid item xs={1} >

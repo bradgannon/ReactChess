@@ -1,6 +1,7 @@
 // Link.react.test.js
 import React from 'react';
 import App from '../App';
+import Block from '../components/block';
 import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay } from '../utility/game-initialization';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
@@ -9,12 +10,10 @@ import Adapter from 'enzyme-adapter-react-16'
 import configureStore from 'redux-mock-store'
 import { SELECT_PIECE } from '../redux/string-constants';
 import Board from '../components/board';
-import Block from '../components/block';
-import { watchFile } from 'fs';
 
 
 Enzyme.configure({adapter: new Adapter()});
-describe('<Board />',()=>{
+describe('<App />',()=>{
   const initialState = {
     board: populateGameBoard(),
   selectedPosition: -1,
@@ -25,41 +24,27 @@ describe('<Board />',()=>{
   blackPiecesInPlay: initialBlackPiecesInPlay(),
   gameMode: "chess"
   }
-
-  const props = {
-    board: populateGameBoard()
-  }
-  // const mockStore = configureStore();
   const mockStore = configureStore();
   let store,wrapper;
-  
 
   beforeEach(()=>{
-    store = mockStore(initialState)
-      // store = mockStore(initialState)
+      store = mockStore(initialState)
       // container = shallow(<Board store={store} board={populateGameBoard()}/> )  
-      wrapper = mount(<Provider store={store}><Board blocks={props.board}/></Provider>);
-      // wrapper.setProps({board: props.board});
+      wrapper = mount(<Provider store={store}><App/></Provider>)
   })
 
-  it('The Smart Board Component should be rendered', () => {
+  it('+++ render the connected(SMART) component', () => {
     let stuff = wrapper;
-    expect(stuff).toBeDefined();
-    //  expect(wrapper.length).toEqual(1)
+     expect(wrapper.find(App).length).toEqual(1)
   });
 
-  it('Board should contain the passed in props', () => {
-    // let stuff = wrapper.get(0);
-    let board = wrapper.find(Board).get(0);
-    let blocks = board.props.blocks;
-    expect(board).toBeDefined();
-    expect(blocks).toEqual(props.board);
+  it('App should contain the initial state', () => {
+    let stuff = wrapper;
+    let output = wrapper.props();
+    let state = output.store.getState()
+    expect(state).toEqual(initialState);
     //  expect(container.prop('output')).toEqual(initialState.output)
   });
 
-  it('Should contain 64 board pieces', () => {
-    let board = wrapper.find(Board).get(0);
-    let blocks = board.props.blocks;
-    expect(blocks.length).toBe(64);
-  });
+
 });

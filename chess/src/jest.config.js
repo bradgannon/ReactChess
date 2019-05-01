@@ -2,7 +2,7 @@ const jestConfig = {
   verbose: true,
   testURL: "http://localhost/",
   'transform': {
-    '^.+\\.jsx?$': 'babel-jest',
+    "^.+\\.(t|j)s$": "ts-jest"
   },
   testMatch: ['**/__tests__/*.js?(x)'],
 }
