@@ -7,7 +7,6 @@ class RemainingPieces extends Component {
   constructor(props) {
     super(props);
     this.blocks = this.props.blocks;
-    // this.board = [];
   }
   render() {
     // Push all of the pices to arrays.
@@ -53,6 +52,7 @@ class RemainingPieces extends Component {
     );
   }
 
+  // Render Pawn
   renderPawn(piece, key) {
     if (piece.player === "black") {
       // Note: The Style property is CSS code - this allows an outline to be shown on the piece
@@ -79,7 +79,7 @@ class RemainingPieces extends Component {
     }
   }
 
-  // TODO @Shub
+  // Render Knight
   renderKnight(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -123,8 +123,8 @@ class RemainingPieces extends Component {
     }
   }
   // continue following pattern.
-  //render rook
 
+  //Render Rook
   renderRook(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -152,19 +152,7 @@ class RemainingPieces extends Component {
     }
   }
 
-  /*
-
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "Rook") {
-      return this.renderRook(piece, key);
-    }
-  }
-  */
   //Render Bishop
-
   renderBishop(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -192,19 +180,7 @@ class RemainingPieces extends Component {
     }
   }
 
-  /*
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "Bishop") {
-      return this.renderBishop(piece, key);
-    }
-  }
-  */
-
-  //Rendr Queen
-
+  //Render Queen
   renderQueen(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -232,17 +208,6 @@ class RemainingPieces extends Component {
     }
   }
 
-  /*
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "Queen") {
-      return this.renderQueen(piece, key);
-    }
-  }
-  */
-
   renderKing(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -269,19 +234,6 @@ class RemainingPieces extends Component {
       );
     }
   }
-
-  /*
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "King") {
-      return this.renderKing(piece, key);
-    } else {
-      return <div key={key}>{piece.typeOfPiece}</div>;
-    }
-  }
-  */
 }
 
 function mapStateToProps(state) {
@@ -304,17 +256,6 @@ function mapStateToProps(state) {
     blackPiecesInPlay: blackPiecesInPlay
   };
 }
-
-// const mapStateToProps = (state, ownProps) => ({
-//   // ... computed data from state and optionally ownProps
-// })
-
-// const mapDispatchToProps = {
-//   // ... normally is an object full of action creators
-// }
-
-// and that function returns the connected, wrapper component:
-// const ConnectedComponent = connectToStore(Component);
 
 // `connect` returns a new function that accepts the component to wrap:
 const connectToStore = connect(mapStateToProps)(RemainingPieces);
