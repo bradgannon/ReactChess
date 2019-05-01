@@ -34,10 +34,16 @@ library.add(
   faCircle
 );
 
+/**
+ * This class is the backbone for starting the game, as well as containing the start page.
+ */
+
 class App extends Component {
+  /**
+   * This constructor binds the methods used and declares states to be used throughout App.js.
+   */
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
     this.handleChange1 = this.handleChange1.bind(this);
     this.handleChange2 = this.handleChange2.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
@@ -50,6 +56,10 @@ class App extends Component {
     };
   }
 
+  /**
+   * This method adjusts the game mode state and updates the name state once 'Submit' is clicked
+   * @param event the submit button for selecting game mode was clicked
+   */
   handleModeSubmit(event) {
     console.log("Selected mode: " + this.state.mode);
     const player1 = this.state.name1;
@@ -76,20 +86,28 @@ class App extends Component {
     }
   }
 
+  /**
+   * This method handles when a different drop-down game mode option was selected
+   * @param event the different game mode selected from drop-down
+   */
   handleModeChange(event) {
     this.setState({ mode: event.target.value });
   }
 
+  /**
+   * Handles the changing of input for the Player 1 Name
+   * @param event new text entered for Player 1 Name
+   */
   handleChange1(event) {
     this.setState({ name1: event.target.value });
   }
 
+  /**
+   * Handles the changing of input for the Player 2 Name
+   * @param event new text entered for Player 2 Name
+   */
   handleChange2(event) {
     this.setState({ name2: event.target.value });
-  }
-
-  handleClick() {
-    this.setState({ clicked: true });
   }
 
   render() {

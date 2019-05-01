@@ -4,7 +4,7 @@ import Board from "./board";
 import RemainingPieces from "./remaining-pieces";
 
 import { updateBoard } from "../redux/action/index";
-import { Grid } from '@material-ui/core/';
+import { Grid } from "@material-ui/core/";
 
 /**
  * Contains the logic and hosts all of the core chess components
@@ -23,57 +23,66 @@ class GameLogic extends Component {
     };
   }
 
-	render() {
-		let playerTurn = "";
+  render() {
+    let playerTurn = "";
     if (this.props.playerTurn === "white") {
       playerTurn = this.props.player1Name + "'s Turn";
     } else {
       playerTurn = this.props.player2Name + "'s Turn";
     }
-		return (
-			<div>
-			<Grid container direction="row" justify="center" alignItems="center" >
-				<Grid item xs={2} alignItems="center" justify="center">
-					<RemainingPieces />
-				</Grid>
-				<Grid item xs={10} alignContent={"center"} style={{maxWidth: 900, minWidth: 900}} >
-					<Board
-						blocks={this.props.board}
-						onClick={i => {
-							this.handleClick(i);
-						}} />
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={12} >
-				<div className="playerTurn">
-						<p>{playerTurn}</p>
-					</div>
-				</Grid>
-			</Grid>
-			</div>
-		
-
-		);
-	}
-}
-
+    return (
+      <div>
+        <Grid container direction="row" justify="center" alignItems="center" spacing={16}>
+          <Grid item xs={2} alignItems="center" justify="center">
+            <RemainingPieces
+              player1={this.props.player1Name}
+              player2={this.props.player2Name}
+            />
+          </Grid>
+          <Grid
+            item
+            xs={8}
+            alignContent={"center"}
+            style={{ maxWidth: 900, minWidth: 900 }}
+          >
+            <Board
+              blocks={this.props.board}
+              onClick={i => {
+                this.handleClick(i);
+              }}
+            />
+          </Grid>
+          <Grid item xs={1} >
+          </Grid>
+        </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <div className="playerTurn">
+                <p>{playerTurn}</p>
+              </div>
+            </Grid>
+          </Grid>
+      </div>
+        );
+      }
+    }
+    
 function mapStateToProps(state) {
-  const { board, selectedPosition, playerTurn } = state;
+  const {board, selectedPosition, playerTurn } = state;
   return {
-    board: board,
-    selectedPosition: selectedPosition,
-    playerTurn: playerTurn
-  };
-}
-
+          board: board,
+        selectedPosition: selectedPosition,
+        playerTurn: playerTurn
+      };
+    }
+    
 function mapDispatchToProps(dispatch) {
   return {
-    updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GameLogic);
+          updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
+      };
+    }
+    
+    export default connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(GameLogic);
