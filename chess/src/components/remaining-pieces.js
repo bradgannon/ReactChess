@@ -152,19 +152,6 @@ class RemainingPieces extends Component {
     }
   }
 
-  /*
-
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "Rook") {
-      return this.renderRook(piece, key);
-    }
-  }
-  */
-  //Render Bishop
-
   renderBishop(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -191,19 +178,6 @@ class RemainingPieces extends Component {
       );
     }
   }
-
-  /*
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "Bishop") {
-      return this.renderBishop(piece, key);
-    }
-  }
-  */
-
-  //Rendr Queen
 
   renderQueen(piece, key) {
     console.log("Shub implement this");
@@ -232,17 +206,6 @@ class RemainingPieces extends Component {
     }
   }
 
-  /*
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "Queen") {
-      return this.renderQueen(piece, key);
-    }
-  }
-  */
-
   renderKing(piece, key) {
     console.log("Shub implement this");
     if (piece.player === "black") {
@@ -269,19 +232,6 @@ class RemainingPieces extends Component {
       );
     }
   }
-
-  /*
-  renderPiece(piece, key) {
-    // console.log(piece);
-    if (piece.typeOfPiece === "pawn") {
-      return this.renderPawn(piece, key);
-    } else if (piece.typeOfPiece === "King") {
-      return this.renderKing(piece, key);
-    } else {
-      return <div key={key}>{piece.typeOfPiece}</div>;
-    }
-  }
-  */
 }
 
 function mapStateToProps(state) {
