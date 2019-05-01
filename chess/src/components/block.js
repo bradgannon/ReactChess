@@ -1,10 +1,6 @@
-import React, {
-  Component
-} from "react";
-import {
-  connect
-} from "react-redux";
-import "./block.css";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import './block.css'
 import PawnPiece from "../models/pieces/pawn-piece";
 import {
   FontAwesomeIcon
