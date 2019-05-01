@@ -89,6 +89,22 @@ export function populatePawnWars() {
 	return boardOfBlocks;
 }
 
+export function initializeWhitePawnWarsPiecesInPlay() {
+	let whitePieces = new Array(16);
+	for(let i = 0; i <= 15; i++) {
+		whitePieces[i] = new PawnPiece("white");
+	}
+	return whitePieces;
+}
+
+export function initializeBlackPawnWarsPiecesInPlay() {
+	let blackPieces = new Array(16);
+	for(let i = 0; i <= 15; i++) {
+		blackPieces[i] = new PawnPiece("black");
+	}
+	return blackPieces;
+}
+
 export function initialWhitePiecesInPlay() {
 	let whitePieces = new Array(16);
 	whitePieces[0] = new RookPiece("white");
