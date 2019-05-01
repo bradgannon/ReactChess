@@ -549,7 +549,10 @@ class Block extends Component {
 
     if (isStalemate(board, playerTurn)) {
       this.props.setGameOver()
-      alert("Stalemate achieved; Game Over");
+      let result = window.confirm("Stalemate achieved; Game Over Play Again?");
+      if(result) {
+        window.location.reload();
+      }
     } else if (isCheckmate(board, playerTurn)) {
       this.props.setGameOver()
       if (playerTurn === "white") {

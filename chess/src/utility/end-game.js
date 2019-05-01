@@ -1,3 +1,4 @@
+import ChessPiece from "../models/pieces/chess-piece";
 
 /**
  * Checks to see if player is in check
@@ -265,10 +266,24 @@ export function handleInCheckPlayer(board, player) {
  * @param {*} board 
  * @param {*} player 
  */
-export function isStalemate(board, player) {
+export function isStalemate(board, player, whitePiecesLeft, blackPiecesLeft) {
+  let allPiecesInPlay = [];
+  board.forEach(piece => {
+    if(piece && piece instanceof ChessPiece) {
+      allPiecesInPlay.push(piece);
+    }
+  });
+  if(allPiecesInPlay.length === 2) {
+    if(allPiecesInPlay[0].typeOfPiece === 'king' && allPiecesInPlay[1].typeOfPiece === 'king') {
+      return true;
+    }
+  }
+
   if (isChecked(board, player)) {
     return false;
   }
+
+  
 
   if (getAllMoves(board, player).length <= 0) {
     return true;
