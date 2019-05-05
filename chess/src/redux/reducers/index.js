@@ -3,7 +3,7 @@ import {
   NEXT_PLAYER_TURN, NEXT_MOVE_STATE, REVERT_TO_SELECT_PIECE, HANDLE_WHITE_REMOVE_PIECE,
   HANDLE_BLACK_REMOVE_PIECE, SET_GAME_OVER, INITIALIZE_PAWN_WARS, INITIALIZE_CHESS, SET_GAME_MODE
 } from '../action/actionTypes';
-import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay, populatePawnWars } from '../../utility/game-initialization';
+import populateGameBoard, { initialWhitePiecesInPlay, initialBlackPiecesInPlay, populatePawnWars, initializeWhitePawnWarsPiecesInPlay, initializeBlackPawnWarsPiecesInPlay } from '../../utility/game-initialization';
 import { SELECT_PIECE, SELECT_AVAILABLE_MOVE, WHITE, BLACK } from '../string-constants';
 import QueenPiece from '../../models/pieces/queen-piece';
 
@@ -110,9 +110,19 @@ function rootReducer(state = initialState, action) {
     });
   } else if (action.type === SET_GAME_MODE) {
     console.log('ITEM TRIGGERED: ' + action.payload);
-    return Object.assign({}, state, {
-      gameMode: action.payload
-    });
+    if(action.payload === "pawnWars") {
+      return Object.assign({}, state, {
+        gameMode: action.payload,
+        whitePiecesInPlay: initializeWhitePawnWarsPiecesInPlay(),
+        blackPiecesInPlay: initializeBlackPawnWarsPiecesInPlay()
+      });
+    } else {
+      return Object.assign({}, state, {
+        gameMode: action.payload,
+        whitePiecesInPlay: initialWhitePiecesInPlay(),
+        blackPiecesInPlay: initialBlackPiecesInPlay()
+      });
+    }
   }
   return state;
 }

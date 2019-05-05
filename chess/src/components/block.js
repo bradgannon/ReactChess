@@ -1,14 +1,8 @@
-import React, {
-	Component
-} from "react";
-import {
-	connect
-} from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./block.css";
 import PawnPiece from "../models/pieces/pawn-piece";
-import {
-	FontAwesomeIcon
-} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RookPiece from "../models/pieces/rook-piece";
 import BishopPiece from "../models/pieces/bishop-piece";
 import KnightPiece from "../models/pieces/knight-piece";
@@ -29,10 +23,7 @@ import {
 } from "../redux/action/index";
 
 import PotentialMove from "../models/potential-move";
-import {
-	SELECT_AVAILABLE_MOVE,
-	SELECT_PIECE
-} from "../redux/string-constants";
+import { SELECT_AVAILABLE_MOVE, SELECT_PIECE } from "../redux/string-constants";
 import ChessPiece from "../models/pieces/chess-piece";
 import {
 	isChecked,
@@ -55,7 +46,7 @@ class Block extends Component {
 		};
 	}
 
-	componentDidMount() { }
+	componentDidMount() {}
 
 	/**
 	 * Method to Render a Pawn on the block
@@ -319,9 +310,9 @@ class Block extends Component {
 
 		console.log(
 			"Handle Remove Piece was called with: Player: " +
-			PieceToBeRemoved.player +
-			" Piece: " +
-			PieceToBeRemoved.typeOfPiece
+				PieceToBeRemoved.player +
+				" Piece: " +
+				PieceToBeRemoved.typeOfPiece
 		);
 	}
 	/**
