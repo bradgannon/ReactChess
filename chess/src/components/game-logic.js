@@ -23,6 +23,9 @@ class GameLogic extends Component {
     };
   }
 
+  /**
+   * Renders components
+   */
   render() {
     let playerTurn = "";
     if (this.props.playerTurn === "white") {
@@ -52,34 +55,34 @@ class GameLogic extends Component {
           <Grid item xs={1} >
           </Grid>
         </Grid>
-          <Grid container>
-            <Grid item xs={12}>
-              <div className="playerTurn">
-                <p>{playerTurn}</p>
-              </div>
-            </Grid>
+        <Grid container>
+          <Grid item xs={12}>
+            <div className="playerTurn">
+              <p>{playerTurn}</p>
+            </div>
           </Grid>
+        </Grid>
       </div>
-        );
-      }
-    }
-    
+    );
+  }
+}
+
 function mapStateToProps(state) {
-  const {board, selectedPosition, playerTurn } = state;
+  const { board, selectedPosition, playerTurn } = state;
   return {
-          board: board,
-        selectedPosition: selectedPosition,
-        playerTurn: playerTurn
-      };
-    }
-    
+    board: board,
+    selectedPosition: selectedPosition,
+    playerTurn: playerTurn
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
-          updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
-      };
-    }
-    
-    export default connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )(GameLogic);
+    updateBoard: updatedBoard => dispatch(updateBoard(updatedBoard))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameLogic);

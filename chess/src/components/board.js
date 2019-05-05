@@ -52,6 +52,9 @@ export default class Board extends Component {
 		);
 	}
 
+	/**
+	 * Render initializes the board and renders the component pieces of the board
+	 */
 	render() {
 		// initalize board logic.
 
